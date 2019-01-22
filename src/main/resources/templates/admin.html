@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="utf-8">
+	<title>IW 2918-19</title>
+</head>
+<body>
+	<h1 th:text="#{admin.welcome}">Ojo solo admines</h1>
+		
+	<h4>Configuración</h4>
+	<ul>
+	<li>Directorio local para archivos de usuario: <span th:text="${basePath}">tal</span>
+	<li>Perfiles activos: <span th:text="${activeProfiles}">tal</span>
+	</ul>
+	
+</body>
+</html>

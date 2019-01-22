@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<title>Nav fragment - rest intentionally left empty</title>
+</head>
+<body>
+	<nav>
+		<a class="logo" href="" th:href="@{/}"></a>
+		<span class="sitename">Karmómetro</span>
+
+		<a class="logx" 
+			th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" 
+			th:href="@{/logout}" href="/logout">logout</a>
+		<a class="logx" 
+			th:if="not ${#authorization.expression('hasRole(''ROLE_USER'')')}" 
+			th:href="@{/login}" href="/login">login</a>		
+	</nav>
+</body>
+</html>

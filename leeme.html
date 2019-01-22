@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Leeme: Karmómetro</title>
+	<style type="text/css">
+		.nota { color: gray; }
+	</style>
+</head>
+<body>
+	<h1>Leeme: Karmómetro</h1>
+	<h2>Objetivo</h2>
+	<p>
+		Una aplicación <span class="nota">de ejemplo para usar como plantilla <a href="#plantilla">[1]</a> en IW, 
+		y además útil</span> para hacer seguimiento del "buen karma <a href="#karma">[2]</a>" de las clases.
+	</p>
+	<p>
+		Durante una clase, un profesor que tenga alumnos con dispositivos conectados a internet, y que esté 
+		usando un proyector, podrá proyectar la pantalla del karmómetro e invitar a sus alumnos a participar con
+		una clave. Los alumnos podrán decir si se están enterando, si creen que el profe va muy rápido o muy 
+		despacio, y formular y votar preguntas/observaciones de texto. Un agregado de estas participaciones
+		se mostrará en la pantalla proyectada por el profesor, permitiendo al profesor, y a toda la clase,
+		medir el buen o mal "karma" de la misma.  
+	</p>
+	<p>
+		Las participaciones serán anónimas, pero el profesor podrá, si se enfada con alguna (sobre todo con
+		comentarios o preguntas ofensivos), invalidar la sesión del responsable.
+	</p>
+	<p>
+		Soporta los siguientes roles:
+		<ul>
+		<li>
+		El <b>administrador</b> (usuario: a, clave: a) puede dar de alta profesores, y ver quién hace qué.
+		<li>		
+		Un <b>profesor</b> (usuario: p, clave: p) puede lanzar clases. Una clase usa una contraseña temporal, 
+		válida sólo para esa clase. Todo aquel que sepa esa contraseña podrá votar y hacer preguntas
+		<li>
+		Un <b>usuario</b> (no requiere registro, pero sí una contraseña de clase) puede, dando una 
+		contraseña válida, votar sobre el transcurso de una clase, y hacer preguntas. 
+		</li>
+		</ul>
+	</p>
+	<h2>Vistas</h2>
+		<ul>
+		<li><a href="http://localhost:8080/">home</a> - vista inicial. Permite especificar una clase, o hacer login 
+		(esquina superior derecha). 
+		<li><a href="http://localhost:8080/admin">admin</a> - vista del administrador. 
+		Permite administrar profesores (altas y bajas inclusive), y administrar también sus clases.
+		<li><a href="http://localhost:8080/profe">profe</a> - vista del profesor. Permite administrar sus clases.
+		<li><a href="http://localhost:8080/clase">clase</a> - vista de clase. Los profesores y administradors pueden
+		 administrarla, abriéndola, cerrándola, o examinando interacciones. Los alumnos pueden, si está abierta,
+		 votar. Cualquiera que entre en una clase puede ver su estado. 
+		</ul>
+	<h2>Recursos</h2>
+		<ul>
+		<li><a href="src/main/resources/static/img/logo.png"/>Logotipo, obtenido de la 
+		<a href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Backofenthermometer.jpg/170px-Backofenthermometer.jpg">entrada de wikipedia para
+		 termómetro</a>, con licencia <a href="https://en.wikipedia.org/wiki/Thermometer#/media/File:Backofenthermometer.jpg">CC BY-SA 3.0</a>.
+		</ul>
+	<h2 class="nota">Notas</h2>
+	<ul class="nota">
+	<li> <a name="plantilla">[1]</a> Todo lo que aparece en gris no tendría porqué aparecer en un leeme.html
+	vuestro, y se incluye sólo como notas aclarativas. 
+	<li> <a name="karma">[2]</a> Lo del <a href="https://es.wikipedia.org/wiki/Karma">karma</a> no se debe entender 
+	en tono religioso, sino en sentido figurativo de "hacerlo bien o mal".	
+	</ul>
+</body>
+</html>
