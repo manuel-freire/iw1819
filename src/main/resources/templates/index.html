@@ -26,6 +26,14 @@
 	</ul>
 	</ul>
 	</div>
+	<div class="sidebar">
+	<table>
+		<tr th:each="x, i: ${xs}">
+		    <td th:text="|${i.index} ${i.count} ${i.size} ${i.current}|"
+		    th:class="|c${i.odd}-${i.first}-${i.last}|">hola!</td>
+		</tr>
+	</table>
+	</div>
 	</div>
 	
 	<footer th:replace="fragments/footer.html :: footer">

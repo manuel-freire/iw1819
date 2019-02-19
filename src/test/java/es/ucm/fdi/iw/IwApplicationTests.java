@@ -12,6 +12,5 @@ public class IwApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }
 
