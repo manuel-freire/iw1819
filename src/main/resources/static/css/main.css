@@ -47,18 +47,14 @@ nav>*{
 
 /* setup main container */
 div.container {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: auto;
-	grid-template-areas: 
-	  "main main . sidebar"
-	  "footer footer footer footer";
+	display: flex;
+	flex-wrap: wrap-reverse;
 }
 div.main {
-	grid-area: main;
+	flex: auto;
 }
 div.sidebar {
-	grid-area: sidebar;
+	flex: none;
 }
 
 /* setup footer */
