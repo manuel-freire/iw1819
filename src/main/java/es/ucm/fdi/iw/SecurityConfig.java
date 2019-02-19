@@ -4,12 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 
 /**
  * Security configuration.
@@ -23,6 +19,16 @@ import org.springframework.security.provisioning.UserDetailsManager;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	/**
+	 * Main security configuration.
+	 * 
+	 * The first rule that matches will be followed - so if a rule decides to grant access
+	 * to a resource, a later rule cannot deny that access, and vice-versa.
+	 * 
+	 * To disable security entirely, just add an .antMatchers("**").permitAll() 
+	 * as a first rule. Note that this may break an application that expects to have
+	 * login information available.
+	 */
 	protected void configure(HttpSecurity http) throws Exception {
 	    http
 	        .authorizeRequests()
@@ -33,24 +39,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        .formLogin();
 	}
 	
+	/**
+	 * Declares a PasswordEncoder bean.
+	 * 
+	 * This allows you to write, in any part of Spring-managed code, 
+	 * `@Autowired PasswordEncoder passwordEncoder`, and have it initialized
+	 * with the result of this method. 
+	 */
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		// by default in Spring Security 5, a wrapped new BCryptPasswordEncoder();
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder(); 
 	}	
-	
-	private void addDummyUser(UserDetailsManager manager, String nameAndPass, String ... roles) {
-		manager.createUser(User.builder()
-        		.username(nameAndPass).password(getPasswordEncoder().encode(nameAndPass))
-        		.roles(roles).build());
-	}
-	
-    @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        addDummyUser(manager, "a", "USER", "ADMIN");
-        addDummyUser(manager, "b", "USER");
-        addDummyUser(manager, "c", "USER");
-        return manager;
-    }    
+	/**
+	 * Declares a springDataUserDetailsService bean.
+	 * 
+	 * This is used to translate from Spring Security users to in-application users.
+	 */
+	@Bean
+	public IwUserDetailsService springDataUserDetailsService() {
+		return new IwUserDetailsService();
+	}    
 }
