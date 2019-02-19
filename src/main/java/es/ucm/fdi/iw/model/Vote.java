@@ -6,19 +6,21 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * An individual act of participation by a student of a class.
+ * Expresses interest in a question by a student.
+ * 
+ * Questions can be either polls (such as "am I going too slow?" 
+ * or "are you following the class?") or actual questions seeking
+ * more complex answers from the teacher, such as "when should I use
+ * POST vs GET?"). Both can have at most 1 outstanding vote per user,
+ * in the range 0 to 100. Teachers&Students will see aggregates.
+ * 
  * @author mfreire
  */
 @Entity
 public class Vote {
 	
-	public enum Type {
-		AskQuestion, VoteQuestion, VotePoll
-	}
-	
 	private long id;
-	private Type type;
-	private Participant participant;
+	private User voter;
 	private Question question;
 	private int value;
 	
@@ -30,18 +32,12 @@ public class Vote {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Type getType() {
-		return type;
+	@ManyToOne(targetEntity=User.class)
+	public User getParticipant() {
+		return voter;
 	}
-	public void setType(Type type) {
-		this.type = type;
-	}
-	@ManyToOne(targetEntity=Participant.class)
-	public Participant getParticipant() {
-		return participant;
-	}
-	public void setParticipant(Participant participant) {
-		this.participant = participant;
+	public void setParticipant(User participant) {
+		this.voter = participant;
 	}
 	@ManyToOne(targetEntity=Question.class)
 	public Question getQuestion() {
