@@ -30,18 +30,18 @@ Como todo proyecto maven, los fuentes se encuentran bajo la carpeta src/ (y los 
 
 - src/main: para los fuentes que forman parte de la distribución
     + java: para fuentes java que forman la aplicación en sí
-        * es.ucm.fdi.iw: configuración de la aplicación web Spring. Distintos ficheros se encargan de distintos apartados:
+        * [es.ucm.fdi.iw](https://github.com/manuel-freire/iw1819/tree/master/src/main/java/es/ucm/fdi/iw): configuración de la aplicación web Spring. Distintos ficheros se encargan de distintos apartados:
             - AppConfig: expone algunos "beans" para i18n (internacionalización) y gestión de rutas para ficheros cargados por los usuarios, en colaboración con LocalData.
             - SecurityConfig: configura los accesos a la aplicación, en colaboración con IwUserDetailsService, que especifica cómo verificar permisos en las tablas generadas con JPA. Hay usuarios pre-creados en el import.sql.
             - WebSocketConfig configura el uso de WebSockets, y IwApplication especifica cómo lanzar la aplicación desde spring boot.
-        * es.ucm.fdi.iw.control: controladores; gestión de peticiones a la aplicación. Las anotadas con @Controller permiten especificar mapeos petición-manejador (con @GetMapping y familia)
-        * es.ucm.fdi.iw.model: clases de modelo; las anotadas con @Entity generan tablas usando JPA
-    + resources: para ficheros de configuración, o recursos que se sirven por la aplicación pero que no forman parte directamente del código de la misma
+        * [es.ucm.fdi.iw.control](https://github.com/manuel-freire/iw1819/tree/master/src/main/java/es/ucm/fdi/iw/control): controladores; gestión de peticiones a la aplicación. Las anotadas con `@Controller` permiten especificar mapeos petición-manejador (con `@GetMapping` y familia)
+        * [es.ucm.fdi.iw.model](https://github.com/manuel-freire/iw1819/tree/master/src/main/java/es/ucm/fdi/iw/model): clases de modelo; las anotadas con `@Entity` generan tablas usando JPA
+    + [resources](https://github.com/manuel-freire/iw1819/tree/master/src/main/resources): para ficheros de configuración, o recursos que se sirven por la aplicación pero que no forman parte directamente del código de la misma
         * import.sql: contenido inicial de la base de datos. Se ejecuta después de generar la BD a partir de las clases del modelo, y debe ser compatible con lo generado.
         * application*.properties: configuración a alto nivel de la aplicación. El principal es application.properties, y ahí puedes especificar un "perfil", según el cual se cargará o bien application-default.properties (si no lo cambias), que usa una BD que se regenera a cada vez -- o application-externaldb.properties, que usa una BD externa persistente, pero que tienes que haber lanzado antes para que funcione.
         * Message*.properties: por si quieres internacionalizar tu aplicación, lo cual es educativo pero aburrido, y no sube mucho la nota (pero es bueno entender cómo funciona). Ver transparencias sobre thymeleaf para ver cómo incluir mensajes internacionalizados en tu aplicación.
-        * static: recursos web no-dinámicos, tipo imágenes, CSSs, JS, ...
-        * templates: templates thymeleaf, y fragmentos de los mismos
+        * [static](https://github.com/manuel-freire/iw1819/tree/master/src/main/resources/static): recursos web no-dinámicos, tipo imágenes, CSSs, JS, ...
+        * [templates](https://github.com/manuel-freire/iw1819/tree/master/src/main/resources/templates): templates thymeleaf, y fragmentos de los mismos
 - src/test: para los ficheros que se usan sólo en las pruebas
 - src/test/java: código de pruebas
 - src/test/resources: ficheros de recursos para usar durante las pruebas
