@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>es.ucm</groupId>
-	<artifactId>iw1819</artifactId>
+	<artifactId>M3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>iw1819</name>
-	<description>Plantilla para IW en la FdI UCM, curso 2018-19</description>
+	<name>M3</name>
+	<description>Gestor multimedia</description>
 	<packaging>jar</packaging>
 
 	<!--  
