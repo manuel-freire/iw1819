@@ -24,10 +24,17 @@
 .right-panel {
     display: flex;
     flex-direction: column;
+    justify-content: start;
     
 }
 
-.history-panel, .files-panel{
+.center-content, .add_group_and_search, .add_group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel {
     padding-top: 20px;
     padding-bottom: 20px;
     /*border-bottom: 1px solid rgba(97,107,125,1);*/
@@ -80,7 +87,7 @@
 }
 
 
-.list-group-item > a {
+.list-group-item > a, .link {
     color: rgba(62,181,169,1);
     font-weight: bold;
      
