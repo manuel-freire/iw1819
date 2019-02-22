@@ -13,7 +13,7 @@
 }
 
 
-.left-panel-index{
+.left-panel-index {
     height: 600px;
     display: flex;
     flex-direction: column;
@@ -36,7 +36,7 @@
     
 }
 
-.center-content, .add_group_and_search, .add_group {
+.center-content, .add_group_and_search, .add_group, .content-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,14 +87,6 @@
 }
 
 
-
-.content-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
 .list-group-item > a, .link {
     color: rgba(62,181,169,1);
     font-weight: bold;
@@ -103,10 +95,23 @@
 
 hr {
     border-color: rgba(97,107,125,1);
-   
     margin:70px 150px;
   }
 
+
+.button-search {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    background:  rgba(97,107,125,1);
+    background: linear-gradient(0deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%); 
+    width: 70px;
+}
+
+.button-search:hover {
+    background: none;
+    border-color: rgba(42,46,54,1) !important;
+    color: rgba(42,46,54,1);
+}
 
 
   /*    CHAT    */
@@ -135,17 +140,17 @@ hr {
     border-bottom-right-radius: 30px;
     border-top:1px solid rgba(97,107,125,1); 
     height: 60px; 
-    background: linear-gradient(42deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%); 
+    background: linear-gradient(0deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%); 
   }
 
-  .panel-msg-chat {
+.panel-msg-chat {
       height: 600px;
-  }
+}
 
-  .borderless {
+.borderless {
       border-bottom:none;
       border-top:none;
-  }
+}
 
 .align-right {
     text-align: right;
@@ -157,16 +162,49 @@ hr {
     margin-left: 10px;
 }
 
-
-
   /*    FRIENDS   */
 
 .profile-image {
     border-radius: 80px;
     width: 75px;
     height: 75px;
+    box-shadow: 0px 2px 30px 0px rgb(66, 64, 64), 0px 0px 0px 1px rgba(97,107,125,1);
 }
 
 .profile-name {
-    
+    margin-left: 40px;
+    text-align: left;
 }
+
+.button-discard-friendship-request {
+    width: 150px;
+    max-height: 40px;
+    background: linear-gradient(0deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%); 
+}
+
+.button-discard-friendship-request:hover {
+    background: none;
+    border-color: rgba(42,46,54,1) !important;
+    color: rgba(42,46,54,1);
+}
+
+.button-accept-friendship-request {
+    width: 150px;
+    max-height: 40px;
+    position: relative;
+    left: 80px;
+}
+
+.friendship-request {
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.friendship-request-profile-name {
+    text-align: left !important;
+}
+
+
+
+
