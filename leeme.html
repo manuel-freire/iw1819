@@ -8,48 +8,36 @@
 	</style>
 </head>
 <body>
-	<h1>Leeme: Karmómetro</h1>
+	<h1>Leeme: M3</h1>
 	<h2>Objetivo</h2>
 	<p>
-		Una aplicación <span class="nota">de ejemplo para usar como plantilla <a href="#plantilla">[1]</a> en IW, 
-		y además útil</span> para hacer seguimiento del "buen karma <a href="#karma">[2]</a>" de las clases.
+		Un gestor multimedia para gestionar y compartir todos tus vídeos, canciones e imágenes.
 	</p>
 	<p>
-		Durante una clase, un profesor que tenga alumnos con dispositivos conectados a internet, y que esté 
-		usando un proyector, podrá proyectar la pantalla del karmómetro e invitar a sus alumnos a participar con
-		una clave. Los alumnos podrán decir si se están enterando, si creen que el profe va muy rápido o muy 
-		despacio, y formular y votar preguntas/observaciones de texto. Un agregado de estas participaciones
-		se mostrará en la pantalla proyectada por el profesor, permitiendo al profesor, y a toda la clase,
-		medir el buen o mal "karma" de la misma.  
+		Esta aplicación puede usarse para tener organizado y disponible online todo el contenido multimedia. Además tiene una componente social, pues
+		se podrá compartir con amigos y familia todo el contenido.
 	</p>
-	<p>
-		Las participaciones serán anónimas, pero el profesor podrá, si se enfada con alguna (sobre todo con
-		comentarios o preguntas ofensivos), invalidar la sesión del responsable.
-	</p>
+
 	<p>
 		Soporta los siguientes roles:
 		<ul>
 		<li>
-		El <b>administrador</b> (usuario: a, clave: a) puede dar de alta profesores, y ver quién hace qué.
-		<li>		
-		Un <b>profesor</b> (usuario: p, clave: p) puede lanzar clases. Una clase usa una contraseña temporal, 
-		válida sólo para esa clase. Todo aquel que sepa esa contraseña podrá votar y hacer preguntas
+		El <b>administrador</b> (usuario: a, clave: a) es el encargado de gestionar la aplicación. Debe asegurarse que el contenido que suben los usuarios a la aplicación es adecuado
+		y no incumple ninguna ley. Podrá eliminar usuarios y eliminar contenido.
 		<li>
-		Un <b>usuario</b> (no requiere registro, pero sí una contraseña de clase) puede, dando una 
-		contraseña válida, votar sobre el transcurso de una clase, y hacer preguntas. 
+		Un <b>usuario</b>  puede hacer solicitudes de amistad a otros usuarios, subir contenido, crear grupos, crear listas de reproducción, chatear con otros usuarios y ver su contenido.
 		</li>
 		</ul>
 	</p>
 	<h2>Vistas</h2>
 		<ul>
-		<li><a href="http://localhost:8080/">home</a> - vista inicial. Permite especificar una clase, o hacer login 
-		(esquina superior derecha). 
+		<li><a href="http://localhost:8080/">home</a> - vista inicial. Permite ver el contenido subido por el usuario actual, subir un nuevo archivo, ver el historial del usuario y ver el perfil. Para ello el usuario debe haber inciado sesión, si no lo está se mostrará la pantalla de login.
 		<li><a href="http://localhost:8080/admin">admin</a> - vista del administrador. 
-		Permite administrar profesores (altas y bajas inclusive), y administrar también sus clases.
-		<li><a href="http://localhost:8080/profe">profe</a> - vista del profesor. Permite administrar sus clases.
-		<li><a href="http://localhost:8080/clase">clase</a> - vista de clase. Los profesores y administradors pueden
-		 administrarla, abriéndola, cerrándola, o examinando interacciones. Los alumnos pueden, si está abierta,
-		 votar. Cualquiera que entre en una clase puede ver su estado. 
+		Permite administrar usuarios (eliminarlos) y administrar el contenido de todos los usuarios.
+		<li><a href="http://localhost:8080/friends">Amigos</a> - vista de amigos de un usuario. Permite ver los amigos y las solicitudes de amistad recibidas de un usuario.
+		<li><a href="http://localhost:8080/groups">Grupos</a> - vista de grupos. Muestra los grupos a los que pertence un usuario. También permite crear un nuevo grupo.
+		<li><a href="http://localhost:8080/chat">Chat</a> - vista de chat. Muestra la vista de chat de un grupo, permitiendo escribir un nuevo mensaje. Además muestra todos los archivos que los miembros del grupo 
+			han compartido, permitiendo al usuario actual compartir un nuevo archivo.
 		</ul>
 	<h2>Recursos</h2>
 		<ul>
