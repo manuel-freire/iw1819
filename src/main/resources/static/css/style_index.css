@@ -205,6 +205,35 @@ hr {
     text-align: left !important;
 }
 
+/*  PROFILE */
+.avatar {
+    width: 120px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 100px;
+    background-color: rgba(62,181,169,1);
+    box-shadow: 0 0 10px black;
+}
 
+.name {
+    font-size: 120%;
+    font-weight: bold;
+}
 
+.nick {
+    color: rgba(62,181,169,1);
+    font-size: 90%;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.bio {
+    font-style: italic;
+    font-size: 90%;
+}
+
+img.social {
+    width: 32px;
+    margin: 4px 8px;
+}
 
