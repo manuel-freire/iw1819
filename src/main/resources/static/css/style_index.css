@@ -236,3 +236,13 @@ img.social {
     margin: 4px 8px;
 }
 
+/* SHARE */
+
+.share-image {
+    
+    width: 400px;
+    height: auto;
+    margin-bottom: 5px;
+    box-shadow: 0px 2px 30px 0px rgb(66, 64, 64), 0px 0px 0px 1px rgba(97,107,125,1);
+}
+
