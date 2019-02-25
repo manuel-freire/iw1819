@@ -143,7 +143,12 @@ hr {
   }
 
 .panel-msg-chat {
-      height: 600px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f7f7f7;
+    overflow: auto;
 }
 
 .borderless {
