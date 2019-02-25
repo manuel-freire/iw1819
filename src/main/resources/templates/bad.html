@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head.html :: head">
+	<meta charset="utf-8">
+	<title>Title goes here</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css" type="text/css"/>
+</head>
+<body>
+	<nav th:replace="fragments/nav.html :: nav">
+		Nav goes here
+	</nav>
+	
+	<div class="container">
+	<div class="main">
+	<h1 th:text="#{index.welcome}">Bienvenido a la plantilla de IW</h1>
+		
+	<h4>ERROR</h4>
+	
+	<p>Ha pasado algo feo. Mira el log para saber qué ha sido.</p>
+
+	<div class="sidebar">
+	<table>
+		<tr th:each="x, i: ${xs}">
+		    <td th:text="|${i.index} ${i.count} ${i.size} ${i.current}|"
+		    th:class="|c${i.odd}-${i.first}-${i.last}|">hola!</td>
+		</tr>
+	</table>
+	</div>
+	</div>
+	
+	<footer th:replace="fragments/footer.html :: footer">
+		Footer goes here
+	</footer>
+</body>
+</html>

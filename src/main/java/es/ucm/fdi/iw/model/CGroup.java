@@ -24,11 +24,11 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Group.ByCode",
-			query="SELECT g FROM Group g "
-					+ "WHERE g.code = :groupCode")
+	@NamedQuery(name="CGroup.ByCode",
+	query="SELECT g FROM CGroup g "
+			+ "WHERE g.code = :groupCode")
 })
-public class Group {
+public class CGroup {
 	private long id;
 	private String code;
 	private List<Vote> votes = new ArrayList<>();
@@ -80,5 +80,10 @@ public class Group {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	@Override
+	public String toString() {
+		return "CGroup [id=" + id + ", code=" + code + "]";
 	}
 }

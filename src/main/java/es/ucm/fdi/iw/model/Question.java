@@ -28,7 +28,7 @@ import javax.persistence.NamedQuery;
 })
 public class Question {
 	private long id;
-	private Group group;
+	private CGroup group;
 	private User author;
 	private String text;
 	private boolean poll;	
@@ -60,11 +60,11 @@ public class Question {
 	public void setAuthor(User author) {
 		this.author = author;
 	}
-	@ManyToOne(targetEntity=Group.class)
-	public Group getGroup() {
+	@ManyToOne(targetEntity=CGroup.class)
+	public CGroup getGroup() {
 		return group;
 	}
-	public void setGroup(Group group) {
+	public void setGroup(CGroup group) {
 		this.group = group;
 	}
 }

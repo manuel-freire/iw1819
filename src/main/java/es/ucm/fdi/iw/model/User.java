@@ -1,10 +1,12 @@
 package es.ucm.fdi.iw.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -24,8 +26,8 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="User.ByLogin",
-			query="SELECT u FROM User u "
-					+ "WHERE u.login = :userLogin"),
+	query="SELECT u FROM User u "
+			+ "WHERE u.login = :userLogin"),
 	@NamedQuery(name="User.HasLogin",
 	query="SELECT COUNT(u) "
 			+ "FROM User u "
@@ -39,14 +41,14 @@ public class User {
 	private byte enabled;
 	
 	// application-specific fields
-	private List<Vote> votes; 
-	private List<Question> questions;
-	private List<Group> groups;
+	private List<Vote> votes = new ArrayList<>(); 
+	private List<Question> questions = new ArrayList<>();
+	private List<CGroup> groups = new ArrayList<>();
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
-	return id;
+		return id;
 	}
 	
 	public void setId(long id) {
@@ -106,11 +108,17 @@ public class User {
 		this.questions = questions;
 	}	
 	
-	@ManyToMany(targetEntity=Group.class, mappedBy="participants")
-	public List<Group> getGroups() {
+	@ManyToMany(targetEntity=CGroup.class, mappedBy="participants")
+	public List<CGroup> getGroups() {
 		return groups;
 	}
-	public void setGroups(List<Group> groups) {
+	public void setGroups(List<CGroup> groups) {
 		this.groups = groups;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", login=" + login + ", password=" + password + ", roles=" + roles + ", enabled="
+				+ enabled + "]";
 	}
 }

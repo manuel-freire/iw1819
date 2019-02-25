@@ -1,6 +1,8 @@
 package es.ucm.fdi.iw;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -33,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    http
 	        .authorizeRequests()
 	            .antMatchers("/css/**", "/js/**", "/img/**", "/").permitAll()
+	            .antMatchers("/vote/enter").permitAll() 		// <-- only when logging in to vote 
 	            .antMatchers("/admin**").hasRole("ADMIN")
 	            .anyRequest().authenticated()
 	            .and()
@@ -51,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// by default in Spring Security 5, a wrapped new BCryptPasswordEncoder();
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder(); 
 	}	
+	
 	/**
 	 * Declares a springDataUserDetailsService bean.
 	 * 
@@ -59,5 +63,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public IwUserDetailsService springDataUserDetailsService() {
 		return new IwUserDetailsService();
-	}    
+	} 
+	
+	/**
+	 * Declares an AuthenticationManager bean.
+	 * 
+	 *  This can be used to auto-login into the site after creating new users, for example.
+	 */
+	 @Bean
+	 @Override
+	 public AuthenticationManager authenticationManagerBean() throws Exception {
+	     return super.authenticationManagerBean();
+	 }
 }
