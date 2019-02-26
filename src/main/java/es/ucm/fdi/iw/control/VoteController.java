@@ -61,7 +61,8 @@ public class VoteController {
 			return "vote";
 		}
 		
-		model.addAttribute("qs", Question.getQuestionsWithVotes(entityManager));		
+		//model.addAttribute("qs", Question.getQuestionsWithVotes(entityManager));
+		return "class";
 	}
 
 	@GetMapping("/enter")
