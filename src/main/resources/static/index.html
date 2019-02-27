@@ -15,17 +15,18 @@
 
     <body> 
         
-<!--  -->
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark center-content">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">home</i></a>
-                    <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">folder_open</i></a>
-                    <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">group</i></a>
-                    <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">brightness_low</i></a>
-                </div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">home</i></a>
+                <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">folder_open</i></a>
+                <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">group</i></a>
+                <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">brightness_low</i></a>
+            </div>
         </nav> 
         
-        <div class="container col-10 mt-5">
+        <div class="conatiner mt-4">
+            <!--
             <div class="left-panel-index col-3">
                 <img class="avatar center-content" src="img/snow.png">
                 <p class="name text-center">John Snow</p>
@@ -45,78 +46,130 @@
                     <button type="button" class="btn button content-button mt-3"><i class="material-icons mr-3">library_music</i> Music</button>
                 </div>
             </div>
-           
-            <div class="right-panel col-9">
+            -->
+            <div class="row">
 
-                    <div class="add_group_and_search mb-5">
-                            <button class="btn button add_group mr-5"><i class="material-icons mr-3">unarchive</i>Upload new file</button>
-        
-                            <form class="form-inline border-left border-dark center-content pl-5">
-                                <input class="form-control" type="search" placeholder="Search a file" aria-label="Search">
-                                <button class="btn button button-search my-2 my-sm-0" type="submit"><i class="material-icons center-content">search</i></button>
-                            </form>
+                <div class="col-10 panel mx-auto">
+                    <div class="row">
+                        <div class="col-4 border-right">
+                            <div class="d-flex flex-column justify-content-center pb-2 border-bottom">
+                                <button class="btn button add_group"><i class="material-icons mr-2">unarchive</i>Upload new file</button>
+
+                                <form class="form-inline center-content">
+                                    <input class="form-control" type="search" placeholder="Search a file" aria-label="Search">
+                                    <button class="btn button button-search my-2 my-sm-0" type="submit"><i class="material-icons center-content">search</i></button>
+                                </form>
+                            
+                                <div class="btn-group d-flex justify-content-center" role="group">
+                                    <button type="button" class="btn button content-button px-3"><i class="material-icons mr-2">photo_library</i> Images</button>
+                                    <button type="button" class="btn button content-button px-3"><i class="material-icons mr-2">videocam</i> Videos</button>
+                                    <button type="button" class="btn button content-button px-3"><i class="material-icons mr-2">library_music</i> Music</button>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <ul class="row list-group list-group-flush">
+                                    <li class="list-group-item py-0 px-4 d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="material-icons mr-2">library_music</i>
+                                            <span>Tag 1</span>
+                                        </div>
+                                        <button class="btn"><i class="material-icons">brightness_low</i></button>
+                                    </li>
+                                    <li class="list-group-item p-0 d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="material-icons mr-2">library_music</i>
+                                            <span>Tag 2</span>
+                                        </div>
+                                        <button class="btn"><i class="material-icons">brightness_low</i></button>
+                                    </li>
+                                </ul>
+                                <button class="btn d-flex align-items-center justify-content-center">
+                                    <i class="material-icons mr-2">add</i>
+                                    <span>Add new Tag #</span>
+                                </button>
+                            </div>
                         </div>
 
-                <div class="panel ml-5">
-                        <p class="title-section ml-4 center-content">MY FILES <i class="material-icons title-section ml-4">folder_open</i></p>
-                        <ul class="list-group list-group-flush mt-4">
-                            <li class="list-group-item">
-                                <div class="btn-group dropright">IMG_2085.jpg
-                                    <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">share</i>Share</a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
-                                    </div>
+                        <div class="col-8">
+                            <div class="row justify-content-around">
+                                <div class="d-flex">
+                                    <span class="title-section">My Files</span>
+                                    <i class="material-icons title-section my-auto ml-3">folder_open</i>
                                 </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="btn-group dropright">IMG_1234.jpg
-                                    <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">share</i>Share</a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
-                                    </div>
-                                </div>
-                             </li>
-                             <li class="list-group-item">
-                                <div class="btn-group dropright">Video2.avi
-                                    <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">share</i>Share</a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
-                                    </div>
-                                </div>
-                             </li>
-                             <li class="list-group-item">
-                                <div class="btn-group dropright">Video_vacaciones.avi
-                                    <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">share</i>Share</a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
-                                    </div>
-                                </div>
-                             </li>
-                             <li class="list-group-item">
-                                <div class="btn-group dropright">cancion2.mp3
-                                    <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">share</i>Share</a>
-                                        <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
-                                    </div>
-                                </div>
-                             </li>
-                             
-                        </ul>
-                    </div>
-               
-                <hr>
+                                <button class="btn button"><i class="material-icons my-auto">brightness_low</i></button>
+                            </div>
 
-                <div class="panel ml-5">
+                            <div class="row align-items-center my-3 px-4">
+                                <div class="btn-group col-3 d-flex justify-content-center" role="group">
+                                    <button type="button" class="btn button-second content-button"><i class="material-icons">list</i></button>
+                                    <button type="button" class="btn button-second content-button"><i class="material-icons">view_module</i></button>
+                                </div>
+                            </div>
+            
+                            <ul class="row list-group list-group-flush mt-4">
+                                <li class="list-group-item">
+                                    <div class="btn-group dropright">
+                                        <input class="my-auto mr-3" type="checkbox" value="">
+                                        <span>IMG_2085.jpg</span>
+                                        <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">share</i>Share</a>
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="btn-group dropright">IMG_1234.jpg
+                                        <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">share</i>Share</a>
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="btn-group dropright">Video2.avi
+                                        <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">share</i>Share</a>
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="btn-group dropright">Video_vacaciones.avi
+                                        <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">share</i>Share</a>
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="btn-group dropright">cancion2.mp3
+                                        <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">share</i>Share</a>
+                                            <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                        
+                    </div>
+
+                    
+                </div>
+
+                <!--
+                <div class="panel">
                     
                     <p class="title-section ml-4 center-content">HISTORY <i class="material-icons title-section ml-4">history</i></p>
                     <ul class="list-group list-group-flush mt-4">
@@ -127,6 +180,7 @@
                         <li class="list-group-item"><a href="">Tú</a> has compartido por el chat <a href="">GRUPO FAMILIA</a> el video<a href="">videoVacaciones.avi</a></li>
                     </ul>
                 </div>
+                -->
             </div>
         </div>
     </body>

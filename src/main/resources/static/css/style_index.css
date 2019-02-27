@@ -6,12 +6,6 @@
     font-family: 'Istok Web';
 }
 
-
-
-.container {
-    display: flex;
-}
-
 .left-panel-index {
     height: 600px;
     display: flex;
@@ -25,14 +19,6 @@
     border-left: 8px solid rgba(97,107,125,1);
     box-shadow: 0px 0px 37px -9px rgba(0,0,0,0.75);
     border-radius: 20px;
-}
-
-
-.right-panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    
 }
 
 .center-content, .add_group_and_search, .add_group, .content-button {
@@ -67,9 +53,13 @@
 .button {
     background: linear-gradient(0deg, rgba(62,181,169,1) 0%, rgba(111,226,204,1) 100%);
     color: white;
+    border-radius: 30px; 
+}
+
+.button-second {
+    background: linear-gradient(0deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%); 
+    color: white;
     border-radius: 30px;
-    width: 180px;
-   
 }
 
 .button:hover {
@@ -95,7 +85,7 @@
 hr {
     border-color: rgba(97,107,125,1);
     margin:70px 150px;
-  }
+}
 
 
 .button-search {
