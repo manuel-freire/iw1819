@@ -7,7 +7,6 @@
 }
 
 .left-panel-index {
-    height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -241,3 +240,61 @@ img.social {
     box-shadow: 0px 2px 30px 0px rgb(66, 64, 64), 0px 0px 0px 1px rgba(97,107,125,1);
 }
 
+
+/* CSS INDEX */
+
+/* left-panel */
+.searchForm {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.searchForm input {
+    padding: 5px 20px;
+    border-radius: 30px 0 0 30px;
+}
+
+.all-tag {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(62,181,169,1);
+}
+
+.list-group-item {
+    height: 40px;
+}
+
+.no-bck {
+    background: none;
+}
+
+/* MyFiles-panel */
+button.active {
+    background-color: rgb(27, 28, 31);
+}
+
+.page-item.active .page-link {
+    background: linear-gradient(0deg, rgba(62,181,169,1) 0%, rgba(111,226,204,1) 100%);
+    border-color: rgba(62,181,169,1);
+}
+
+.files-link:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.breadcrumb {
+    background: none;
+    font-size: 26px;
+    margin: 0;
+}
+
+.breadcrumb-item > a {
+    color: rgba(62,181,169,1);
+}
+
+.folder {
+    font-size: 60px;
+    color: linear-gradient(0deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%)
+}
