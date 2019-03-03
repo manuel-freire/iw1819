@@ -14,71 +14,47 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-/**
- * Group of students.
- * 
- * This is the primary access point to the state of the
- * different questions in a class.
- * 
- * @author mfreire
- */
-@Entity
-@NamedQueries({
-	@NamedQuery(name="Group.ByCode",
-			query="SELECT g FROM Group g "
-					+ "WHERE g.code = :groupCode")
-})
-public class Group {
-	private long id;
-	private String code;
-	private List<Vote> votes = new ArrayList<>();
-	private List<User> participants = new ArrayList<>();
-	private List<User> owners = new ArrayList<>();
 
-	/**
-	 * Generates a random ID.
-	 * @return the generated ID. If you are unlucky, it may conflict with
-	 *      an existing one -- test it before assuming that it is unique!
-	 */
-	public String createRandomId() {
-		return String.format("%06.6d", 
-				ThreadLocalRandom.current().nextLong(1_000_000));
-	}
+@Entity
+public class Group {
 	
 	@Id
 	@GeneratedValue
-	public long getId() {
-		return id;
-	}
+	private long id;
+	private String name;
 	
-	public void setId(long id) {
-		this.id = id;
-	}
 	
-	@OneToMany(targetEntity=Vote.class)
-	@JoinColumn(name="group_id")
-	public List<Vote> getVotes() {
-		return votes;
-	}
-
-	public void setVotes(List<Vote> votes) {
-		this.votes = votes;
-	}
-
 	@ManyToMany(targetEntity=User.class)
-	public List<User> getParticipants() {
-		return participants;
-	}
-	public void setParticipants(List<User> participants) {
-		this.participants = participants;
+	private List<User> users;
+
+	@ManyToMany(targetEntity=File.class)
+	private List<File> files;
+
+	@OneToMany(targetEntity=GroupMessage.class, mappedBy="group")
+	private List<GroupMessage> messages;
+	
+	
+	public List<GroupMessage> getMessages() {
+		return messages;
 	}
 
-	@Column(unique=true)
-	public String getCode() {
-		return code;
+	public void setMessages(List<GroupMessage> messages) {
+		this.messages = messages;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public List<File> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<File> files) {
+		this.files = files;
+	}
+	
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 }
