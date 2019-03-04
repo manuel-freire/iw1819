@@ -26,7 +26,7 @@ public class Tag {
 	@JoinColumn(name="parent_id")
 	private List<Tag> children;
 	
-	@ManyToMany(targetEntity=File.class)
+	@ManyToMany(targetEntity=File.class, mappedBy="tags")
 	private List<File> files;
 	
 	public Tag getParent() {
