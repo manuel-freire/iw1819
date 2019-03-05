@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Notification {
 	
+
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
@@ -17,6 +19,20 @@ public class Notification {
 	@ManyToOne(targetEntity=User.class)
 	private User user;
 	private String text;
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	
 	
 	public String getText() {
