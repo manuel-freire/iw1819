@@ -208,6 +208,9 @@ hr {
     box-shadow: 0 0 10px black;
 }
 
+.email_profile{
+    font-weight: bold;
+}
 .name {
     font-size: 120%;
     font-weight: bold;
