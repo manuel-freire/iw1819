@@ -6,10 +6,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
 @Entity
-public class FilePermission {
+public class UserFile {
 	
 	@EmbeddedId
-	private FilePermissionId id;
+	private UserFileId id;
 	
 	@ManyToOne
 	@MapsId("userId")

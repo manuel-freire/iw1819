@@ -26,8 +26,8 @@ public class File {
 	 */
 	 
 	 
-	@OneToMany(targetEntity=FilePermission.class, mappedBy="file")
-	private List<FilePermission> filePermissions;
+	@OneToMany(targetEntity=UserFile.class, mappedBy="file")
+	private List<UserFile> filePermissions;
 	
 	@ManyToMany(targetEntity=Group.class, mappedBy="files")
 	private List<Group> groups;
@@ -39,11 +39,11 @@ public class File {
 	
 	
 
-	public List<FilePermission> getFilePermissions() {
+	public List<UserFile> getFilePermissions() {
 		return filePermissions;
 	}
 
-	public void setFilePermissions(List<FilePermission> filePermissions) {
+	public void setFilePermissions(List<UserFile> filePermissions) {
 		this.filePermissions = filePermissions;
 	}
 

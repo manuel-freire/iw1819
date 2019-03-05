@@ -1,16 +1,60 @@
 package es.ucm.fdi.iw.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+
+@Entity
+public class User{
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long id;
+	private String nickname;
+	private String name;
+	private String email;
+	private String password;
+	private Date birthdate;
+	
+	
+	
+	@OneToMany(targetEntity=Notification.class, mappedBy="user")
+	private List<Notification> notifications;
+	
+	
+	@OneToMany(targetEntity=UserFile.class, mappedBy="user")
+	private List<UserFile> files;
+	
+	
+	@ManyToMany(targetEntity=Group.class, mappedBy="users")
+	private List<Group> groups;
+	
+	
+	@ManyToMany(targetEntity=GroupMessage.class, mappedBy="user")
+	private List<GroupMessage> groupsMessages;
+	
+	
+	@OneToMany(targetEntity=UserMessage.class, mappedBy="userReceiver")
+	private List<UserMessage> usersMessages;
+	
+	
+	
+	
+}
+
+
+
+
+
 
 /**
  * A user.
@@ -21,7 +65,7 @@ import javax.persistence.OneToMany;
  * 
  * @author mfreire
  */
-@Entity
+/*@Entity
 @NamedQueries({
 	@NamedQuery(name="User.ByLogin",
 			query="SELECT u FROM User u "
@@ -113,4 +157,4 @@ public class User {
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
-}
+}*/
