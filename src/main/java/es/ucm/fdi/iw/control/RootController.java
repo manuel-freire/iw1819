@@ -1,9 +1,5 @@
 package es.ucm.fdi.iw.control;
 
-import java.security.Principal;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +21,50 @@ public class RootController {
 	
 	@GetMapping("/")
 	public String index(Model model) {
-		model.addAttribute("xs", "uno dos tres cuatro cinco".split(" "));
 		return "index";
 	}
 
+	@GetMapping("/login")
+	public String login(Model model) {
+		return "login";
+	}
+	
+	@GetMapping("/profile")
+	public String profile(Model model) {
+		return "profile";
+	}
+	
+	@GetMapping("/modifyProfile")
+	public String modifyProfile(Model model) {
+		return "modifyProfile";
+	}
+	
+	@GetMapping("/chats")
+	public String chats(Model model) {
+		return "chats";
+	}
+	
+	@GetMapping("/friends")
+	public String friends(Model model) {
+		return "friends";
+	}
+	
+	@GetMapping("/groups")
+	public String groups(Model model) {
+		return "groups";
+	}
+	
+	@GetMapping("/history")
+	public String history(Model model) {
+		return "history";
+	}
+	
+	@GetMapping("/share")
+	public String share(Model model) {
+		return "share";
+	}
+	
+	/*
 	@GetMapping("/admin")
 	public String admin(Model model, Principal principal) {
 		model.addAttribute("activeProfiles", env.getActiveProfiles());
@@ -45,5 +81,6 @@ public class RootController {
 				.replaceFirst("[^:]*", "ws")
 				.replace("chat", "ws"));
 		return "chat";
-	} 
+	}
+	*/
 }

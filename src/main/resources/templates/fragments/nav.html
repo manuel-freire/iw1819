@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html 
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
 <head>
 	<title>Nav fragment - rest intentionally left empty</title>
 </head>
 <body>
-	<nav th:fragment="nav">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark center-content" th:fragment="nav">
+
+        <div class="navbar-nav">
+        	<img src="img/">
+            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">home</i></a>
+            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">folder_open</i></a>
+            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">group</i></a>
+            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">brightness_low</i></a>
+        </div>
+	
+	<!-- 
 		<a class="logo" href="" th:href="@{/}"></a>
 		<span class="sitename">Karmómetro</span>
 
@@ -16,6 +27,7 @@
 		<a class="logx" 
 			th:if="not ${#authorization.expression('hasRole(''ROLE_USER'')')}" 
 			th:href="@{/login}" href="/login">login</a>		
+	 -->
 	</nav>
 </body>
 </html>

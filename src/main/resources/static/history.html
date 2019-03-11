@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
 <head>
     <title>Principal</title>
     <meta charset="utf-8">
@@ -13,15 +16,7 @@
 
 <body> 
     
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark center-content">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">home</i></a>
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">folder_open</i></a>
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">group</i></a>
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">brightness_low</i></a>
-        </div>
-    </nav> 
+    <nav th:replace="fragments/navbar :: navbar"></nav>
     
     <div class="conatiner mt-4">
         <div class="panel">
