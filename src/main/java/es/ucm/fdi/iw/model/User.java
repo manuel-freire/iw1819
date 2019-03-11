@@ -3,15 +3,12 @@ package es.ucm.fdi.iw.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -26,6 +23,8 @@ public class User{
 	private Date birthdate;
 	
 	
+	@ManyToOne(targetEntity=User.class)
+	private List<Friend> friends;
 	
 	@OneToMany(targetEntity=Notification.class, mappedBy="user")
 	private List<Notification> notifications;
