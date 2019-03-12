@@ -1,6 +1,7 @@
 package es.ucm.fdi.iw.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -40,13 +41,19 @@ public class User {
 	private String roles; // split by ',' to separate roles
 	private byte enabled;
 	
+	public boolean hasRole(String roleName) {
+		String requested = roleName.toLowerCase();
+		return Arrays.stream(roles.split(","))
+				.anyMatch(r -> r.equals(requested));
+	}
+	
 	// application-specific fields
 	private List<Vote> votes = new ArrayList<>(); 
 	private List<Question> questions = new ArrayList<>();
 	private List<CGroup> groups = new ArrayList<>();
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	public long getId() {
 		return id;
 	}
