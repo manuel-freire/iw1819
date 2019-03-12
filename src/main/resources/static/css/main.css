@@ -44,6 +44,9 @@ nav>*{
 .logx {
 	margin-left: auto;
 }
+.logx form {
+	display: inline;
+}
 
 /* setup main container */
 div.container {
@@ -63,4 +66,15 @@ footer {
 }
 footer img {
 	vertical-align: middle;
+}
+
+/* for compact forms */
+.smallform input {
+	display: block;
+}
+
+/* to highlight debug elements */
+.debug {
+	padding: 5px;
+	border: 1px dashed red;
 }

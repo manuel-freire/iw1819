@@ -10,12 +10,33 @@
 		<a class="logo" href="" th:href="@{/}"></a>
 		<span class="sitename">Karmómetro</span>
 
-		<a class="logx" 
-			th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" 
-			th:href="@{/logout}" href="/logout">logout</a>
-		<a class="logx" 
-			th:if="not ${#authorization.expression('hasRole(''ROLE_USER'')')}" 
-			th:href="@{/login}" href="/login">login</a>		
+		<span class="logx" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+			<a th:href="@{/user/{id}(id=${session.u.id})}" th:text="${session.u.login}">Pepe</a>
+			<a th:href="@{/logout}" href="/logout">logout</a>
+		</span>
+		<span class="logx" th:if="not ${#authorization.expression('hasRole(''ROLE_USER'')')}">
+			<a th:href="@{/login}" href="/login">login</a>
+			<span class="debug" th:if="${application.debug}">
+				<form th:action="@{/login}" method="post">
+					<input type="hidden" name="username" value="a">
+					<input type="hidden" name="password" value="a">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<button type="submit">a</button>
+  				</form>
+				<form th:action="@{/login}" method="post">
+					<input type="hidden" name="username" value="p">
+					<input type="hidden" name="password" value="p">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<button type="submit">p</button>
+  				</form>
+				<form th:action="@{/login}" method="post">
+					<input type="hidden" name="username" value="q">
+					<input type="hidden" name="password" value="q">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<button type="submit">q</button>
+  				</form>
+			</span>
+		</span>		
 	</nav>
 </body>
 </html>
