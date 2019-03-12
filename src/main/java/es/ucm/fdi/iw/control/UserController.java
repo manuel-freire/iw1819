@@ -94,7 +94,7 @@ public class UserController {
 	@PostMapping("/{id}/photo")
 	public String postPhoto(@RequestParam("photo") MultipartFile photo,
 			@PathVariable("id") String id, Model model, HttpSession session){
-		User target = entityManager.find(User.class, ""+id);
+		User target = entityManager.find(User.class, Long.parseLong(id));
 		model.addAttribute("user", target);
 		
 		// check permissions
