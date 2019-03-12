@@ -31,7 +31,7 @@ public class Group {
 	@ManyToMany(targetEntity=File.class)
 	private List<File> files;
 
-	@OneToMany(targetEntity=Message.class, mappedBy="group")
+	@OneToMany(targetEntity=Message.class, mappedBy="groupReceiver")
 	private List<Message> messages;
 	
 	
