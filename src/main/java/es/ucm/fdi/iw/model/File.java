@@ -18,12 +18,14 @@ public class File {
 	private String metadata;
 	
 	
+	
 	//Hay que añadir en la entidad User lo siguiente : 
 	/*
 	 	@OneToMany(targetEntity=FilePermission.class, mappedBy="user")
 		private List<FilePermission> filePermissions;
 	 */
-	  
+	 
+	 
 	@OneToMany(targetEntity=UserFile.class, mappedBy="file")
 	private List<UserFile> filePermissions;
 	
@@ -34,21 +36,8 @@ public class File {
 	private List<Tag> tags;
 	
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(String metadata) {
-		this.metadata = metadata;
-	}
+	
+	
 
 	public List<UserFile> getFilePermissions() {
 		return filePermissions;
