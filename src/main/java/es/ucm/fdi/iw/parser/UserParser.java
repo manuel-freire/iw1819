@@ -32,8 +32,6 @@ public class UserParser extends Parser {
     private static final int USER_NAME_ERROR_CODE = 200;
     private static final int PARSE_COD_NAME_PATTERN = USER_ERROR_CODE+USER_NAME_ERROR_CODE+1;
     private static final String PE_MSG_NAME_PATTERN = "Nombre inválido, solo puede contener letras";
-    private static final int PARSE_COD_LAST_NAME_PATTERN = USER_ERROR_CODE+USER_NAME_ERROR_CODE+2;
-    private static final String PE_MSG_LAST_NAME_PATTERN = "Apellido inválido, solo puede contener letras";
     
     //Passwords
     private static final int USER_PASSWORD_ERROR_CODE = 300;

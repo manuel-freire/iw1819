@@ -14,9 +14,7 @@ public class Parser {
 
     protected static final int PARSE_COD_FORMATO_INCORRECTO = 202;
     protected static final String PE_MSG_FORMATO_INCORRECTO = "Formato incorrecto";
-
-
-    private static final String MSG_INTERESES = "Debes seleccionar al menos un interés";
+    
 
     public static boolean isNotNull(Object obj) throws ParseException {
         if (obj == null)
