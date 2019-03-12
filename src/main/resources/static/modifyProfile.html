@@ -26,32 +26,37 @@
 	        <form class ="form">
 	            <div class="form-row">
 	                <div class="form-group col-auto mx-auto">
-	                    <span class= "email_profile">snowed@gamedetronos.serie</span>
+	                    <span class= "email_profile" th:text=${userTransfer.email}></span>
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-6">
-	                    <input type="text" class="form-control" id="inputFirstName" placeholder="FirstName" value = "John">
+	                    <input type="text" class="form-control" id="inputFirstName" placeholder="FirstName" th:value=${userTransfer.name}>
+	                    <div class="invalid-feedback" th:text="${nameError}"></div>
 	                </div>
 	                <div class="form-group col-6">
-	                    <input type="text" class="form-control" id="inputLastName" placeholder="LastName" value = "Snow">
+	                    <input type="text" class="form-control" id="inputLastName" placeholder="LastName" th:value=${userTransfer.lastName}>
+	                    <div class="invalid-feedback" th:text="${lastNameError}"></div>
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-12">
-	                    <input type="text" class="form-control" id="inputNick" placeholder="Nick" value= "@snow">
+	                    <input type="text" class="form-control" id="inputNick" placeholder="Nick" th:value="@+${userTransfer.nickname}">
+	                    <div class="invalid-feedback" th:text="${nicknameError}"></div>
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-12">
-	                    <input type="date" class="form-control" id="inputBirthday">
+	                    <input type="date" class="form-control" id="inputBirthday" th:value=${#dates.format(userTransfer.birthday, 'dd-MM-yyyy')}>
+	                    <div class="invalid-feedback" th:text="${birthdayError}"></div>
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-12">
-	                    <textarea class="form-control" id="text_description" rows = "4" >· I know nothing, my friends killed me once, my parents are dead... but I have a white wolf! =) ·</textarea>
+	                    <textarea class="form-control" id="text_description" rows="4" th:text=${userTransfer.description}></textarea>
 	                </div>
 	            </div>
+	            <!-- 
 	            <div class="form-row">
 	                <div class="form-group col-12 d-flex flex-row align-items-center">
 	                    <i class="material-icons mr-3">explore</i>
@@ -61,13 +66,14 @@
 	            <div class="form-row">
 	                <div class="form-group col-12 d-flex flex-row align-items-center">
 	                    <i class="material-icons mr-3">language</i>
-	                    <input type="text" class="form-control" id="inputUbication" value="winteriscoming.com">
+	                    <input type="text" class="form-control" id="inputWebsite" value="winteriscoming.com">
 	                </div>
 	            </div>
 	            <div class="form-row justify-content-center align-items-center">
 	                <img class="social" src="img/facebook.png">
 	                <img class="social" src="img/twitter.png">
 	            </div>
+	            -->
 	            <div class="d-flex flex-column align-items-center"> 
 	                <button type="button" class="btn button content-button mt-3" data-toggle="modal" data-target="#exampleModal"><i class="material-icons mr-3">settings_backup_restore</i>Modify password</button>
 	                <button type="button" class="btn button content-button mt-3"><i class="material-icons mr-3">save</i> Save changes</button>
@@ -86,12 +92,20 @@
 	                            <form class ="form">
 	                                <div class="form-row">
 	                                    <div class="form-group col-12">
-	                                        <input type="password" class="form-control" id="OldPassword" placeholder="OldPassword">
+	                                        <input type="password" class="form-control" id="OldPassword" placeholder="Old password">
+	                                        <div class="invalid-feedback" th:text="${oldPasswordError}"></div>
 	                                    </div>
 	                                </div>
 	                                <div class="form-row">
 	                                    <div class="form-group col-12">
-	                                        <input type="password" class="form-control" id="NewPassword" placeholder="NewPassword">
+	                                        <input type="password" class="form-control" id="NewPassword" placeholder="New password">
+	                                        <div class="invalid-feedback" th:text="${newPasswordError}"></div>
+	                                    </div>
+	                                </div>
+	                                <div class="form-row">
+	                                    <div class="form-group col-12">
+	                                        <input type="password" class="form-control" id="SameNewPassword" placeholder="Repeat new password">
+	                                        <div class="invalid-feedback" th:text="${sameNewPasswordError}"></div>
 	                                    </div>
 	                                </div>
 	                            </form>

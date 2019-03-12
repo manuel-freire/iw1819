@@ -16,11 +16,13 @@ public class User{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	
 	private String nickname;
 	private String name;
 	private String email;
 	private String password;
-	private Date birthdate;
+	private Date birthday;
+	private String description;
 	
 	
 	@ManyToOne(targetEntity=User.class)
@@ -44,6 +46,133 @@ public class User{
 	
 	@OneToMany(targetEntity=UserMessage.class, mappedBy="userReceiver")
 	private List<UserMessage> usersMessages;
+
+
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public String getNickname() {
+		return nickname;
+	}
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<Friend> getFriends() {
+		return friends;
+	}
+
+
+	public void setFriends(List<Friend> friends) {
+		this.friends = friends;
+	}
+
+
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
+
+	public List<UserFile> getFiles() {
+		return files;
+	}
+
+
+	public void setFiles(List<UserFile> files) {
+		this.files = files;
+	}
+
+
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
+
+
+	public List<GroupMessage> getGroupsMessages() {
+		return groupsMessages;
+	}
+
+
+	public void setGroupsMessages(List<GroupMessage> groupsMessages) {
+		this.groupsMessages = groupsMessages;
+	}
+
+
+	public List<UserMessage> getUsersMessages() {
+		return usersMessages;
+	}
+
+
+	public void setUsersMessages(List<UserMessage> usersMessages) {
+		this.usersMessages = usersMessages;
+	}
 	
 	
 	
