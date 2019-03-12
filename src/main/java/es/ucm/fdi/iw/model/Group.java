@@ -31,15 +31,15 @@ public class Group {
 	@ManyToMany(targetEntity=File.class)
 	private List<File> files;
 
-	@OneToMany(targetEntity=GroupMessage.class, mappedBy="group")
-	private List<GroupMessage> messages;
+	@OneToMany(targetEntity=Message.class, mappedBy="group")
+	private List<Message> messages;
 	
 	
-	public List<GroupMessage> getMessages() {
+	public List<Message> getMessages() {
 		return messages;
 	}
 
-	public void setMessages(List<GroupMessage> messages) {
+	public void setMessages(List<Message> messages) {
 		this.messages = messages;
 	}
 

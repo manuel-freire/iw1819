@@ -38,15 +38,11 @@ public class User{
 	private List<Group> groups;
 	
 	
-	@ManyToMany(targetEntity=GroupMessage.class, mappedBy="user")
-	private List<GroupMessage> groupsMessages;
+	@OneToMany(targetEntity=Message.class, mappedBy="sender")
+	private List<Message> sentMessages;
 	
-	
-	@OneToMany(targetEntity=UserMessage.class, mappedBy="userReceiver")
-	private List<UserMessage> usersMessages;
-	
-	
-	
+	@OneToMany(targetEntity=Message.class, mappedBy="receiver")
+	private List<Message> receivedMessages;
 	
 }
 
