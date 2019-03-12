@@ -22,37 +22,4 @@ public class UserFile {
 	
 	private String permission;
 	
-
-	public UserFileId getId() {
-		return id;
-	}
-
-	public void setId(UserFileId id) {
-		this.id = id;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public File getFile() {
-		return file;
-	}
-
-	public void setFile(File file) {
-		this.file = file;
-	}
-
-	public String getPermission() {
-		return permission;
-	}
-
-	public void setPermission(String permission) {
-		this.permission = permission;
-	}
-	
 }

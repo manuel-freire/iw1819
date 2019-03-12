@@ -85,13 +85,9 @@
                     <div class="tabs-content">
 	                    <!-- TABS LOGIN -->
 	                    <div id="login-tab-content" class="active">
-	                        <form class="login-form" th:action="@{/login}" th:object="${userLogin}" method="POST">
-	                            <input type="text" class="input"   placeholder="Email or Username" th:field="*{email}">
-	                            <div class="invalid-feedback" th:text="${loginUserError}"></div>
-	                            
-	                            <input type="password" class="input"   placeholder="Password" th:field="*{password}">
-	                            <div class="invalid-feedback" th:text="${loginPasswordError}"></div>
-	                            
+	                        <form class="login-form" action="" method="post">
+	                            <input type="text" class="input"   placeholder="Email or Username">
+	                            <input type="password" class="input"   placeholder="Password">
 	                            <input type="checkbox" class="checkbox" checked id="remember_me">
 	                            <label for="remember_me">Remember me</label>
 	                            <input type="submit" class="button" value="Login">
@@ -102,19 +98,10 @@
 	                    </div>
 	                    <!-- TABS SIGNUP -->
 	                    <div id="signup-tab-content">
-	                        <form class="signup-form" th:action="@{/register}" th:object="${userRegister}" method="POST">
-	                            <input type="email" class="input" placeholder="Email" th:field="*{email}">
-	                            <div class="invalid-feedback" th:text="${emailError}"></div>
-	                            
-	                            <input type="text" class="input" placeholder="Username" th:field="*{nickname}">
-	                            <div class="invalid-feedback" th:text="${nicknameError}"></div>
-	                            
-	                            <input type="password" class="input" autocomplete="off" placeholder="Password" th:field="*{password}">
-	                            <div class="invalid-feedback" th:text="${passwordError}"></div>
-	                            
-	                            <input type="password" class="input" autocomplete="off" placeholder="Repeat password" th:field="*{samePassword}">
-	                            <div class="invalid-feedback" th:text="${samePasswordError}"></div>
-	                            
+	                        <form class="signup-form" action="" method="post">
+	                            <input type="email" class="input" placeholder="Email">
+	                            <input type="text" class="input" placeholder="Username">
+	                            <input type="password" class="input" autocomplete="off" placeholder="Password">
 	                            <input type="submit" class="button" value="Sign Up">
 	                        </form>
 	                    </div>
