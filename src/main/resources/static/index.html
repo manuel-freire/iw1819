@@ -1,5 +1,8 @@
-
-<html lang="es">
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
 <head>
     <title>Principal</title>
     <meta charset="utf-8">
@@ -17,19 +20,14 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/sl-1.2.6/datatables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css"></script>
+    
+    <script type="text/javascript" src="js/index.js"></script>
 </head>
 
 <body> 
         
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark center-content">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">home</i></a>
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">folder_open</i></a>
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">group</i></a>
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">brightness_low</i></a>
-        </div>
-    </nav> 
+    <nav th:replace="fragments/navbar :: navbar"></nav>
     
     <div class="conatiner mt-4">
 
@@ -210,36 +208,6 @@
         </div>
     </div>
 
-<script>
-    $(function() {
-
-        $("#view-list").click(function() {
-            $("#action-button-container").removeClass("d-none");
-        });
-
-        $("#view-files").click(function() {
-            $("#action-button-container").addClass("d-none");
-        });
-
-        $('#fileTable').DataTable({
-            select: true,
-        });
-
-        $("#edit-folder-view").click(function() {
-            console.log("folderView "+(($("#folderView").is(":visible")) ? "visible" : "hidden"));
-            if($("#folderView").is(":visible")) {
-                console.log("action-button-container "+(($("#action-button-container").is(":visible")) ? "visible" : "hidden"));
-                if(($("#action-button-container").is(":visible"))) {
-                    $("#action-button-container").addClass("d-none");
-                }
-                else {
-                    $("#action-button-container").removeClass("d-none");
-                }
-            }
-        });
-
-    });
-</script>
 </body>
 </html>
     

@@ -25,7 +25,9 @@ public class IwUserDetailsService implements UserDetailsService {
         this.entityManager = em;
     }
 
+    
     public UserDetails loadUserByUsername(String userName){
+    	/*
     	try {
 	        User u = entityManager.createNamedQuery("User.ByLogin", User.class)
                     .setParameter("userLogin", userName)
@@ -42,5 +44,8 @@ public class IwUserDetailsService implements UserDetailsService {
     		log.info("No such user: " + userName);
     		throw new UsernameNotFoundException(userName);
     	}
+    	*/
+    	return null;
     }
+    
 }
