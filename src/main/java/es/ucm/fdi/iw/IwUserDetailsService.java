@@ -35,13 +35,16 @@ public class IwUserDetailsService implements UserDetailsService {
 	        	roles.add(new SimpleGrantedAuthority("ROLE_" + r));
 		        log.info("Roles for " + userName + " include " + roles.get(roles.size()-1));
 	        }
-	        */
+	        
 	        return new org.springframework.security.core.userdetails.User(
 	        		u.getEmail(), u.getPassword(), null); 
+	        		*/
 	    } catch (Exception e) {
     		log.info("No such user: " + userName);
     		throw new UsernameNotFoundException(userName);
     	}
+    	
+    	return null;
     }
     
 }
