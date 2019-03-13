@@ -1,7 +1,6 @@
 package es.ucm.fdi.iw;
 
 import java.io.IOException;
-import java.security.Principal;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;

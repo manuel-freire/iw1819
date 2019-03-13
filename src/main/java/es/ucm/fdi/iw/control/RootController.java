@@ -2,7 +2,6 @@ package es.ucm.fdi.iw.control;
 
 import java.security.Principal;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
