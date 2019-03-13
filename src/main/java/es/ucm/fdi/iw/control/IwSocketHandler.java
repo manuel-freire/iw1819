@@ -74,6 +74,7 @@ public class IwSocketHandler extends TextWebSocketHandler {
     		log.info("No such user, not sending message: {}", userName);
     		return false;
     	}
+		log.info("Sending message to {}: {}", userName, text);
     	
     	try {
     		synchronized (sh) {

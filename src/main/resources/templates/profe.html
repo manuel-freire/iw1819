@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head.html :: head">
+	<meta charset="utf-8">
+	<title>Title goes here</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css" type="text/css"/>
+</head>
+<body>
+	<nav th:replace="fragments/nav.html :: nav">
+		Nav goes here
+	</nav>
+	
+	<div class="container">
+	<div class="main">
+	<h1 th:text="#{index.welcome}">Bienvenido a la plantilla de IW</h1>
+		
+	<h4>Información del usuario <span th:text="${user.login}">Pepe</span></h4>
+	
+	<div th:if="(${session.u.id} eq ${user.id}) or ${user.hasRole('ADMIN')}">
+		<!-- puedes cambiar todo -->
+		<form class="smallform" th:action="@{/user/{id}(id=${user.id})}" method="POST">
+			<input name="login" required placeholder="Nombre de usuario" th:value="${user.login}"/>
+			<input name="roles" required placeholder="Roles" th:value="${user.roles}"/>
+			<input type="password" required name="password" placeholder="Contraseña"/>
+			<input type="password" required name="pass2" placeholder="Confirmación"/>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />			
+			<button type="submit">Modificar</button>
+		</form>
+		<form th:action="@{/user/{id}/photo(id=${user.id})}" method="POST" enctype="multipart/form-data">
+			Nueva foto <input type="file" name="photo"/>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />			
+			<button type="submit">Actualizar</button>
+		</form>
+	</div>
+	<img th:src="@{/user/{id}/photo(id=${user.id})}">
+	</div>
+
+	<div class="sidebar">
+	<table>
+		<tr th:each="x, i: ${xs}">
+		    <td th:text="|${i.index} ${i.count} ${i.size} ${i.current}|"
+		    th:class="|c${i.odd}-${i.first}-${i.last}|">hola!</td>
+		</tr>
+	</table>
+	</div>
+	</div>
+	
+	<footer th:replace="fragments/footer.html :: footer">
+		Footer goes here
+	</footer>
+</body>
+</html>

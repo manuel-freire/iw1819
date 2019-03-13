@@ -17,7 +17,7 @@
 	<h1 th:text="#{index.welcome}">Bienvenido a la plantilla de IW</h1>
 		
 	<h4>Registro en clase</h4>
-	<form th:action="@{/vote/enter}" method="POST">
+	<form th:action="@{/clase/enter}" method="POST">
 		<input name="userName" placeholder="Nombre de usuario" value="x"/>
 		<input name="groupCode" placeholder="Código de la clase" value="test"/>
 		<button type="submit">Enviar</button>
