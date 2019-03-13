@@ -6,12 +6,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,27 +25,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.ucm.fdi.iw.IwUserDetailsService;
 import es.ucm.fdi.iw.model.CGroup;
 import es.ucm.fdi.iw.model.User;
 
 @Controller()
-@RequestMapping("vote")
-public class VoteController {
+@RequestMapping("clase")
+public class ClassController {
 	
-	private static final Logger log = LogManager.getLogger(VoteController.class);
+	private static final Logger log = LogManager.getLogger(ClassController.class);
 	
 	@Autowired 
 	private EntityManager entityManager;
-	
-	@Autowired
-	private Environment env;
-	
-	@Autowired
-	private IwSocketHandler iwSocketHandler;
-
-	@Autowired
-	private IwUserDetailsService userDetailsService;
 	
 	@Autowired 
 	private PasswordEncoder passwordEncoder;
@@ -54,26 +44,29 @@ public class VoteController {
 	private AuthenticationManager authenticationManager;
 	
 	@GetMapping("/")
-	public String index(Model model, Principal principal) {
+	public String index(Model model, Principal principal, HttpSession session) {
 		
 		if (principal == null) {
 			// force login
-			return "vote";
+			return "enter";
 		}
-		
+		CGroup g = entityManager.find(CGroup.class, 
+				((CGroup)session.getAttribute("g")).getId());
+		model.addAttribute("questions", g.getQuestions());
+
 		//model.addAttribute("qs", Question.getQuestionsWithVotes(entityManager));
-		return "class";
+		return "clase";
 	}
 
 	@GetMapping("/enter")
 	public String getEnter(Model model) {
 		return "enter";			
 	}
-
+	
 	@PostMapping("/enter")
 	@Transactional
 	public String enter(Model model, HttpServletRequest request, Principal principal, 
-			@RequestParam String userName, @RequestParam String groupCode) {
+			@RequestParam String userName, @RequestParam String groupCode, HttpSession session) {
 		CGroup g = null;
 		try {
 	        g = entityManager.createNamedQuery("CGroup.ByCode", CGroup.class)
@@ -81,7 +74,8 @@ public class VoteController {
 	                            .getSingleResult();
 	        // if no exception here, the group code is valid - yay!
 		} catch (Exception e) {
-			List<CGroup> groups = (List<CGroup>)entityManager
+			@SuppressWarnings("unchecked")
+			List<CGroup> groups = entityManager
 					.createQuery("select g from CGroup g").getResultList();
     		log.info("No such group code: {}; listing {} valid groups", groupCode, groups.size());
     		for (CGroup i : groups) {
@@ -105,22 +99,20 @@ public class VoteController {
         u.setLogin(userName);
         u.setPassword(passwordEncoder.encode(randomPassword));
         u.setGroups(new ArrayList<CGroup>());
-        u.getGroups().add(g);
-        u.setRoles("STUDENT");
-        log.info("Creating & logging in student {}, with ID {} and password {}", userName, u.getId(), randomPassword);
+        u.setRoles("STUDENT,USER");
         entityManager.persist(u);
-        entityManager.flush();	// <-- flush before querying DB again (as part of autologin)
-        
-        List<User> users = (List<User>)entityManager
-				.createQuery("select u from User u").getResultList();
-		for (User i : users) {
-			log.info(i.toString());
-		}
-        
+        entityManager.flush();
+        log.info("Creating & logging in student {}, with ID {} and password {}", userName, u.getId(), randomPassword);
+
         doAutoLogin(userName, randomPassword, request);	  
         log.info("Created & logged in student {}, with ID {} and password {}", userName, u.getId(), randomPassword);
+		
+        g.getParticipants().add(u);
+        log.info("Added to group {}", g.getId());
+        session.setAttribute("u", u);
+        session.setAttribute("g", g);
         
-		return "forward:/";
+		return "redirect:/clase/";
 	}
 	
 	/**

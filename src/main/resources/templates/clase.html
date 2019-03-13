@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head.html :: head">
+	<meta charset="utf-8">
+	<title>Title goes here</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css" type="text/css"/>
+</head>
+<body>
+	<nav th:replace="fragments/nav.html :: nav">
+		Nav goes here
+	</nav>
+	
+	<div class="container">
+	<div class="main">
+	<h1 th:text="#{index.welcome}">Bienvenido a la plantilla de IW</h1>
+
+	<div th:if="${session.u eq null}">
+		<h4>Registro en clase</h4>
+		<form th:action="@{/vote/enter}" method="POST">
+			<input name="userName" placeholder="Nombre de usuario" value="x"/>
+			<input name="groupCode" placeholder="Código de la clase" value="test"/>
+			<button type="submit">Enviar</button>
+		</form>
+	</div>		
+	<div th:unless="${session.u eq null}">
+		<h4>Nuevo voto</h4>
+		<div th:each="q: ${questions}">
+			<form class="vote" th:action="@{/api/v/{qid}(qid=${q.id})}" method="post">
+				<input th:id="|r_${q.id}|" type="range" name="vote" min="0" max="100" value="0"/>
+				<span class="numeric" th:id="|v_${q.id}|"></span>
+				<input class="csrf" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />				
+				<span th:text="${q.text}">El texto de la pregunta</span>
+			</form>
+		</div>		
+		<h4>Nueva pregunta</h4>
+		<form th:action="@{/api/q}" method="POST">
+			<textarea cols="80" rows="3" name="text" 
+				placeholder="Tu pregunta aquí..."></textarea>
+			<br>
+			<label for="poll_t">encuesta</label>
+			<input id="poll_t" type="radio" name="poll" value="true"/>
+			<label for="poll_f">pregunta</label>
+			<input id="poll_f" type="radio" name="poll" value="false"/>
+			<button type="submit">Enviar</button>
+		</form>
+		
+	</div>		
+
+	</div>
+
+	<div class="sidebar">
+	<table>
+		<tr th:each="x, i: ${xs}">
+		    <td th:text="|${i.index} ${i.count} ${i.size} ${i.current}|"
+		    th:class="|c${i.odd}-${i.first}-${i.last}|">hola!</td>
+		</tr>
+	</table>
+	</div>
+	</div>
+	
+	<footer th:replace="fragments/footer.html :: footer">
+		Footer goes here
+	</footer>
+</body>
+</html>
