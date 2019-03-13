@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 /**
  * Expresses interest in a question by a student.
  * 
@@ -21,12 +23,15 @@ import javax.persistence.ManyToOne;
 public class Vote {
 	
 	private long id;
+    @JsonView(Views.Public.class)
 	private User voter;
+    @JsonView(Views.Public.class)
 	private Question question;
+    @JsonView(Views.Public.class)
 	private int value;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
 		return id;
 	}
@@ -34,11 +39,11 @@ public class Vote {
 		this.id = id;
 	}
 	@ManyToOne(targetEntity=User.class)
-	public User getParticipant() {
+	public User getVoter() {
 		return voter;
 	}
-	public void setParticipant(User participant) {
-		this.voter = participant;
+	public void setVoter(User voter) {
+		this.voter = voter;
 	}
 	@ManyToOne(targetEntity=Question.class)
 	public Question getQuestion() {

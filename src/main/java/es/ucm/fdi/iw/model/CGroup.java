@@ -15,6 +15,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 /**
  * Group of students.
  * 
@@ -31,9 +33,13 @@ import javax.persistence.OneToMany;
 })
 public class CGroup {
 	private long id;
+    @JsonView(Views.Public.class)
 	private String code;
-	private List<Vote> votes = new ArrayList<>();
+    @JsonView(Views.Public.class)
+	private List<Question> questions = new ArrayList<>();
+    @JsonView(Views.Public.class)
 	private List<User> participants = new ArrayList<>();
+    @JsonView(Views.Public.class)
 	private List<User> owners = new ArrayList<>();
 
 	/**
@@ -47,7 +53,7 @@ public class CGroup {
 	}
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
 		return id;
 	}
@@ -56,14 +62,14 @@ public class CGroup {
 		this.id = id;
 	}
 	
-	@OneToMany(targetEntity=Vote.class)
+	@OneToMany(targetEntity=Question.class)
 	@JoinColumn(name="group_id")
-	public List<Vote> getVotes() {
-		return votes;
+	public List<Question> getQuestions() {
+		return questions;
 	}
 
-	public void setVotes(List<Vote> votes) {
-		this.votes = votes;
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
 	}
 
 	@ManyToMany(targetEntity=User.class)

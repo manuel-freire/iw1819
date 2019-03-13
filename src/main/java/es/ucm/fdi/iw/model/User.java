@@ -15,6 +15,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 /**
  * A user.
  * 
@@ -36,7 +38,8 @@ import javax.persistence.OneToMany;
 })
 public class User {
 	private long id;
-	private String login;
+    @JsonView(Views.Public.class)    
+	private String login;	
 	private String password;
 	private String roles; // split by ',' to separate roles
 	private byte enabled;
@@ -53,7 +56,7 @@ public class User {
 	private List<CGroup> groups = new ArrayList<>();
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
 		return id;
 	}
