@@ -47,10 +47,18 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	    log.info("Storing user info for {} in session {}", login, session.getId());
 		User u = entityManager.createNamedQuery("User.ByLogin", User.class)
 		        .setParameter("userLogin", login)
-		        .getSingleResult();			   	
+		        .getSingleResult();		
 		session.setAttribute("u", u);
 		
+		// add a 'ws' session variable
+		session.setAttribute("ws", request.getRequestURL().toString()
+				.replaceFirst("[^:]*", "ws")	// http[s]://... => ws://...
+				.replaceFirst("/[^/]*$", "/ws"));	// .../foo		 => .../ws
+		
 		// redirects to 'admin' or 'user/{id}', depending on the user
-		response.sendRedirect(u.hasRole("ADMIN") ? "admin" : "user/" + u.getId());
+		response.sendRedirect(
+				u.hasRole("admin") ? "admin" :
+				u.hasRole("student") ? "clase/" :
+					"user/" + u.getId());
 	}
 }
