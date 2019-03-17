@@ -45,4 +45,7 @@ INSERT INTO user(id,enabled,login,password,roles) VALUES (
 
 -- a group
 INSERT INTO cgroup VALUES (1, 'test');
-INSERT INTO cgroup VALUES (2, 'x');
+
+-- a question for the group
+INSERT INTO question (poll, text, author_id, group_id) VALUES (
+	1, 'La clase es interesante', 1, 1);

@@ -37,6 +37,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 			+ "WHERE u.login = :userLogin")	
 })
 public class User {
+    @JsonView(Views.Public.class)    
 	private long id;
     @JsonView(Views.Public.class)    
 	private String login;	
@@ -45,9 +46,8 @@ public class User {
 	private byte enabled;
 	
 	public boolean hasRole(String roleName) {
-		String requested = roleName.toLowerCase();
 		return Arrays.stream(roles.split(","))
-				.anyMatch(r -> r.equals(requested));
+				.anyMatch(r -> r.equalsIgnoreCase(roleName));
 	}
 	
 	// application-specific fields
@@ -99,7 +99,7 @@ public class User {
 	}
 	
 	@OneToMany(targetEntity=Vote.class)
-	@JoinColumn(name="author_id")
+	@JoinColumn(name="voter_id")
 	public List<Vote> getVotes() {
 		return votes;
 	}
@@ -109,7 +109,7 @@ public class User {
 	}
 
 	@OneToMany(targetEntity=Question.class)
-	@JoinColumn(name="participant_id")
+	@JoinColumn(name="author_id")
 	public List<Question> getQuestions() {
 		return questions;
 	}
