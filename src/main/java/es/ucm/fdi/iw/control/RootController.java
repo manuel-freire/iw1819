@@ -19,7 +19,7 @@ public class RootController {
 	
 	@Autowired
 	private Environment env;
-	
+		
 	@Autowired
 	private IwSocketHandler iwSocketHandler;
 
@@ -36,7 +36,7 @@ public class RootController {
 		
 		log.info("let us all welcome this admin, {}", principal.getName());
 		
-		return "index";
+		return "admin";
 	}
 	
 	@GetMapping("/chat")

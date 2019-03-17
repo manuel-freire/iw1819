@@ -23,9 +23,9 @@
 			<button type="submit">Enviar</button>
 		</form>
 	</div>		
-	<div th:unless="${session.u eq null}">
-		<h4>Preguntas</h4>
-		<div th:each="q: ${questions}" class="question" th:id="|q_${q.id}|">
+	<div class="polls" th:unless="${session.u eq null}">
+		<h4>Encuestas</h4>
+		<div th:each="q: ${polling}" class="question" th:id="|q_${q.id}|">
 			<form class="vote" th:action="@{/api/v/{qid}(qid=${q.id})}" method="post">
 				<div class="bars">
 				<div class="me">
@@ -40,11 +40,35 @@
 				</div>
 				</div>
 				<span class="qtext" th:text="${q.text}">El texto de la pregunta</span>
+				<button class="delq" th:if="${session.u.hasRole('admin')} or ${session.u.id} eq ${q.author.id}">🗑</button>
 			</form>
-		</div>		
-		<h4>Nueva pregunta</h4>
+		</div>
+	</div>
+	<div class="questions" th:unless="${session.u eq null}">
+		<h4>Preguntas</h4>
+		<div th:each="q: ${asking}" class="question" th:id="|q_${q.id}|">
+			<form class="vote" th:action="@{/api/v/{qid}(qid=${q.id})}" method="post">
+				<div class="bars">
+				<div class="me">
+					<span class="barlabel">👤</span>
+					<input type="range" name="vote" min="0" max="100" value="0"/>
+					<span class="numeric">??</span>
+				</div>
+				<div class="others">
+					<span class="barlabel">👥 ×0</span>
+					<input disabled type="range" min="0" max="100" value="0"/>
+					<span class="numeric">??</span>
+				</div>
+				</div>
+				<span class="qtext" th:text="${q.text}">El texto de la pregunta</span>
+				<button class="delq" th:if="${session.u.hasRole('admin')} or ${session.u.id} eq ${q.author.id}">🗑</button>
+			</form>
+		</div>
+	</div>
+	<div class="newquestion">
+		<h4>Nueva</h4>
 		<form class="ask" th:action="@{/api/q}" method="POST">
-			<textarea cols="80" rows="3" name="text" 
+			<textarea cols="60" rows="3" name="text" 
 				placeholder="Tu pregunta aquí..."></textarea>
 			<br>
 			<label for="poll_t">encuesta</label>
@@ -63,11 +87,6 @@
 	</footer>
 	
 	<script>
-	const csrf = {
-			name: "[[${_csrf.parameterName}]]",
-			value: "[[${_csrf.token}]]"
-	};
-	
 	const handleVote = (vote) => {
 		// {q_1: [1, 2, 3, 4]}
         for (let k in vote) {

@@ -47,8 +47,8 @@ public class CGroup {
 	 * @return the generated ID. If you are unlucky, it may conflict with
 	 *      an existing one -- test it before assuming that it is unique!
 	 */
-	public String createRandomId() {
-		return String.format("%06.6d", 
+	public static String createRandomId() {
+		return String.format("%06d", 
 				ThreadLocalRandom.current().nextLong(1_000_000));
 	}
 	

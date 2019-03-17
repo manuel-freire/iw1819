@@ -18,8 +18,8 @@ body {
 
 /* for debugging purposes - remove borders for a cleaner look */
 div, nav, footer {
-	border: 1px solid gray;
-	margin: 10px;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
 }
 
 /* setup nav & children */
@@ -78,6 +78,17 @@ footer img {
 	padding: 5px;
 	border: 1px dashed red;
 }
+nav div.debug {
+	display: inline;
+}
+
+.logx a>img {
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	top: 1px;
+	right: 1px;
+}
 
 /* your vote vs class votes */
 .question .others {
@@ -101,6 +112,9 @@ footer img {
 	position: relative;
 	top: 5px;
 }
+.ask textarea {
+	margin: 10px;
+}
 
 /* for error debugging */
 .errKey {
@@ -118,4 +132,13 @@ footer img {
 	border: none;
 	margin: 0;
 	padding: 0;
+}
+
+/* admin */
+.adminTable {
+	word-break: break-word;
+	border-collapse: collapse;
+}
+.adminTable td, .adminTable th {
+	border: 1px solid gray;
 }

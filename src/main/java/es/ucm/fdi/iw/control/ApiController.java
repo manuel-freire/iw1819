@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.HtmlUtils;
 
@@ -105,6 +107,26 @@ public class ApiController {
 		}
 		return vote;
 	}
+	
+	@PostMapping("/d/{qid}")
+	@ResponseBody
+	@Transactional
+	public String delete(Model model, @PathVariable long qid, 
+			HttpServletResponse response) {
+		
+		User u = (User)session.getAttribute("u");
+		u = entityManager.find(User.class, u.getId());
+				
+		Question q = entityManager.find(Question.class,  qid);
+		if (q.getAuthor().getId() != u.getId() || ! u.hasRole("admin")) {
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return "no es tu pregunta para borrarla, ni eres admin";
+		}
+
+		response.setStatus(HttpServletResponse.SC_ACCEPTED);
+		entityManager.remove(q);
+		return "hecho";
+	}	
 	
 	@PostMapping("/q")
 	@JsonView(Views.Public.class)

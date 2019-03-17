@@ -1,11 +1,21 @@
-console.log("this is a test");
+/**
+ * Main Karmometro script. Simplifies calling the server-side API.
+ */
 
+
+/**
+ * Listens to the specified form, and posts to the vote API when
+ * its value changes.
+ * 
+ * @param {Element} e, a form to listen to  
+ * @returns nothing 
+ */
 function addVoteListener(e) {
 	const input = e.querySelector("input[type=range]");
 	const numeric = e.querySelector(".numeric");
 	const headers = {
 		"Content-Type": "application/json",
-		"X-CSRF-TOKEN": csrf.value
+		"X-CSRF-TOKEN": km.csrf.value
 	};
 	input.onchange = () => {
 		numeric.innerText = input.value;
@@ -15,14 +25,33 @@ function addVoteListener(e) {
 			body: JSON.stringify({value: input.value})
 		}).then(response => console.log(response));
 	};
+	const button = e.querySelector(".delq");
+	if (button) {
+		button.onclick = () => {
+			const target = e.action.replace(/\/v\//, '/d/')
+			console.log("removing q: ", target);
+			fetch(target, {
+				method: 'POST',
+				headers: headers,
+			}).then(response => console.log(response));
+			return false;
+		}
+	}
 }
 
+/**
+ * Listens to the specified form, and posts new questions when they 
+ * are submitted.
+ * 
+ * @param {Element} e, a form to listen to  
+ * @returns nothing 
+ */
 function addQuestionListener(e) {
 	const button = e.querySelector("button");
 	const textarea = e.querySelector("textarea");
 	const headers = {
 		"Content-Type": "application/json",				
-		"X-CSRF-TOKEN": csrf.value
+		"X-CSRF-TOKEN": km.csrf.value
 	};
 	console.log("patched", e);
 	e.onsubmit = () => {
@@ -36,18 +65,26 @@ function addQuestionListener(e) {
 			headers: headers,
 			body: body				
 		}).then(response => {
+			e.reset();
 			console.log(response)
 		});
 		return false;	
 	}
 }
 
+/**
+ * Creates a new voting form based on a question's data. Also
+ * appends it wherever it should go.
+ * 
+ * @param data (as returned by the server after adding a question)
+ * @returns nothing
+ */
 function addQuestion(data) {
 	const questionDiv = document.createElement("div");
 	questionDiv.classList.add("question");
 	questionDiv.id = "q_" + data.id;
 	questionDiv.innerHTML = [
-		'<form class="vote" th:action="/api/v/' + data.id + '" method="post">',
+		'<form class="vote" action="' + km.voteApiUrl + data.id + '" method="post">',
 		'	<div class="bars">',
 		'	<div class="me">',
 		'		<span class="barlabel">👤</span>',
@@ -62,36 +99,63 @@ function addQuestion(data) {
 		'	</div>',
 		'	<span class="qtext">' + data.text + '</span>',
 		'</form>'].join('\n');	
-	document.querySelector(".question").parentElement
-		.append(questionDiv);
+	document.querySelector(data.poll ? ".polls" : ".questions").append(questionDiv);
 	addVoteListener(questionDiv.querySelector(".vote"));
 }
 
+/**
+ * WebSocket API, which only works once initialized
+ */
 const ws = {
+		
+	/**
+	 * WebSocket, or null if none connected
+	 */
 	socket: null,
-	// llama a esto para enviar
+	
+	/**
+	 * Sends a string to the server via the websocket.
+	 * @param {string} text to send 
+	 * @returns nothing
+	 */
 	send: (text) => {
 		if (ws.socket != null) {
 			ws.socket.send(text);
 		}
 	},
-	// sobreescribe esto para modificar cómo recibes cosas
+
+	/**
+	 * Default action when text is received. 
+	 * @returns
+	 */
 	receive: (text) => {
 		console.log(text);
+	},
+	
+	/**
+	 * Attempts to establish communication with the specified
+	 * web-socket endpoint. If successfull, will call 
+	 * @returns
+	 */
+	initialize: (endpoint) => {
+		console.log("Connecting to WS '" + endpoint + "'...");
+		try {
+			ws.socket = new WebSocket(endpoint);
+			ws.socket.onmessage = (e) => ws.receive(e.data);
+			console.log("Connected to WS '" + endpoint + "'")
+		} catch (e) {
+			console.log("Error, connection to WS '" + endpoint + "' FAILED: ", e);
+		}
 	}
 } 
 
-function addWebSocketListener() {
-	// socketUrl must be set prior to loading this script
-	if (socketUrl !== 'false') {
-		console.log("Connecting to WS '" + socketUrl + "'");
-		ws.socket = new WebSocket(socketUrl);
-		ws.socket.onmessage = (e) => ws.receive(e.data);
-	}
-}
-
+/**
+ * Actions to perform once the page is fully loaded
+ */
 window.addEventListener('load', () => {
 	document.querySelectorAll(".vote").forEach(e => addVoteListener(e));
 	document.querySelectorAll(".ask").forEach(e => addQuestionListener(e));
-	addWebSocketListener();
+	if (km.socketUrl !== false) {
+		ws.initialize(km.socketUrl);
+	}
 });

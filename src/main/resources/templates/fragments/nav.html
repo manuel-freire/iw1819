@@ -10,13 +10,17 @@
 		<a class="logo" href="" th:href="@{/}"></a>
 		<span class="sitename">Karmómetro</span>
 
-		<span class="logx" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
-			<a th:href="@{/user/{id}(id=${session.u.id})}" th:text="${session.u.login}">Pepe</a>
+		<span class="logx" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">			
+			<a th:if="${session.u.hasRole('admin')}" th:href="@{/admin/}">admin</a>
+			<a th:if="${session.g} neq null" th:href="@{/clase/}">clase</a>
+			<a th:href="@{/user/{id}(id=${session.u.id})}">
+				<img class="userthumb" th:src="@{/user/{id}/photo(id=${session.u.id})}">
+				<span th:text="${session.u.login}">Pepe</span></a>			
 			<a th:href="@{/logout}" href="/logout">logout</a>
 		</span>
 		<span class="logx" th:if="not ${#authorization.expression('hasRole(''ROLE_USER'')')}">
 			<a th:href="@{/login}" href="/login">login</a>
-			<span class="debug" th:if="${application.debug}">
+			<div class="debug" th:if="${application.debug}">
 				<form th:action="@{/login}" method="post">
 					<input type="hidden" name="username" value="a">
 					<input type="hidden" name="password" value="a">
@@ -58,7 +62,7 @@
 		document.getElementById('z').value = "z" + Math.floor(Math.random()*1000);		        	
 	});
 	</script>  				
-  			</span>
+  			</div>
 		</span>		
 	</nav>
 </body>

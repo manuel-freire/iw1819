@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.ucm.fdi.iw.model.CGroup;
+import es.ucm.fdi.iw.model.Question;
 import es.ucm.fdi.iw.model.User;
 
 @Controller()
@@ -52,9 +53,18 @@ public class ClassController {
 		}
 		CGroup g = entityManager.find(CGroup.class, 
 				((CGroup)session.getAttribute("g")).getId());
-		model.addAttribute("questions", g.getQuestions());
-
-		//model.addAttribute("qs", Question.getQuestionsWithVotes(entityManager));
+		ArrayList<Question> polling = new ArrayList<>();
+		ArrayList<Question> asking = new ArrayList<>();
+		for (Question q : g.getQuestions()) {
+			if (q.isPoll()) {
+				polling.add(q);
+			} else {
+				asking.add(q);
+			}
+		}
+		model.addAttribute("polling", polling);
+		model.addAttribute("asking", asking);
+		
 		return "clase";
 	}
 
