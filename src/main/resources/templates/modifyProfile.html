@@ -21,41 +21,41 @@
 		<nav th:replace="fragments/navbar :: navbar"></nav>
 	
 	    <div class="left-panel-index col-5 mx-auto mt-3 h-auto">
-	        <img class="avatar center-content" src="img/snow.png">
+	        <img class="avatar center-content" th:src="@{img/snow.png}">
 	
 	        <form class ="form">
 	            <div class="form-row">
 	                <div class="form-group col-auto mx-auto">
-	                    <span class= "email_profile">snowed@gamedetronos.serie</span>
+	                    <span class= "email_profile" th:text="${user.email}">snowed@gamedetronos.serie</span>
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-6">
-	                    <input type="text" class="form-control" id="inputFirstName" placeholder="FirstName" value = "John">
+	                    <input type="text" class="form-control" id="inputFirstName" placeholder="FirstName" th:value="${user.name}">
 	                </div>
 	                <div class="form-group col-6">
-	                    <input type="text" class="form-control" id="inputLastName" placeholder="LastName" value = "Snow">
+	                    <input type="text" class="form-control" id="inputLastName" placeholder="LastName" th:value="${user.surname}">
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-12">
-	                    <input type="text" class="form-control" id="inputNick" placeholder="Nick" value= "@snow">
+	                    <input type="text" class="form-control" id="inputNick" placeholder="Nick" th:value="${user.nickname}">
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-12">
-	                    <input type="date" class="form-control" id="inputBirthday">
+	                    <input type="date" class="form-control" id="inputBirthday" th:value="${user.birthdate}">
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-12">
-	                    <textarea class="form-control" id="text_description" rows = "4" >· I know nothing, my friends killed me once, my parents are dead... but I have a white wolf! =) ·</textarea>
+	                    <textarea class="form-control" id="text_description" rows = "4" th:field="*{user.description}">· I know nothing, my friends killed me once, my parents are dead... but I have a white wolf! =) ·</textarea>
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-12 d-flex flex-row align-items-center">
 	                    <i class="material-icons mr-3">explore</i>
-	                    <input type="text" class="form-control" id="inputUbication" value="Winterfell, GOT">
+	                    <input type="text" class="form-control" id="inputUbication" th:value="${user.location}">
 	                </div>
 	            </div>
 	            <div class="form-row">
