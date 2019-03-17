@@ -109,8 +109,14 @@ public class ClassController {
 		
         g.getParticipants().add(u);
         log.info("Added to group {}", g.getId());
+        
+        // add 'u' and 'g' session attributes
         session.setAttribute("u", u);
         session.setAttribute("g", g);
+		// add a 'ws' session variable
+		session.setAttribute("ws", request.getRequestURL().toString()
+				.replaceFirst("[^:]*", "ws")		// http[s]://... => ws://...
+				.replaceFirst("/clase.*", "/ws"));	
         
 		return "redirect:/clase/";
 	}

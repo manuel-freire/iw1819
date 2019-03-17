@@ -34,26 +34,22 @@
 	</footer>
 	
 	<script>
-		
-		// texto entre dobles-corchetes se interpreta como template  		
-		const socketUrl = "[[${socketUrl}]]";
-		const socket = new WebSocket(socketUrl);
-		const lineForm = document.getElementById("escrito");
+	window.addEventListener('load', () => {
+		// envio	
 		const lineInput = document.getElementById("texto");
-		const lineOutput = document.getElementById("recibido");
-		
-		// envio
-		escrito.onsubmit = function (e) {
-			var t = lineInput.value;
-			socket.send(t);
+		document.getElementById("escrito").onsubmit = (e) => {
+			var text = lineInput.value;
+			ws.send(text);
 			lineInput.value = ""
 			return false;
 		}
-		
+	
 		// recepcion
-		socket.onmessage = function(e) {
-			lineOutput.value = lineOutput.value + '\n' + e.data;
-		}		
+		const lineOutput = document.getElementById("recibido");
+		ws.receive = (text) => {
+			lineOutput.value = lineOutput.value + '\n' + text;
+		}
+	});
 	</script>
 </body>
 </html>

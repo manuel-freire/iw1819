@@ -7,7 +7,7 @@
  */
  
 html, body{ 
-	height:100%; 
+	min-height:100%; 
 	margin:0; 
 }
 body {
@@ -77,4 +77,45 @@ footer img {
 .debug {
 	padding: 5px;
 	border: 1px dashed red;
+}
+
+/* your vote vs class votes */
+.question .others {
+	color: gray;
+}
+.question div.bars {
+	display: inline-block;
+	border-right: 1px solid gray;
+}
+.question div {
+	margin: 0;
+	border: none;
+	padding: 2px;
+}
+.question span.barlabel {
+	display: inline-block;
+	width: 3em;
+	text-align: right;
+}
+.question input {
+	position: relative;
+	top: 5px;
+}
+
+/* for error debugging */
+.errKey {
+	display: block;
+	width: 10em;
+}
+.errTable {
+	word-break: break-word;
+	border-collapse: collapse;
+}
+.errTable td {
+	border: 1px solid gray;
+}
+.errTable div {
+	border: none;
+	margin: 0;
+	padding: 0;
 }

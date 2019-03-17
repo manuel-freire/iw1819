@@ -45,5 +45,10 @@ public class RootController {
 				.replaceFirst("[^:]*", "ws")
 				.replace("chat", "ws"));
 		return "chat";
-	} 
+	}
+	
+	@GetMapping("/error")
+	public String error(Model model) {
+		return "error";
+	}	
 }
