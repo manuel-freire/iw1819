@@ -1,5 +1,7 @@
 package es.ucm.fdi.iw;
 
+import java.text.SimpleDateFormat;
+
 import javax.servlet.ServletContext;
 
 import org.apache.logging.log4j.LogManager;
@@ -35,5 +37,10 @@ public class StartupConfig {
 				&& Boolean.parseBoolean(debugProperty.toLowerCase()));
 		log.info("Setting global debug property to {}", 
 				context.getAttribute("debug"));
+		
+		// see http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.15
+		// and https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html
+		context.setAttribute("dateFormatter", 
+				new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ss.sssZ"));
 	}
 }
