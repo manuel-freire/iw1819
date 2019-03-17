@@ -14,7 +14,6 @@
 	
 	<div class="container">
 	<div class="main">
-	<h1 th:text="#{index.welcome}">Bienvenido a la plantilla de IW</h1>
 
 	<div th:if="${session.u eq null}">
 		<h4>Registro en clase</h4>
@@ -25,17 +24,26 @@
 		</form>
 	</div>		
 	<div th:unless="${session.u eq null}">
-		<h4>Nuevo voto</h4>
-		<div th:each="q: ${questions}">
+		<h4>Preguntas</h4>
+		<div th:each="q: ${questions}" class="question" th:id="|q_${q.id}|">
 			<form class="vote" th:action="@{/api/v/{qid}(qid=${q.id})}" method="post">
-				<input th:id="|r_${q.id}|" type="range" name="vote" min="0" max="100" value="0"/>
-				<span class="numeric" th:id="|v_${q.id}|"></span>
-				<input class="csrf" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />				
-				<span th:text="${q.text}">El texto de la pregunta</span>
+				<div class="bars">
+				<div class="me">
+					<span class="barlabel">👤</span>
+					<input type="range" name="vote" min="0" max="100" value="0"/>
+					<span class="numeric">??</span>
+				</div>
+				<div class="others">
+					<span class="barlabel">👥 ×0</span>
+					<input disabled type="range" min="0" max="100" value="0"/>
+					<span class="numeric">??</span>
+				</div>
+				</div>
+				<span class="qtext" th:text="${q.text}">El texto de la pregunta</span>
 			</form>
 		</div>		
 		<h4>Nueva pregunta</h4>
-		<form th:action="@{/api/q}" method="POST">
+		<form class="ask" th:action="@{/api/q}" method="POST">
 			<textarea cols="80" rows="3" name="text" 
 				placeholder="Tu pregunta aquí..."></textarea>
 			<br>
@@ -45,23 +53,56 @@
 			<input id="poll_f" type="radio" name="poll" value="false"/>
 			<button type="submit">Enviar</button>
 		</form>
-		
 	</div>		
-
-	</div>
-
-	<div class="sidebar">
-	<table>
-		<tr th:each="x, i: ${xs}">
-		    <td th:text="|${i.index} ${i.count} ${i.size} ${i.current}|"
-		    th:class="|c${i.odd}-${i.first}-${i.last}|">hola!</td>
-		</tr>
-	</table>
-	</div>
-	</div>
+	
+	</div> <!-- container -->
+	</div> <!-- main -->
 	
 	<footer th:replace="fragments/footer.html :: footer">
 		Footer goes here
 	</footer>
+	
+	<script>
+	const csrf = {
+			name: "[[${_csrf.parameterName}]]",
+			value: "[[${_csrf.token}]]"
+	};
+	
+	const handleVote = (vote) => {
+		// {q_1: [1, 2, 3, 4]}
+        for (let k in vote) {
+        	const div = document.getElementById(k); // q_123
+        	const span = div.querySelector(".others .numeric"); 
+        	const slider = div.querySelector(".others input");
+        	const barlabel = div.querySelector(".others .barlabel");
+        	if (div) {
+        		const n = vote[k].length;
+        		const avg = vote[k].reduce((a,c)=>a+c) / n;
+        		span.innerText = Math.floor(avg);
+        		slider.value = avg;
+        		barlabel.innerText = "👥 ×" + n; 
+        	}
+        }		
+	}
+	
+	const handleQuestion = (question) => {
+		// {"id":2,"votes":null,"author":{"id":4,"login":"z775"},"text":"asdf asdf","poll":false}
+		addQuestion(question);
+	}
+	
+	window.addEventListener('load', () => {
+		ws.receive = (text) => {
+			console.log("just in:", text);
+		    try {
+		        const o = JSON.parse(text);
+		        console.log(o);
+		        if (o.vote) handleVote(o.vote);
+		        if (o.question) handleQuestion(o.question);		        
+		    } catch (e) {
+		    	console.log("...not json: ", e);
+		    }
+		}
+	});
+	</script>
 </body>
 </html>
