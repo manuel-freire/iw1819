@@ -17,8 +17,10 @@
 	
 		<div class="starter-template">
 			<h1>Chat</h1>
-			<p class="lead">Ejemplo de uso de websockets</p>
-		
+			<p class="lead">Ejemplo de uso de websockets. Usa <code>@nick texto</code> para enviar 
+			ese texto a ese nick, y <code>@all texto</code> para enviárselo a todos. Ojo: depende del 
+			IwSocketHandler hacer que esto funcione o no; y según se configure, puede que recibas
+			fragmentos de JSON que nada tienen que ver con el chat.</p>		
 			<textarea id="recibido" cols="80" rows="10">
 			</textarea>
 			<form id="escrito">

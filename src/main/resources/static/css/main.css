@@ -44,7 +44,7 @@ nav>*{
 .logx {
 	margin-left: auto;
 }
-.logx form {
+.logx form, .logx img {
 	display: inline;
 }
 
@@ -82,12 +82,9 @@ nav div.debug {
 	display: inline;
 }
 
-.logx a>img {
+.userthumb {
 	width: 32px;
 	height: 32px;
-	position: absolute;
-	top: 1px;
-	right: 1px;
 }
 
 /* your vote vs class votes */
@@ -114,6 +111,26 @@ nav div.debug {
 }
 .ask textarea {
 	margin: 10px;
+}
+
+.question div.metadata {
+	float: right;
+	text-align: right;
+}
+div.metadata span {
+	color: gray;
+	font-size: 7pt;
+	display: block;
+}
+
+.polls h4, .questions h4, .newquestion h4,
+.polls h4+p, .questions h4+p {
+	display: inline-block;
+	margin: 10px 0 10px 0;	
+}
+.polls h4+p, .questions h4+p {
+	margin-left: 10px;
+	color: gray;
 }
 
 /* for error debugging */

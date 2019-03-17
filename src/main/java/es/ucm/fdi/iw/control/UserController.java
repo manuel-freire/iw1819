@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -31,6 +32,11 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.User;
 
+/**
+ * User-administration controller
+ * 
+ * @author mfreire
+ */
 @Controller()
 @RequestMapping("user")
 public class UserController {
@@ -42,6 +48,9 @@ public class UserController {
 	
 	@Autowired
 	private LocalData localData;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/{id}")
 	public String getUser(@PathVariable long id, Model model, HttpSession session) {
@@ -61,13 +70,13 @@ public class UserController {
 		
 		User requester = (User)session.getAttribute("u");
 		if (requester.getId() != target.getId() &&
-				! requester.hasRole("ADMIN")) {			
+				! requester.hasRole("admin")) {			
 			return "user";
 		}
 		
-		// ojo: faltaria más validación
 		if (edited.getPassword() != null && edited.getPassword().equals(pass2)) {
-			target.setPassword(edited.getPassword());
+			// save encoded version of password
+			target.setPassword(passwordEncoder.encode(edited.getPassword()));
 		}		
 		target.setLogin(edited.getLogin());
 		return "user";

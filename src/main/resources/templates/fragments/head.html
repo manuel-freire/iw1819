@@ -13,7 +13,8 @@
 				name: "[[${_csrf.parameterName}]]",
 				value: "[[${_csrf.token}]]"
 			},
-			admin: "[[${session.u != null && session.u.hasRole('admin')}?'true':'false']]"
+			admin: [[${session.u != null && session.u.hasRole('admin')}?'true':'false']],
+			userId: [[${session.u != null}?${session.u.id}:-1]]
 		};
 	</script>
 	<script th:src="@{/js/kclient.js}" src="js/kclient.js" type="text/javascript"></script>

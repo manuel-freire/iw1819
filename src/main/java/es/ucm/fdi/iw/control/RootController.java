@@ -12,31 +12,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * Landing-page controller
+ * 
+ * @author mfreire
+ */
 @Controller
 public class RootController {
 	
 	private static final Logger log = LogManager.getLogger(RootController.class);
-	
-	@Autowired
-	private Environment env;
-		
-	@Autowired
-	private IwSocketHandler iwSocketHandler;
 
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("xs", "uno dos tres cuatro cinco".split(" "));
 		return "index";
-	}
-	
-	@GetMapping("/admin")
-	public String admin(Model model, Principal principal) {
-		model.addAttribute("activeProfiles", env.getActiveProfiles());
-		model.addAttribute("basePath", env.getProperty("es.ucm.fdi.base-path"));
-		
-		log.info("let us all welcome this admin, {}", principal.getName());
-		
-		return "admin";
 	}
 	
 	@GetMapping("/chat")

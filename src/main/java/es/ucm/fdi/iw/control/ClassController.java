@@ -29,6 +29,12 @@ import es.ucm.fdi.iw.model.CGroup;
 import es.ucm.fdi.iw.model.Question;
 import es.ucm.fdi.iw.model.User;
 
+/**
+ * Controller for entering and browsing a class.
+ * 
+ * @author mfreire
+ *
+ */
 @Controller()
 @RequestMapping("clase")
 public class ClassController {
@@ -44,13 +50,14 @@ public class ClassController {
 	@Autowired 
 	private AuthenticationManager authenticationManager;
 	
+	/**
+	 * Returns the main page for voting and asking questions
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/")
 	public String index(Model model, Principal principal, HttpSession session) {
-		
-		if (principal == null) {
-			// force login
-			return "enter";
-		}
+
 		CGroup g = entityManager.find(CGroup.class, 
 				((CGroup)session.getAttribute("g")).getId());
 		ArrayList<Question> polling = new ArrayList<>();
@@ -67,12 +74,12 @@ public class ClassController {
 		
 		return "clase";
 	}
-
-	@GetMapping("/enter")
-	public String getEnter(Model model) {
-		return "enter";			
-	}
 	
+	/**
+	 * Logs in a student-user. Creates and authenticates the user on-the-fly.
+	 * @param session where "u" (User) and "g" (CGroup) will be stored on success 
+	 * @return main view
+	 */
 	@PostMapping("/enter")
 	@Transactional
 	public String enter(Model model, HttpServletRequest request, Principal principal, 
@@ -91,7 +98,7 @@ public class ClassController {
     		for (CGroup i : groups) {
     			log.info(i.toString());
     		}
-    		return "bad";
+    		return "index";
     	}
 		
         Long usersWithLogin = entityManager.createNamedQuery("User.HasLogin", Long.class)
@@ -99,7 +106,8 @@ public class ClassController {
                 .getSingleResult();
         // if the user exists, we have a problem
         if (usersWithLogin != 0) {
-        	return "test";
+    		log.info("User {} already exists", userName);
+        	return "index";
         }
         
         // ok, let us create & authenticate a student-user

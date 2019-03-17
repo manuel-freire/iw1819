@@ -4,6 +4,27 @@
 
 
 /**
+ * Replaces dates with relative deltas to the current moment.
+ * @param {Element} e, an element with a data-timestamp attribute
+ * 		representing nanoseconds since the unich epoch
+ */
+function prettyDelta(e) {
+	const now = Number(new Date()),
+	 	  then = e.dataset.timestamp;
+	let diff = now - then;
+	const days =  Math.floor(diff / (24 * 60 * 60 * 1000)), 	
+	 	  hours = Math.floor(diff / (60 * 60 * 1000)) % 24, 
+	 	  mins =  Math.floor(diff / (60 * 1000)) % 60, 
+	 	  secs =  Math.floor(diff / (1000)) % 60;
+	let result = ["hace "];
+	if (days > 0)  result.push("" + days + " d");
+	if (hours > 0) result.push("" + hours + " h");
+	if (mins > 0)  result.push("" + mins + " m");
+	if (secs > 0)  result.push("" + secs+ " s");
+	e.innerText = result.length > 1 ? result.join(" ") : "ahora";
+}
+
+/**
  * Listens to the specified form, and posts to the vote API when
  * its value changes.
  * 
@@ -53,7 +74,6 @@ function addQuestionListener(e) {
 		"Content-Type": "application/json",				
 		"X-CSRF-TOKEN": km.csrf.value
 	};
-	console.log("patched", e);
 	e.onsubmit = () => {
 		const body = JSON.stringify({
 			text: textarea.value, 
@@ -81,10 +101,20 @@ function addQuestionListener(e) {
  */
 function addQuestion(data) {
 	const questionDiv = document.createElement("div");
+	const canDelete = (data.author.id == km.userId) || km.admin;
+	const deleteButton = canDelete ?
+		'	<button class="delq">🗑</button>' :
+		'	<!-- cannot delete -->';
+	console.log(deleteButton, canDelete, data.author.id, km.userId, km.admin);
 	questionDiv.classList.add("question");
 	questionDiv.id = "q_" + data.id;
 	questionDiv.innerHTML = [
 		'<form class="vote" action="' + km.voteApiUrl + data.id + '" method="post">',
+		'	<div class="metadata">',
+		'		<span class="delta" data-timestamp="' + Number(new Date(data.time)) + '">??</span>',
+		'		<img class="userthumb" alt="' + data.author.login + '" ', 
+		'			 src="/user/' + data.author.id + '/photo">',
+		'	</div>',
 		'	<div class="bars">',
 		'	<div class="me">',
 		'		<span class="barlabel">👤</span>',
@@ -98,6 +128,7 @@ function addQuestion(data) {
 		'	</div>',
 		'	</div>',
 		'	<span class="qtext">' + data.text + '</span>',
+		deleteButton,
 		'</form>'].join('\n');	
 	document.querySelector(data.poll ? ".polls" : ".questions").append(questionDiv);
 	addVoteListener(questionDiv.querySelector(".vote"));
@@ -138,7 +169,6 @@ const ws = {
 	 * @returns
 	 */
 	initialize: (endpoint) => {
-		console.log("Connecting to WS '" + endpoint + "'...");
 		try {
 			ws.socket = new WebSocket(endpoint);
 			ws.socket.onmessage = (e) => ws.receive(e.data);
@@ -158,4 +188,7 @@ window.addEventListener('load', () => {
 	if (km.socketUrl !== false) {
 		ws.initialize(km.socketUrl);
 	}
+	window.setInterval(() => {
+		document.querySelectorAll(".delta").forEach(e => prettyDelta(e));
+	}, 5000);
 });

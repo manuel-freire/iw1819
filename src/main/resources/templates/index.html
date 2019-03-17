@@ -14,28 +14,31 @@
 	
 	<div class="container">
 	<div class="main">
+	
 	<h1 th:text="#{index.welcome}">Bienvenido a la plantilla de IW</h1>
-		
-	<h4>Información de Login</h4>
-	<ul>
-	<li>Logged user: <span sec:authentication="name">Bob</span>
-	<li>Roles: 
-	<ul>
-	<li>Admin? <span th:text="${#authorization.expression('hasRole(''ROLE_ADMIN'')')?'Si':'No'}">Puede</span>
-	<li>User? <span th:text="${#authorization.expression('hasRole(''ROLE_USER'')')?'Si':'No'}">Quizás</span>
-	</ul>
-	</ul>
-	</div>
-	<div class="sidebar">
-	<table>
-		<tr th:each="x, i: ${xs}">
-		    <td th:text="|${i.index} ${i.count} ${i.size} ${i.current}|"
-		    th:class="|c${i.odd}-${i.first}-${i.last}|">hola!</td>
-		</tr>
-	</table>
-	</div>
+	
+	<p>
+	El Karmómetro te permite dos cosas: experimentar con una aplicación que más o menos funciona, y 
+	conseguir que el profe sepa, en tiempo real, lo que te parece la clase. ¿Problemas de timidez? 
+	¡Karmómetro es 100% anónimo, no te quedes con dudas! ¿Al contrario, tus compañeros dicen que preguntas demasiado? 
+	¡Karmómetro les permite votar sólo tus preguntas interesantes!	
+	</p>
+	
+	<div th:if="${session.u == null}">
+	<h4>Entra en una clase</h4>
+	<form th:action="@{/clase/enter}" method="POST">
+		<input name="userName" placeholder="Nombre de usuario"/>
+		<input name="groupCode" placeholder="Código de la clase"/>
+		<button type="submit">Enviar</button>				
+	</form>
+	<p>
+		(El profesor debería escribir el código de la clase en la pizarra)
+	</p>
 	</div>
 	
+	</div>
+	</div>
+		
 	<footer th:replace="fragments/footer.html :: footer">
 		Footer goes here
 	</footer>

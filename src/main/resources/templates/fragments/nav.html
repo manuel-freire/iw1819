@@ -10,15 +10,15 @@
 		<a class="logo" href="" th:href="@{/}"></a>
 		<span class="sitename">Karmómetro</span>
 
-		<span class="logx" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">			
+		<div class="logx" th:if="${session.u}">			
 			<a th:if="${session.u.hasRole('admin')}" th:href="@{/admin/}">admin</a>
 			<a th:if="${session.g} neq null" th:href="@{/clase/}">clase</a>
+			<a th:href="@{/logout}" href="/logout">logout</a>
 			<a th:href="@{/user/{id}(id=${session.u.id})}">
 				<img class="userthumb" th:src="@{/user/{id}/photo(id=${session.u.id})}">
-				<span th:text="${session.u.login}">Pepe</span></a>			
-			<a th:href="@{/logout}" href="/logout">logout</a>
-		</span>
-		<span class="logx" th:if="not ${#authorization.expression('hasRole(''ROLE_USER'')')}">
+				<span th:text="${session.u.login}">Pepe</span></a>						
+		</div>
+		<div class="logx" th:unless="${session.u}">
 			<a th:href="@{/login}" href="/login">login</a>
 			<div class="debug" th:if="${application.debug}">
 				<form th:action="@{/login}" method="post">
@@ -26,44 +26,20 @@
 					<input type="hidden" name="password" value="a">
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 					<button type="submit">a</button>
-  				</form>
-				<form th:action="@{/login}" method="post">
-					<input type="hidden" name="username" value="p">
-					<input type="hidden" name="password" value="p">
-					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-					<button type="submit">p</button>
-  				</form>
-				<form th:action="@{/login}" method="post">
-					<input type="hidden" name="username" value="q">
-					<input type="hidden" name="password" value="q">
-					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-					<button type="submit">q</button>
-  				</form>
-				<form th:action="@{/clase/enter}" method="post">
-					<input type="hidden" name="userName" value="x">
-					<input type="hidden" name="groupCode" value="test">
-					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-					<button type="submit">x</button>
-  				</form>
-				<form th:action="@{/clase/enter}" method="post">
-					<input type="hidden" name="userName" value="y">
-					<input type="hidden" name="groupCode" value="test">
-					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-					<button type="submit">y</button>
-  				</form>  				  				
+  				</form>				
 				<form th:action="@{/clase/enter}" method="post">
 					<input id="z" type="hidden" name="userName" value="z">
 					<input type="hidden" name="groupCode" value="test">
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 					<button type="submit">z</button>
   				</form> 
-	<script>
-	window.addEventListener('load', () => {
-		document.getElementById('z').value = "z" + Math.floor(Math.random()*1000);		        	
-	});
-	</script>  				
+				<script>
+				window.addEventListener('load', () => {
+					document.getElementById('z').value = "z" + Math.floor(Math.random()*1000);		        	
+				});
+				</script>  				
   			</div>
-		</span>		
+		</div>		
 	</nav>
 </body>
 </html>

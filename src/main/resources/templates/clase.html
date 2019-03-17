@@ -25,8 +25,16 @@
 	</div>		
 	<div class="polls" th:unless="${session.u eq null}">
 		<h4>Encuestas</h4>
+		<p>Sirven para medir el karma general de la clase</p>
 		<div th:each="q: ${polling}" class="question" th:id="|q_${q.id}|">
 			<form class="vote" th:action="@{/api/v/{qid}(qid=${q.id})}" method="post">
+				<div class="metadata">
+					<span class="delta"
+						th:attr="data-timestamp=${q.time.time}" 					
+						th:text="${application.dateFormatter.format(q.time)}">YYYY-MM-DDTHH:mm:ss.sssZ</span>
+					<img class="userthumb" 
+						th:alt="${q.author.login}" th:src="@{/user/{id}/photo(id=${q.author.id})}">
+				</div>
 				<div class="bars">
 				<div class="me">
 					<span class="barlabel">👤</span>
@@ -46,9 +54,16 @@
 	</div>
 	<div class="questions" th:unless="${session.u eq null}">
 		<h4>Preguntas</h4>
+		<p>Dudas puntuales que quieres que el profesor resuelva</p>
 		<div th:each="q: ${asking}" class="question" th:id="|q_${q.id}|">
 			<form class="vote" th:action="@{/api/v/{qid}(qid=${q.id})}" method="post">
-				<div class="bars">
+				<div class="metadata">
+					<span class="delta"
+						th:attr="data-timestamp=${q.time.time}" 					
+						th:text="${application.dateFormatter.format(q.time)}">YYYY-MM-DDTHH:mm:ss.sssZ</span>
+					<img class="userthumb" 
+						th:alt="${q.author.login}" th:src="@{/user/{id}/photo(id=${q.author.id})}">
+				</div>				<div class="bars">
 				<div class="me">
 					<span class="barlabel">👤</span>
 					<input type="range" name="vote" min="0" max="100" value="0"/>
@@ -66,7 +81,7 @@
 		</div>
 	</div>
 	<div class="newquestion">
-		<h4>Nueva</h4>
+		<h4>Nueva encuesta ó pregunta puntual</h4>
 		<form class="ask" th:action="@{/api/q}" method="POST">
 			<textarea cols="60" rows="3" name="text" 
 				placeholder="Tu pregunta aquí..."></textarea>
@@ -74,7 +89,7 @@
 			<label for="poll_t">encuesta</label>
 			<input id="poll_t" type="radio" name="poll" value="true"/>
 			<label for="poll_f">pregunta</label>
-			<input id="poll_f" type="radio" name="poll" value="false"/>
+			<input id="poll_f" type="radio" name="poll" checked value="false"/>
 			<button type="submit">Enviar</button>
 		</form>
 	</div>		
@@ -106,6 +121,7 @@
 	
 	const handleQuestion = (question) => {
 		// {"id":2,"votes":null,"author":{"id":4,"login":"z775"},"text":"asdf asdf","poll":false}
+		question.time = new Date(question.time * 1000); // fix timestamp
 		addQuestion(question);
 	}
 	
@@ -116,7 +132,10 @@
 		        const o = JSON.parse(text);
 		        console.log(o);
 		        if (o.vote) handleVote(o.vote);
-		        if (o.question) handleQuestion(o.question);		        
+		        if (o.question) handleQuestion(o.question);
+		        if (o.deletion) {
+		        	document.getElementById("q_"+o.deletion).remove();
+		        }
 		    } catch (e) {
 		    	console.log("...not json: ", e);
 		    }

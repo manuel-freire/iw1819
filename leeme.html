@@ -17,26 +17,27 @@
 	<p>
 		Durante una clase, un profesor que tenga alumnos con dispositivos conectados a internet, y que esté 
 		usando un proyector, podrá proyectar la pantalla del karmómetro e invitar a sus alumnos a participar con
-		una clave. Los alumnos podrán decir si se están enterando, si creen que el profe va muy rápido o muy 
+		una clave (o bien podrá administrarlo desde otro dispositivo, tipo teléfono). 
+		Los alumnos podrán decir si se están enterando, si creen que el profe va muy rápido o muy 
 		despacio, y formular y votar preguntas/observaciones de texto. Un agregado de estas participaciones
-		se mostrará en la pantalla proyectada por el profesor, permitiendo al profesor, y a toda la clase,
+		se puede mostrar en la pantalla proyectada por el profesor, permitiendo al profesor, y a toda la clase,
 		medir el buen o mal "karma" de la misma.  
 	</p>
 	<p>
 		Las participaciones serán anónimas, pero el profesor podrá, si se enfada con alguna (sobre todo con
-		comentarios o preguntas ofensivos), invalidar la sesión del responsable.
+		comentarios o preguntas ofensivos), invalidar la sesión del responsable; y borrar el comentario.
 	</p>
 	<p>
 		Soporta los siguientes roles:
 		<ul>
 		<li>
 		El <b>administrador</b> (usuario: a, clave: a) puede dar de alta profesores, y ver quién hace qué.
-		<li>		
-		Un <b>profesor</b> (usuario: p, clave: p) puede lanzar clases. Una clase usa una contraseña temporal, 
-		válida sólo para esa clase. Todo aquel que sepa esa contraseña podrá votar y hacer preguntas
+		También puede lanzar clases. Una clase usa una contraseña temporal, válida sólo para esa clase. 
+		Todo aquel que sepa esa contraseña podrá votar y hacer preguntas.
 		<li>
 		Un <b>usuario</b> (no requiere registro, pero sí una contraseña de clase) puede, dando una 
-		contraseña válida, votar sobre el transcurso de una clase, y hacer preguntas. 
+		contraseña válida, votar sobre el transcurso de una clase, y hacer preguntas. También se puede poner
+		un divertido icono, y elegir un nombre. 
 		</li>
 		</ul>
 	</p>
@@ -52,9 +53,8 @@
 		<li><a href="http://localhost:8080/">home</a> - vista inicial. Permite especificar una clase, o hacer login 
 		(esquina superior derecha). 
 		<li><a href="http://localhost:8080/admin">admin</a> - vista del administrador. 
-		Permite administrar profesores (altas y bajas inclusive), y administrar también sus clases.
-		<li><a href="http://localhost:8080/profe">profe</a> - vista del profesor. Permite administrar sus clases.
-		<li><a href="http://localhost:8080/clase">clase</a> - vista de clase. Los profesores y administradors pueden
+		Permite administrar clases, entrar en ellas, y administrar también usuarios.
+		<li><a href="http://localhost:8080/clase/">clase</a> - vista de clase. Los profesores y administradors pueden
 		 administrarla, abriéndola, cerrándola, o examinando interacciones. Los alumnos pueden, si está abierta,
 		 votar. Cualquiera que entre en una clase puede ver su estado. 
 		</ul>

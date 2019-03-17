@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,10 @@ import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.CGroup;
 import es.ucm.fdi.iw.model.User;
 
+/**
+ * Admin-only controller
+ * @author mfreire
+ */
 @Controller()
 @RequestMapping("admin")
 public class AdminController {
@@ -32,9 +37,14 @@ public class AdminController {
 	@Autowired
 	private LocalData localData;
 	
+	@Autowired
+	private Environment env;
+	
 	@GetMapping("/")
 	public String index(Model model) {
-		
+		model.addAttribute("activeProfiles", env.getActiveProfiles());
+		model.addAttribute("basePath", env.getProperty("es.ucm.fdi.base-path"));
+
 		model.addAttribute("users", entityManager.createQuery(
 				"SELECT u FROM User u").getResultList());
 		model.addAttribute("groups", entityManager.createQuery(

@@ -35,6 +35,12 @@ import es.ucm.fdi.iw.model.User;
 import es.ucm.fdi.iw.model.Views;
 import es.ucm.fdi.iw.model.Vote;
 
+/**
+ * Rest controller for managing a class.
+ * Asking questions, removing them, and voting are the main tasks. 
+ * 
+ * @author mfreire
+ */
 @RestController
 @RequestMapping("api")
 public class ApiController {
@@ -118,11 +124,19 @@ public class ApiController {
 		u = entityManager.find(User.class, u.getId());
 				
 		Question q = entityManager.find(Question.class,  qid);
-		if (q.getAuthor().getId() != u.getId() || ! u.hasRole("admin")) {
+		if (q.getAuthor().getId() != u.getId() && ! u.hasRole("admin")) {
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			log.warn("user {} tried to delete question {} from user {}",
+					u.getId(), qid, q.getAuthor().getId());
 			return "no es tu pregunta para borrarla, ni eres admin";
 		}
 
+		// notify all group members
+		String message = "{\"deletion\": " + qid + "}";
+		for (User p : q.getGroup().getParticipants()) {
+			iwSocketHandler.sendText(p.getLogin(), message);
+		}
+		
 		response.setStatus(HttpServletResponse.SC_ACCEPTED);
 		entityManager.remove(q);
 		return "hecho";
@@ -142,6 +156,7 @@ public class ApiController {
 		g = entityManager.find(CGroup.class, g.getId());
 		question.setGroup(g);
 		
+		question.setTime(new Timestamp(new Date().getTime()));
 		question.setText(HtmlUtils.htmlEscape(question.getText()));
 		entityManager.persist(question);
 		g.getQuestions().add(question);
