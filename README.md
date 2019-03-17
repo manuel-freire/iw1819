@@ -31,11 +31,18 @@ Como todo proyecto maven, los fuentes se encuentran bajo la carpeta src/ (y los 
 - src/main: para los fuentes que forman parte de la distribución
     + java: para fuentes java que forman la aplicación en sí
         * [es.ucm.fdi.iw](https://github.com/manuel-freire/iw1819/tree/master/src/main/java/es/ucm/fdi/iw): configuración de la aplicación web Spring. Distintos ficheros se encargan de distintos apartados:
-            - AppConfig: expone algunos "beans" para i18n (internacionalización) y gestión de rutas para ficheros cargados por los usuarios, en colaboración con LocalData.
-            - SecurityConfig: configura los accesos a la aplicación, en colaboración con IwUserDetailsService, que especifica cómo verificar permisos en las tablas generadas con JPA. Hay usuarios pre-creados en el import.sql.
-            - WebSocketConfig configura el uso de WebSockets, y IwApplication especifica cómo lanzar la aplicación desde spring boot.
-        * [es.ucm.fdi.iw.control](https://github.com/manuel-freire/iw1819/tree/master/src/main/java/es/ucm/fdi/iw/control): controladores; gestión de peticiones a la aplicación. Las anotadas con `@Controller` permiten especificar mapeos petición-manejador (con `@GetMapping` y familia)
-        * [es.ucm.fdi.iw.model](https://github.com/manuel-freire/iw1819/tree/master/src/main/java/es/ucm/fdi/iw/model): clases de modelo; las anotadas con `@Entity` generan tablas usando JPA
+            - `AppConfig`: expone algunos "beans" para i18n (internacionalización) y gestión de rutas para ficheros cargados por los usuarios, en colaboración con `LocalData`.
+            - `SecurityConfig`: configura los accesos a la aplicación, en colaboración con `IwUserDetailsService`, que especifica cómo verificar permisos en las tablas generadas con JPA. Hay usuarios pre-creados en el `import.sql`. Los usuarios que entran vía el login estándar son inicializados y redirigidos en el `LoginSuccessHandler`.
+            - `WebSocketConfig` configura el uso de WebSockets, y `IwApplication` especifica cómo lanzar la aplicación desde spring boot.
+            - `StartupConfig`: llamada una vez la aplicación empieza a funcionar, permite hacer inicializaciones de último momento visibles para todos los usuarios.
+        * [es.ucm.fdi.iw.control](https://github.com/manuel-freire/iw1819/tree/master/src/main/java/es/ucm/fdi/iw/control): controladores; gestión de peticiones a la aplicación. Las anotadas con `@Controller` permiten especificar mapeos petición-manejador (con `@GetMapping` y familia). Hay varios controladores, cada uno especializado en un área:
+            - `RootController`: para los recién llegados
+            - `AdminController`: para administración
+            - `UserController`: para gestionar perfiles de usuarios, y mostrar sus fotos
+            - `ClassController`: para entrar en una clase, y ver preguntas
+            - `ApiController`: para gestionar peticiones AJAX para preguntar y votar
+            - `IwSocketHandler`: no es un controlador tradicional, sino que gestiona comunicación asíncrona vía websockets. Lo usa mucho el `ApiController`, para informar a los participantes en una clase de cómo van las votaciones, y de la aparición de nuevas preguntas y borrado de preguntas viejas.
+        * [es.ucm.fdi.iw.model](https://github.com/manuel-freire/iw1819/tree/master/src/main/java/es/ucm/fdi/iw/model): clases de modelo; las anotadas con `@Entity`, generan tablas usando JPA
     + [resources](https://github.com/manuel-freire/iw1819/tree/master/src/main/resources): para ficheros de configuración, o recursos que se sirven por la aplicación pero que no forman parte directamente del código de la misma
         * import.sql: contenido inicial de la base de datos. Se ejecuta después de generar la BD a partir de las clases del modelo, y debe ser compatible con lo generado.
         * application*.properties: configuración a alto nivel de la aplicación. El principal es application.properties, y ahí puedes especificar un "perfil", según el cual se cargará o bien application-default.properties (si no lo cambias), que usa una BD que se regenera a cada vez -- o application-externaldb.properties, que usa una BD externa persistente, pero que tienes que haber lanzado antes para que funcione.
@@ -53,4 +60,6 @@ Como todo proyecto maven, los fuentes se encuentran bajo la carpeta src/ (y los 
 + Elimina todo lo que sea karmómetro-específico:
     - sustituye la información del leeme
     - sustituye las clases de modelo karmómetro-específicas
+    - elimina controladores y templates que no necesites. Recomiendo modificar, sin borrar, los fragmentos de `header` y `nav`, porque tienen funcionalidad útil relacionada con websockets; y el script `kclient.js`, al menos en la parte relacionada con esos mismos websockets.
+    - retoca la seguridad para que se adapte a tus roles y lo que debe poder hacer cada uno
 + Ábrelo con tu copia de STS
