@@ -34,18 +34,20 @@ INSERT INTO user(id,enabled,login,password,roles) VALUES (
 	'{bcrypt}$2a$04$2ao4NQnJbq3Z6UeGGv24a.wRRX0FGq2l5gcy2Pjd/83ps7YaBXk9C',
 	'USER,ADMIN'
 );
--- a teacher with password 'p'
-INSERT INTO user(id,enabled,login,password,roles) VALUES (
-	2, 1, 'p', 
-	'{bcrypt}$2a$04$5v02dQ.kxt7B5tJIA4gh3u/JFQlxmoCadSnk76PnvoN35Oz.ge3GK', 'USER');
--- a teacher with password 'q'
-INSERT INTO user(id,enabled,login,password,roles) VALUES (
-	3, 1, 'q', 
-	'{bcrypt}$2a$04$9rrSETFYL/gqiBxBCy3DMOIZ6qmLigzjqnOGbsNji/bt65q.YBfjK', 'USER');
 
--- a group
+-- a sample group
 INSERT INTO cgroup VALUES (1, 'test');
 
--- a question for the group
-INSERT INTO question (poll, text, author_id, group_id) VALUES (
-	1, 'La clase es interesante', 1, 1);
+-- polls for the group
+INSERT INTO question (poll, text, author_id, group_id, time) VALUES (
+	1, 'La explicación va demasiado rápido: estoy perdido', 1, 1, LOCALTIMESTAMP);
+	
+INSERT INTO question (poll, text, author_id, group_id, time) VALUES (
+	2, 'La explicación va demasiado lento: me aburro', 1, 1, LOCALTIMESTAMP);
+	
+INSERT INTO question (poll, text, author_id, group_id, time) VALUES (
+	3, 'Esto es interesante: me gustaría profundizar', 1, 1, LOCALTIMESTAMP);
+	
+INSERT INTO question (poll, text, author_id, group_id, time) VALUES (
+	4, 'Esto es poco útil: pasemos de largo', 1, 1, LOCALTIMESTAMP);
+

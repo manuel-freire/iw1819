@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.model;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -43,7 +44,9 @@ public class Question {
     @JsonView(Views.Public.class)    
 	private String text;
     @JsonView(Views.Public.class)    
-	private boolean poll;	
+	private boolean poll;
+    @JsonView(Views.Public.class)    
+    private Timestamp time;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,4 +89,10 @@ public class Question {
 	public void setVotes(List<Vote> votes) {
 		this.votes = votes;
 	}	
+	public Timestamp getTime() {
+		return time;
+	}
+	public void setTime(Timestamp time) {
+		this.time = time;
+	}
 }
