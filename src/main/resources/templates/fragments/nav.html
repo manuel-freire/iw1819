@@ -47,7 +47,18 @@
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 					<button type="submit">y</button>
   				</form>  				  				
-			</span>
+				<form th:action="@{/clase/enter}" method="post">
+					<input id="z" type="hidden" name="userName" value="z">
+					<input type="hidden" name="groupCode" value="test">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<button type="submit">z</button>
+  				</form> 
+	<script>
+	window.addEventListener('load', () => {
+		document.getElementById('z').value = "z" + Math.floor(Math.random()*1000);		        	
+	});
+	</script>  				
+  			</span>
 		</span>		
 	</nav>
 </body>

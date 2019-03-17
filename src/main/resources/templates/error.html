@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head.html :: head">
+	<meta charset="utf-8">
+	<title>Title goes here</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css" type="text/css"/>
+</head>
+<body>
+	<nav th:replace="fragments/nav.html :: nav">
+		Nav goes here
+	</nav>
+	
+	<div class="container">
+	<div class="main">
+		
+	<h4>ERROR</h4>
+	
+	<p>Ha pasado algo feo. Mira el log del servidor para saber más detalles.</p>
+
+	<h4>Detalles del error</h4>
+	<table class="errTable">
+		<tr><td>Date<td th:text="${timestamp}">
+		<tr><td>Path<td th:text="${path}">
+		<tr><td>Error<td th:text="${error}">
+		<tr><td>Status<td th:text="${status}">
+		<tr><td>Mensaje<td th:text="${message}">
+		<tr><td>Excepción<td th:text="${exception}">
+		<tr><td>Traza<td><pre th:text="${trace}"/>
+	</table>
+
+	<h4>Variables definidas en sesión</h4>
+	<table class="errTable">
+		<tr th:each="v: ${session}">
+		<td><span class="errKey" th:text="${v.key}"></span>
+		<td th:text="${v.value}">
+	</table>
+
+	<h4>Variables definidas en parámetros</h4>
+	<table class="errTable">
+		<tr th:each="v: ${param}">
+		<td th:text="${v.key}">
+		<td> <div th:each="v: ${v.value}"><div th:text="${v}"></div></div>
+	</table>
+
+	<h4>Otras</h4>
+	<table class="errTable">
+		<tr><td>req.url
+			<td th:text="${#request.requestURL}">
+		<tr><td>req.uri
+			<td th:text="${#request.requestURI}">
+		<tr><td>req.getHeader("User-Agent")
+			<td th:text="${#request.getHeader('User-Agent')}">			
+	</table>
+
+	</div>
+	</div>
+	
+	<footer th:replace="fragments/footer.html :: footer">
+		Footer goes here
+	</footer>
+</body>
+</html>
