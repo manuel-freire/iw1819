@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.HtmlUtils;
 
 import es.ucm.fdi.iw.model.CGroup;
 import es.ucm.fdi.iw.model.Question;
@@ -100,6 +101,9 @@ public class ClassController {
     		}
     		return "index";
     	}
+		
+		// FIXME: verificar que escapa comillas '"', porque si no no nos vale
+		userName = HtmlUtils.htmlEscape(userName);
 		
         Long usersWithLogin = entityManager.createNamedQuery("User.HasLogin", Long.class)
                 .setParameter("userLogin", userName)
