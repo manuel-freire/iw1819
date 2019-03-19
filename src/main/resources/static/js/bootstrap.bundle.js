@@ -3885,7 +3885,7 @@ var Dropdown = function ($$$1) {
     DATA_TOGGLE: '[data-toggle="dropdown"]',
     FORM_CHILD: '.dropdown form',
     MENU: '.dropdown-menu',
-    NAVBAR_NAV: '.navbar-nav',
+    nav_NAV: '.nav-nav',
     VISIBLE_ITEMS: '.dropdown-menu .dropdown-item:not(.disabled)'
   };
   var AttachmentMap = {
@@ -3923,7 +3923,7 @@ var Dropdown = function ($$$1) {
       this._popper = null;
       this._config = this._getConfig(config);
       this._menu = this._getMenuElement();
-      this._inNavbar = this._detectNavbar();
+      this._innav = this._detectnav();
 
       this._addEventListeners();
     } // Getters
@@ -3955,10 +3955,10 @@ var Dropdown = function ($$$1) {
 
       if (showEvent.isDefaultPrevented()) {
         return;
-      } // Disable totally Popper.js for Dropdown in Navbar
+      } // Disable totally Popper.js for Dropdown in nav
 
 
-      if (!this._inNavbar) {
+      if (!this._innav) {
         /**
          * Check for Popper dependency
          * Popper - https://popper.js.org
@@ -3989,7 +3989,7 @@ var Dropdown = function ($$$1) {
       // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 
 
-      if ('ontouchstart' in document.documentElement && $$$1(parent).closest(Selector.NAVBAR_NAV).length === 0) {
+      if ('ontouchstart' in document.documentElement && $$$1(parent).closest(Selector.nav_NAV).length === 0) {
         $$$1('body').children().on('mouseover', null, $$$1.noop);
       }
 
@@ -4015,7 +4015,7 @@ var Dropdown = function ($$$1) {
     };
 
     _proto.update = function update() {
-      this._inNavbar = this._detectNavbar();
+      this._innav = this._detectnav();
 
       if (this._popper !== null) {
         this._popper.scheduleUpdate();
@@ -4071,8 +4071,8 @@ var Dropdown = function ($$$1) {
       return placement;
     };
 
-    _proto._detectNavbar = function _detectNavbar() {
-      return $$$1(this._element).closest('.navbar').length > 0;
+    _proto._detectnav = function _detectnav() {
+      return $$$1(this._element).closest('.nav').length > 0;
     };
 
     _proto._getPopperConfig = function _getPopperConfig() {
@@ -4355,7 +4355,7 @@ var Modal = function ($$$1) {
     DATA_DISMISS: '[data-dismiss="modal"]',
     FIXED_CONTENT: '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top',
     STICKY_CONTENT: '.sticky-top',
-    NAVBAR_TOGGLER: '.navbar-toggler'
+    nav_TOGGLER: '.nav-toggler'
     /**
      * ------------------------------------------------------------------------
      * Class Definition
@@ -4729,9 +4729,9 @@ var Modal = function ($$$1) {
           var actualMargin = $$$1(element)[0].style.marginRight;
           var calculatedMargin = $$$1(element).css('margin-right');
           $$$1(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this9._scrollbarWidth + "px");
-        }); // Adjust navbar-toggler margin
+        }); // Adjust nav-toggler margin
 
-        $$$1(Selector.NAVBAR_TOGGLER).each(function (index, element) {
+        $$$1(Selector.nav_TOGGLER).each(function (index, element) {
           var actualMargin = $$$1(element)[0].style.marginRight;
           var calculatedMargin = $$$1(element).css('margin-right');
           $$$1(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) + _this9._scrollbarWidth + "px");
@@ -4751,9 +4751,9 @@ var Modal = function ($$$1) {
         if (typeof padding !== 'undefined') {
           $$$1(element).css('padding-right', padding).removeData('padding-right');
         }
-      }); // Restore sticky content and navbar-toggler margin
+      }); // Restore sticky content and nav-toggler margin
 
-      $$$1(Selector.STICKY_CONTENT + ", " + Selector.NAVBAR_TOGGLER).each(function (index, element) {
+      $$$1(Selector.STICKY_CONTENT + ", " + Selector.nav_TOGGLER).each(function (index, element) {
         var margin = $$$1(element).data('margin-right');
 
         if (typeof margin !== 'undefined') {
