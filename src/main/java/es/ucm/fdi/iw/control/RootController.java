@@ -64,11 +64,6 @@ public class RootController {
 		return "share";
 	}
 	
-	@GetMapping("/file-image")
-	public String fileImage(Model model) {
-		return "file-image";
-	}
-	
 	/*
 	@GetMapping("/admin")
 	public String admin(Model model, Principal principal) {
