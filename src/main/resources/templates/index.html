@@ -4,14 +4,11 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	lang="es">
 <head>
-    <title>Principal</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <script src="js/jquery-3.2.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/style_index.css" rel="stylesheet" media="screen">
+	<head th:replace="fragments/head.html :: head"></head>
+	
+	<!-- Put additional css and js sources -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">    
+    <link rel="stylesheet" type="text/css" href="css/style_index.css"/>
 
     <!-- datatables-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
@@ -22,11 +19,12 @@
     <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css"></script>
     
     <script type="text/javascript" src="js/index.js"></script>
+    
+    <title>M3 - MultiMedia Manager</title>
 </head>
 
 <body> 
         
-    <!-- Navbar -->
     <nav th:replace="fragments/nav :: nav"></nav>
     
     <div class="conatiner mt-4">
@@ -111,7 +109,7 @@
                                     <tr>
                                         <th>Nombre</th>
                                         <th>Tipo</th>
-                                        <th>TamaÃ±o</th>
+                                        <th>Tamaño</th>
                                         <th>Opc</th>
                                     </tr>
                                 </thead>

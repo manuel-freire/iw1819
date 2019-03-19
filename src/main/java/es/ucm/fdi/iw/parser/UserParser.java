@@ -15,7 +15,7 @@ import es.ucm.fdi.transfer.UserTransfer;
 public class UserParser extends Parser {
 
     private static final String EMAIL_PATTERN = "^[^@]+@[^@]+\\.[a-zA-Z]{2,}$";
-    private static final String NAME_PATTERN = "^([a-zA-ZáéíóúñÁÉÍÓÚÑ- ])*$";
+    private static final String NAME_PATTERN = "^[a-zA-ZáéíóúñÁÉÍÓÚÑ- ]*$";
     private static final String EMAIL_EXAMPLE = "ejemplo@ejemplo.es";
     private static final int EMAIL_MIN_LENGTH = 5;
     private static final int PASSWORD_MIN_LENGTH = 6;

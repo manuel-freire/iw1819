@@ -4,34 +4,23 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	lang="es">
 <head>
-    <title>Prueba</title>
-    <meta charset="utf-8">
-    <link href="css/style.css" rel="stylesheet" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js" ></script> 
+	<head th:replace="fragments/head.html :: head"></head>
+	
+	<!-- Put additional css and js sources -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style_index.css">
     
+    <title>M3 - Login</title>
 </head>
 
 <body> 
-        
-<!--  -->
-	<nav class="navbar navbar-expand-lg barra-nav navbar-dark bg-dark">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		</button>
-		
-		<div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
-		    <ul class="navbar-nav">
-		        <li class="nav-item active">
-		            <a class="titulo" href="#">M3<span class="sr-only"></span></a>
-		        </li>
-		    </ul>
-		</div>
-	</nav> 
+
+	<nav th:replace="fragments/nav :: nav"></nav>
 	
-	<!-- LOGIN MODULE -->
-	<div class="login">
+	<div class="conatiner mt-4">
+	
+		<!-- LOGIN MODULE -->
+		<div class="login">
 	     <div class="wrap">
 			<!-- TOGGLE -->
 			<div id="toggle-wrap">
@@ -110,6 +99,8 @@
 	        </div>
 		</div>
 	</div>
+     
+     </div>
      
 </body>
 </html>

@@ -4,27 +4,25 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	lang="es">
 <head>
-    <title>Chat</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <script src="js/jquery-3.2.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js" ></script> 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/style_index.css" rel="stylesheet" media="screen"/>
-    <link href="css/style.css" rel="stylesheet" media="screen"/>
+	<head th:replace="fragments/head.html :: head"></head>
+	
+	<!-- Put additional css and js sources -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">    
+    <link rel="stylesheet" type="text/css" href="css/style_index.css"/>
+
+    <title>M3 - Chats</title>
 </head>
 
 <body> 
         
-	<nav th:replace="fragments/navbar :: navbar"></nav>
+	<nav th:replace="fragments/nav :: nav"></nav>
                 
     <div class="container col-10 mt-5">
 	    <div class="left-panel-index col-3">
 	        <img class="avatar center-content" src="img/snow.png">
 	        <p class="name text-center">John Snow</p>
 	        <p class="nick text-center">@snow</p>
-	        <p class="bio text-center">Â· I know nothing, my friends killed me once, my parents are dead... but I have a white wolf! =) Â·</p>
+	        <p class="bio text-center">· I know nothing, my friends killed me once, my parents are dead... but I have a white wolf! =) ·</p>
 	        <div class="border-top">
 	            <a href=""><i class="material-icons mr-3">explore</i>Winterfell, GOT</a><br>
 	            <a href=""><i class="material-icons mr-3">language</i>winteriscoming.com</a><br>
@@ -53,7 +51,7 @@
 	                    </div>
                         <div class="message message-left">
                             <div class="row">
-                                <a href="">Maria</a>&nbsp;compartiÃ³
+                                <a href="">Maria</a>&nbsp;compartió
                             </div>
                             <div class="row">
                                 <div class="d-flex flex-row my-1">
@@ -79,7 +77,7 @@
                             </div>
                         </div>
                         <div class="message message-center">
-                            <a href="">RocÃ­o</a><span> se ha unido a <a href="">GRUPO FAMILIA</a></span>
+                            <a href="">Rocío</a><span> se ha unido a <a href="">GRUPO FAMILIA</a></span>
                         </div>
                         <div class="message message-left">
                             <div class="row">
@@ -91,7 +89,7 @@
                         </div>
                         <div class="message message-left">
                             <div class="row">
-                                <a href="">PapÃ¡</a>&nbsp;compartiÃ³
+                                <a href="">Papá</a>&nbsp;compartió
                             </div>
                             <div class="row">
                                 <div class="d-flex flex-row my-1">

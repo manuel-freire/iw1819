@@ -18,9 +18,11 @@ public class User{
 	private long id;
 	private String nickname;
 	private String name;
+	private String lastame;
 	private String email;
 	private String password;
 	private Date birthdate;
+	private String descrption;
 	
 	
 	@ManyToOne(targetEntity=User.class)

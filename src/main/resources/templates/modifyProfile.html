@@ -4,69 +4,51 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	lang="es">
 <head>
-    <title>Modify Profile</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link href="css/style_index.css" rel="stylesheet" media="screen"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet" media="screen"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js" ></script>
+	<head th:replace="fragments/head.html :: head"></head>
+	
+	<!-- Put additional css and js sources -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">    
+    <link rel="stylesheet" type="text/css" href="css/style_index.css"/>
     
+    <title>M3 - Modify Profile</title>
 </head>
 
 <body> 
 	<div class ="container-fluid px-0">
 	
-		<nav th:replace="fragments/navbar :: navbar"></nav>
+		<nav th:replace="fragments/nav :: nav"></nav>
 	
 	    <div class="left-panel-index col-5 mx-auto mt-3 h-auto">
 	        <img class="avatar center-content" th:src="@{img/snow.png}">
 	
-	        <form class ="form">
+	        <form class="form" th:action="@{/modifyProfile}" th:object="${user}" method="POST" th:if="${user != null}">
 	            <div class="form-row">
 	                <div class="form-group col-auto mx-auto">
-	                    <span class= "email_profile" th:text="${user.email}">snowed@gamedetronos.serie</span>
+	                    <span class= "email_profile" th:field="*{email}">snowed@gamedetronos.serie</span>
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-6">
-	                    <input type="text" class="form-control" id="inputFirstName" placeholder="FirstName" th:value="${user.name}">
+	                    <input type="text" class="form-control" id="inputFirstName" placeholder="FirstName" th:field="*{name}">
 	                </div>
 	                <div class="form-group col-6">
-	                    <input type="text" class="form-control" id="inputLastName" placeholder="LastName" th:value="${user.surname}">
+	                    <input type="text" class="form-control" id="inputLastName" placeholder="LastName" th:field="*{lastname}">
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-12">
-	                    <input type="text" class="form-control" id="inputNick" placeholder="Nick" th:value="${user.nickname}">
+	                    <input type="text" class="form-control" id="inputNick" placeholder="Nick" th:value="*{nickname}">
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-12">
-	                    <input type="date" class="form-control" id="inputBirthday" th:value="${user.birthdate}">
+	                    <input type="date" class="form-control" id="inputBirthday" th:value="*{birthdate}">
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-12">
-	                    <textarea class="form-control" id="text_description" rows = "4" th:field="*{user.description}">Â· I know nothing, my friends killed me once, my parents are dead... but I have a white wolf! =) Â·</textarea>
+	                    <textarea class="form-control" id="text_description" rows = "4" th:field="*{description}">· I know nothing, my friends killed me once, my parents are dead... but I have a white wolf! =) ·</textarea>
 	                </div>
-	            </div>
-	            <div class="form-row">
-	                <div class="form-group col-12 d-flex flex-row align-items-center">
-	                    <i class="material-icons mr-3">explore</i>
-	                    <input type="text" class="form-control" id="inputUbication" th:value="${user.location}">
-	                </div>
-	            </div>
-	            <div class="form-row">
-	                <div class="form-group col-12 d-flex flex-row align-items-center">
-	                    <i class="material-icons mr-3">language</i>
-	                    <input type="text" class="form-control" id="inputUbication" value="winteriscoming.com">
-	                </div>
-	            </div>
-	            <div class="form-row justify-content-center align-items-center">
-	                <img class="social" src="img/facebook.png">
-	                <img class="social" src="img/twitter.png">
 	            </div>
 	            <div class="d-flex flex-column align-items-center"> 
 	                <button type="button" class="btn button content-button mt-3" data-toggle="modal" data-target="#exampleModal"><i class="material-icons mr-3">settings_backup_restore</i>Modify password</button>
