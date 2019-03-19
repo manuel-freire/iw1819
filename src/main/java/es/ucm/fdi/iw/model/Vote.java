@@ -1,8 +1,11 @@
 package es.ucm.fdi.iw.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,14 +29,19 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="Vote.allLastByQuestion",
-	query="SELECT v.value FROM Vote v JOIN v.question q "
+	query="SELECT v.voter.id, v.value FROM Vote v JOIN v.question q "
 			+ "WHERE q.id = :questionId"
 			+ " AND v.last = TRUE"),
 	@NamedQuery(name="Vote.lastByVoterAndQuestion",
 	query="SELECT v FROM Vote v JOIN v.question q JOIN v.voter u "
 			+ "WHERE q.id = :questionId"
 			+ "	AND u.id = :userId"
+			+ " AND u.enabled = 1"
 			+ " AND v.last = TRUE"),
+	@NamedQuery(name="Vote.count",
+	query="SELECT v.voter.id, COUNT(v) "
+			+ "FROM Vote v "
+			+ "GROUP BY v.voter.id")	
 	})
 public class Vote {
 	
@@ -87,5 +95,30 @@ public class Vote {
 	}
 	public void setLast(boolean last) {
 		this.last = last;
+	}
+	
+	/**
+	 * Returns a JSON string representing votes for a question.
+	 * 
+	 * @param questions for which votes will be tallied
+	 * @param manager to use for queries
+	 * @return votes from enabled users, and only the last vote for each user.
+	 * 			The format is {"vote": {"q_123": {"1": 11, "3": 33}}}
+	 */
+	public static String latestVotesForQuestion(EntityManager manager, Question ... questions) {
+		List<String> lines = new ArrayList<String>();
+		for (Question q : questions) {
+			@SuppressWarnings("unchecked")
+			List<Object[]> values = manager
+				.createNamedQuery("Vote.allLastByQuestion")			
+				.setParameter("questionId", q.getId())
+				.getResultList();
+			List<String> votes = new ArrayList<>();
+			for (Object[] o : values) {
+				votes.add("\"" + o[0] + "\": " + o[1]);
+			}
+			lines.add("\"q_" + q.getId() + "\": {" + String.join(",", votes) + "}");
+		}
+		return "{\"vote\": {" + String.join(",", lines) + "}}";
 	}
 }

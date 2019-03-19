@@ -102,19 +102,29 @@
 	</footer>
 	
 	<script>
-	const handleVote = (vote) => {
-		// {q_1: [1, 2, 3, 4]}
-        for (let k in vote) {
-        	const div = document.getElementById(k); // q_123
+	const handleVote = (votes) => {
+		// {q_1: [ {1: 11}, {2, 22} ]}
+        for (let qid in votes) {
+        	const div = document.getElementById(qid); // q_123
         	const span = div.querySelector(".others .numeric"); 
         	const slider = div.querySelector(".others input");
+        	const mySlider = div.querySelector(".me input");
         	const barlabel = div.querySelector(".others .barlabel");
         	if (div) {
-        		const n = vote[k].length;
-        		const avg = vote[k].reduce((a,c)=>a+c) / n;
+        		const vote = votes[qid];
+        		let total = 0;
+        		let count = 0;
+        		for (let vid in vote) {
+        			total += vote[vid];
+					count ++;        			
+        		}
+        		const avg = count == 0 ? 0 : total/count; 
         		span.innerText = Math.floor(avg);
         		slider.value = avg;
-        		barlabel.innerText = "👥 ×" + n; 
+        		barlabel.innerText = "👥 ×" + count; 
+        		if (vote[km.userId]) {
+        			mySlider.value = vote[km.userId];     		
+        		}
         	}
         }		
 	}
@@ -125,21 +135,27 @@
 		addQuestion(question);
 	}
 	
+	const handleMessage = (o) => {
+		console.log(o);
+        if (o.vote) handleVote(o.vote);
+        if (o.question) handleQuestion(o.question);
+        if (o.deletion) {
+        	document.getElementById("q_"+o.deletion).remove();
+        }
+	}
+	
 	window.addEventListener('load', () => {
 		ws.receive = (text) => {
 			console.log("just in:", text);
 		    try {
 		        const o = JSON.parse(text);
-		        console.log(o);
-		        if (o.vote) handleVote(o.vote);
-		        if (o.question) handleQuestion(o.question);
-		        if (o.deletion) {
-		        	document.getElementById("q_"+o.deletion).remove();
-		        }
+		        handleMessage(o);
 		    } catch (e) {
 		    	console.log("...not json: ", e);
 		    }
 		}
+		
+		handleMessage([[${votes}]]);
 	});
 	</script>
 </body>

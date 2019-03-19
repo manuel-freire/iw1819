@@ -1,6 +1,9 @@
 package es.ucm.fdi.iw.control;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
@@ -49,9 +52,36 @@ public class AdminController {
 				"SELECT u FROM User u").getResultList());
 		model.addAttribute("groups", entityManager.createQuery(
 				"SELECT g FROM CGroup g").getResultList());
+		model.addAttribute("questionCount", countsToMap("Question.count"));
+		model.addAttribute("voteCount", countsToMap("Vote.count"));
+		model.addAttribute("groupActivity", countsToMap("CGroup.activity"));
+		
 		return "admin";
 	}
 
+	/**
+	 * Creates a map from a query, where the 1st column of results is used as key.
+	 * @param queryName that returns unique long ids as 1st column
+	 * @return a map using this id as key, and either
+	 * 	- full rows, if each row has over 2 columns
+	 *  - single values (those of the 2nd column), if each row has exactly 2 columns
+	 */
+	private Map<Long, Object> countsToMap(String queryName) {
+		Map<Long, Object> m = new HashMap<>();
+		@SuppressWarnings("unchecked")
+		List<Object[]> results = entityManager.createNamedQuery(queryName).getResultList();
+		for (Object[] row : results) {
+			if (row.length == 2) {
+				m.put((Long)row[0], row[1]);
+			} else {
+				m.put((Long)row[0], row);
+			}
+		}
+		log.info("CountsToMap for {} returned {} rows", queryName, m.size());
+		return m;
+	}
+	
+	
 	@GetMapping("/group")
 	@Transactional
 	public String index(HttpSession session, @RequestParam long id) {
@@ -65,15 +95,21 @@ public class AdminController {
 		return "redirect:/clase/";
 	}
 	
-	@PostMapping("/deluser")
+	@PostMapping("/toggleuser")
 	@Transactional
 	public String delUser(Model model,	@RequestParam long id) {
 		User target = entityManager.find(User.class, id);
-		File f = localData.getFile("user", ""+id);
-		if (f.exists()) {
-			f.delete();
+		if (target.getEnabled() == 1) {
+			// disable
+			File f = localData.getFile("user", ""+id);
+			if (f.exists()) {
+				f.delete();
+			}
+			target.setEnabled((byte)0); // disable user
+		} else {
+			// enable
+			target.setEnabled((byte)1);
 		}
-		entityManager.remove(target);
 		return index(model);
 	}	
 

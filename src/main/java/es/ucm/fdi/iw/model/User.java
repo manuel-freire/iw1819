@@ -28,13 +28,13 @@ import com.fasterxml.jackson.annotation.JsonView;
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name="User.ByLogin",
+	@NamedQuery(name="User.byLogin",
 	query="SELECT u FROM User u "
-			+ "WHERE u.login = :userLogin"),
-	@NamedQuery(name="User.HasLogin",
+			+ "WHERE u.login = :userLogin AND u.enabled = 1"),
+	@NamedQuery(name="User.hasLogin",
 	query="SELECT COUNT(u) "
 			+ "FROM User u "
-			+ "WHERE u.login = :userLogin")	
+			+ "WHERE u.login = :userLogin")
 })
 public class User {
     @JsonView(Views.Public.class)    

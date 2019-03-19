@@ -29,6 +29,7 @@ import org.springframework.web.util.HtmlUtils;
 import es.ucm.fdi.iw.model.CGroup;
 import es.ucm.fdi.iw.model.Question;
 import es.ucm.fdi.iw.model.User;
+import es.ucm.fdi.iw.model.Vote;
 
 /**
  * Controller for entering and browsing a class.
@@ -59,6 +60,7 @@ public class ClassController {
 	@GetMapping("/")
 	public String index(Model model, Principal principal, HttpSession session) {
 
+		User u = (User)session.getAttribute("u");
 		CGroup g = entityManager.find(CGroup.class, 
 				((CGroup)session.getAttribute("g")).getId());
 		ArrayList<Question> polling = new ArrayList<>();
@@ -72,6 +74,13 @@ public class ClassController {
 		}
 		model.addAttribute("polling", polling);
 		model.addAttribute("asking", asking);
+		
+		// calculates current totals to send to this client
+		Question[] qs = new Question[g.getQuestions().size()];
+		g.getQuestions().toArray(qs);
+		model.addAttribute("votes", Vote
+				.latestVotesForQuestion(entityManager, qs)
+				.replaceAll("\"", "")); 	// to avoid thymeleaf escaping
 		
 		return "clase";
 	}
@@ -87,7 +96,7 @@ public class ClassController {
 			@RequestParam String userName, @RequestParam String groupCode, HttpSession session) {
 		CGroup g = null;
 		try {
-	        g = entityManager.createNamedQuery("CGroup.ByCode", CGroup.class)
+	        g = entityManager.createNamedQuery("CGroup.byCode", CGroup.class)
 	                            .setParameter("groupCode", groupCode)
 	                            .getSingleResult();
 	        // if no exception here, the group code is valid - yay!
@@ -105,7 +114,7 @@ public class ClassController {
 		// FIXME: verificar que escapa comillas '"', porque si no no nos vale
 		userName = HtmlUtils.htmlEscape(userName);
 		
-        Long usersWithLogin = entityManager.createNamedQuery("User.HasLogin", Long.class)
+        Long usersWithLogin = entityManager.createNamedQuery("User.hasLogin", Long.class)
                 .setParameter("userLogin", userName)
                 .getSingleResult();
         // if the user exists, we have a problem

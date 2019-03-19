@@ -24,9 +24,11 @@
 	<h4>Clases</h4>
 	
 	<table class="adminTable">
-	<tr><th>Nombre & Enlace<th>Borrar
+	<tr><th>Nombre & Enlace<th>Preguntas<th>Votos<th>Borrar
 	<tr th:each="g: ${groups}">
 		<td><a th:href="@{/admin/group(id=${g.id})}" th:text="${g.code}">123za</a>
+		<td><span th:text="${groupActivity[g.id][1]}"></span>
+		<td><span th:text="${groupActivity[g.id][2]}"></span>
 		<td><form method="post" th:action="@{/admin/delgroup(id=${g.id})}">
 			<button type="submit">🗑</button>
 		</form>
@@ -40,11 +42,13 @@
 	<h4>Usuarios</h4>
 	
 	<table class="adminTable">
-	<tr><th>Nombre & Enlace<th>Borrar
+	<tr><th>Nombre & Enlace<th>Preguntas<th>Votos<th>Deshabilitar (🔒) ó Habilitar (🔓)
 	<tr th:each="u: ${users}">
 		<td><a th:href="@{/user/{id}(id=${u.id})}" th:text="${u.login}">Pepe</a>
-		<td><form method="post" th:action="@{/admin/deluser(id=${u.id})}">
-			<button type="submit">🗑</button>
+		<td><span th:text="${questionCount[u.id]}"></span>
+		<td><span th:text="${voteCount[u.id]}"></span>
+		<td><form method="post" th:action="@{/admin/toggleuser(id=${u.id})}">
+			<button th:text="${u.enabled eq 1 ? '🔒' : '🔓'}" type="submit">🗑</button>
 		</form>
 	</tr>
 	</table>

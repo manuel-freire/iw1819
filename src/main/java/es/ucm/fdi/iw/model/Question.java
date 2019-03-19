@@ -28,10 +28,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Question.ValidVotes",
-			query="SELECT NEW java.lang.Integer(v.value) "
-					+ "FROM User u JOIN u.votes v "
-					+ "WHERE u.enabled = 1 AND v.question = :questionId")
+	@NamedQuery(name="Question.count",
+	query="SELECT q.author.id, COUNT(q) "
+			+ "FROM Question q "
+			+ "GROUP BY q.author.id")
 })
 public class Question {
     @JsonView(Views.Public.class)	

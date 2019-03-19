@@ -27,9 +27,13 @@ import com.fasterxml.jackson.annotation.JsonView;
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name="CGroup.ByCode",
+	@NamedQuery(name="CGroup.byCode",
 	query="SELECT g FROM CGroup g "
-			+ "WHERE g.code = :groupCode")
+			+ "WHERE g.code = :groupCode"),
+	@NamedQuery(name="CGroup.activity",
+	query="SELECT q.group.id, COUNT(q), COUNT(v) "
+			+ "FROM Question q LEFT JOIN q.votes v "
+			+ "GROUP BY q.group.id")	
 })
 public class CGroup {
 	private long id;
