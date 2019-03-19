@@ -10,6 +10,10 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/style_index.css">
     
+    <script src="js/moment.min.js"></script>
+	<script src="js/parser.js"></script>
+    <script src="js/register.js"></script>
+    
     <title>M3 - Login</title>
 </head>
 
@@ -88,9 +92,22 @@
 	                    <!-- TABS SIGNUP -->
 	                    <div id="signup-tab-content">
 	                        <form class="signup-form" action="" method="post">
-	                            <input type="email" class="input" placeholder="Email">
-	                            <input type="text" class="input" placeholder="Username">
-	                            <input type="password" class="input" autocomplete="off" placeholder="Password">
+	                        	<div class="form-row">
+		                            <input id="inputEmail" type="email" class="input form-control" placeholder="Email">
+		                            <div class="invalid-feedback" th:text="${emailError}"></div>
+	                            </div>
+	                            <div class="form-row">
+	                            	<input id="inputName" type="text" class="input form-control" placeholder="Username">
+	                            	<div class="invalid-feedback" th:text="${nameError}"></div>
+	                            </div>
+	                            <div class="form-row">
+	                            	<input id="inputPassword" type="password" class="input form-control" autocomplete="off" placeholder="Password">
+	                            	<div class="invalid-feedback" th:text="${passwordError}"></div>
+	                            </div>
+	                            <div class="form-row">
+	                           		<input id="inputSamePassword" type="password" class="input form-control" autocomplete="off" placeholder="Repeat password">
+	                            	<div class="invalid-feedback" th:text="${samePasswordError}"></div>
+	                            </div>
 	                            <input type="submit" class="button" value="Sign Up">
 	                        </form>
 	                    </div>
