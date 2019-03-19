@@ -101,6 +101,39 @@ hr {
     color: rgba(42,46,54,1);
 }
 
+  /*    FILE   */
+  
+  #mediaplayer {
+      margin: 20px;
+  }
+  
+  #metadata {
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-content: start;
+      margin: 20px;
+  }
+  
+  #metadata > * {
+      padding: 5px 10px;
+      border-bottom: 1px solid lightgrey;
+  }
+  
+  #metadata .title {
+      color: rgba(62,181,169,1);
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: right;
+  }
+  
+  #metadata .title::after {
+      content: ":";
+  }
+  
+  #metadata .description {
+      font-style: italic;
+  }
 
   /*    CHAT    */
 

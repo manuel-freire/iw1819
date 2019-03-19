@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
+<head>
+    <title>Mis archivos</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/style_index.css" rel="stylesheet" media="screen">
+
+    <!-- datatables-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/sl-1.2.6/datatables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css"></script>
+</head>
+
+<body> 
+        
+    <!-- Navbar -->
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    
+    <div class="conatiner mt-4">
+
+        <div class="row">
+            <div class="col-10 panel mx-auto">
+                <div class="row">
+                    <div class="col-3 border-right d-flex flex-column justify-content-center">
+                        <div class="d-flex flex-column align-items-center pb-2 border-bottom files-left-panel">
+                            <form class="form-inline center-content searchForm mb-2">
+                                <input class="form-control" type="search" placeholder="Search a file" aria-label="Search">
+                                <button class="btn button button-search" type="submit"><i class="material-icons center-content">search</i></button>
+                            </form>
+                        
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn button content-button px-3"><i class="material-icons mr-2">photo_library</i>Images</button>
+                                <button type="button" class="btn button content-button px-3"><i class="material-icons mr-2">video_library</i>Videos</button>
+                                <button type="button" class="btn button content-button px-3"><i class="material-icons mr-2">library_music</i>Music</button>
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item py-0 d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center all-tag">
+                                    <i class="material-icons mr-2">all_inclusive</i>
+                                    <span>All</span>
+                                </div>
+                            </li>
+                            <li class="list-group-item py-0 d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="material-icons mr-2">local_offer</i>
+                                    <span>Tag 1</span>
+                                </div>
+                                <button class="btn no-bck" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons">brightness_low</i></button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Rename</a>
+                                    <a class="dropdown-item" href="#"><i class="material-icons mr-2">palette</i>Change color</a>
+                                    <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
+                                </div>
+                            </li>
+                            <li class="list-group-item py-0 d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="material-icons mr-2">local_offer</i>
+                                    <span>Tag 2</span>
+                                </div>
+                                <button class="btn no-bck" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons">brightness_low</i></button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
+                                    <a class="dropdown-item" href="#"><i class="material-icons mr-2">palette</i>Change color</a>
+                                    <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <button class="btn button-second mt-auto d-flex align-items-center justify-content-center">
+                            <i class="material-icons mr-2">add</i>
+                            <span>Add Tag</span>
+                        </button>
+                    </div>
+
+                    <div class="col-9">
+                        <div class="row align-items-center justify-content-center mb-2 px-3">
+                            <a class="d-flex files-link" href="#">
+                                <span class="title-section">intro_GOT.mp4</span>
+                                <i class="material-icons title-section my-auto ml-3">videocam</i>
+                            </a>
+                        </div>
+
+                        <div id="folderView" class="row justify-content-center px-3 collapse multi-collapse show">
+                            <nav class="d-flex justify-content-between align-items-center border-bottom" aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">gameofthrones</a></li>
+                                    <li class="breadcrumb-item"><a href="#">video</a></li>
+                                    <li class="breadcrumb-item"><a href="#">serie</a></li>
+                                </ol>
+                                <div class="row">
+                                	<button class="btn button d-flex align-items-center" style="height: 40px; margin-right: 20px;"><i class="material-icons mr-2">share</i>Share</button>
+                                	<button class="btn button d-flex align-items-center" style="height: 40px; margin-right: 20px;"><i class="material-icons mr-2">edit</i>Edit</button>
+                                </div>
+                            </nav>
+                            <div id="mediaplayer" class="row justify-content-center">
+                            	<video width="50%" height="50%" controls>
+                            		<source src="file/intro_GOT.mp4" type="video/mp4">
+                            	</video>
+                            </div>
+                            <div id="metadata">
+                            	<div class="title">Title</div>
+                            	<div class="description">Game of Thrones Intro</div>
+                            	<div class="title">Duration</div>
+                            	<div class="description">0:01:41</div>
+                            	<div class="title">Resolution</div>
+                            	<div class="description">640p</div>
+                            	<div class="title">Size</div>
+                            	<div class="description">8.1 MB</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+    
