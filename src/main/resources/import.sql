@@ -28,16 +28,41 @@
 -- {bcrypt}$2a$04$5v02dQ.kxt7B5tJIA4gh3u/JFQlxmoCadSnk76PnvoN35Oz.ge3GK == 'p'
 -- {bcrypt}$2a$04$9rrSETFYL/gqiBxBCy3DMOIZ6qmLigzjqnOGbsNji/bt65q.YBfjK == 'q'
 
--- an admin with password 'a'
-INSERT INTO user(id,enabled,login,password,roles) VALUES (
-	1, 1, 'a', 
-	'{bcrypt}$2a$04$2ao4NQnJbq3Z6UeGGv24a.wRRX0FGq2l5gcy2Pjd/83ps7YaBXk9C',
-	'USER,ADMIN'
-);
--- a teacher with password 'p'
-INSERT INTO user(id,enabled,login,password,roles) VALUES (2, 1, 'p', 
-	'{bcrypt}$2a$04$5v02dQ.kxt7B5tJIA4gh3u/JFQlxmoCadSnk76PnvoN35Oz.ge3GK', 	'USER');
--- a teacher with password 'q'
-INSERT INTO user(id,enabled,login,password,roles) VALUES (3, 1, 'q', 
-	'{bcrypt}$2a$04$9rrSETFYL/gqiBxBCy3DMOIZ6qmLigzjqnOGbsNji/bt65q.YBfjK', 	'USER');
+-- USERS
+
+INSERT INTO USER
+("ACTIVE", "DESCRIPTION", "EMAIL", "LAST_NAME", "NAME", "NICKNAME", "PASSWORD")
+VALUES ( 1, '', 'flopezcarr@ucm.es', 'Lopez', 'Fernando', 'BadmintonNoob', '{bcrypt}$2a$04$2ao4NQnJbq3Z6UeGGv24a.wRRX0FGq2l5gcy2Pjd/83ps7YaBXk9C');
+
+INSERT INTO USER
+("ACTIVE", "DESCRIPTION", "EMAIL", "LAST_NAME", "NAME", "NICKNAME", "PASSWORD")
+VALUES ( 1, '', 'guicor@ucm.es', 'Cortina', 'Guillermo', 'ChessNoob', '{bcrypt}$2a$04$2ao4NQnJbq3Z6UeGGv24a.wRRX0FGq2l5gcy2Pjd/83ps7YaBXk9C');
+
+INSERT INTO USER
+("ACTIVE", "DESCRIPTION", "EMAIL", "LAST_NAME", "NAME", "NICKNAME", "PASSWORD")
+VALUES ( 1, '', 'semart12@ucm.es', 'Martin', 'Sergio', 'ChessMaister', '{bcrypt}$2a$04$2ao4NQnJbq3Z6UeGGv24a.wRRX0FGq2l5gcy2Pjd/83ps7YaBXk9C');
+
+INSERT INTO USER
+("ACTIVE", "DESCRIPTION", "EMAIL", "LAST_NAME", "NAME", "NICKNAME", "PASSWORD")
+VALUES ( 1, '', 'imart02@ucm.es', 'Martin', 'Irene', 'Darko', '{bcrypt}$2a$04$2ao4NQnJbq3Z6UeGGv24a.wRRX0FGq2l5gcy2Pjd/83ps7YaBXk9C');
+
+
+-- TAGS
+
+INSERT INTO TAG
+("COLOR", "NAME", "PARENT_ID" )
+VALUES ('Red', 'Video', null);
+
+INSERT INTO TAG
+("COLOR", "NAME", "PARENT_ID" )
+VALUES ('Yellow', 'Music', null);
+
+INSERT INTO TAG
+("COLOR", "NAME", "PARENT_ID" )
+VALUES ('Orange', 'Pictures', null);
+
+INSERT INTO TAG
+("COLOR", "NAME", "PARENT_ID" )
+VALUES ('Blue', 'Home Videos', 1);
+
 
