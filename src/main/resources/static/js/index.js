@@ -8,10 +8,6 @@ $(function() {
         $("#action-button-container").addClass("d-none");
     });
 
-    $('#fileTable').DataTable({
-        select: true,
-    });
-
     $("#edit-folder-view").click(function() {
         console.log("folderView "+(($("#folderView").is(":visible")) ? "visible" : "hidden"));
         if($("#folderView").is(":visible")) {
