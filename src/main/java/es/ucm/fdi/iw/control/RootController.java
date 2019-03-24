@@ -273,15 +273,6 @@ public class RootController {
 		return modelAndView;
 	}
 	
-	@GetMapping("/admin")
-	public String admin(Model model) {
-		List<User> users = userService.getAll();
-		
-		model.addAttribute("user", users.get(0));
-		
-		return "admin";
-	}
-	
 	@GetMapping("/chats")
 	public String chats(Model model) {
 		return "chats";

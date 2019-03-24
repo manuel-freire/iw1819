@@ -10,7 +10,7 @@
 	<head th:replace="fragments/head.html :: head"></head>
 	
 	<!-- Put additional css and js sources -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">    
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>    
     <link rel="stylesheet" type="text/css" href="css/style_index.css"/>
     
     <title>M3 - Profile</title>
@@ -20,13 +20,13 @@
     
     <nav th:replace="fragments/nav :: nav"></nav>
     
-    <div class="conatiner mt-4">
+    <div class="container mt-4">
         <div class="left-panel-index col-3 mx-auto" th:if="${user != null}">
             <img class="avatar center-content" src="img/snow.png">
             <p class="name text-center" th:text="${user.name + ' ' + user.lastName}">John Snow</p>
             <p class="nick text-center" th:text="${'@'+user.nickname}"></p>
             <p class="text-center" th:text="${user.email}"></p>
-            <p class="text-center" th:text="${ 'Edad : ' + (#dates.year(#dates.createNow()) - #dates.year(user.birthdate)) + ' años - ' + #dates.format(user.birthdate, 'dd/MM/yyyy')}"></p>
+            <!--  <p class="text-center" th:text="${ 'Edad : ' + (#dates.year(#dates.createNow()) - #dates.year(user.birthdate)) + ' años - ' + #dates.format(user.birthdate, 'dd/MM/yyyy')}"></p> -->
             <p class="bio text-center" th:text="${user.description}"></p>
             <a th:href="@{/modifyProfile?userId=__${user.id}__}" class="btn button content-button mt-3"><i class="material-icons mr-2">edit</i>Modify profile</a>
 
