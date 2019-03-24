@@ -4,6 +4,9 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	lang="es">
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
 	<head th:replace="fragments/head.html :: head"></head>
 	
 	<!-- Put additional css and js sources -->
@@ -24,72 +27,85 @@
 	    <div class="left-panel-index col-5 mx-auto mt-3 h-auto">
 	        <img class="avatar center-content" th:src="@{img/snow.png}">
 	
-	        <form class="form" th:action="@{/modifyProfile}" th:object="${user}" method="POST" th:if="${user != null}">
-	            <div class="form-row">
-	                <div class="form-group col-auto mx-auto">
-	                    <span class= "email_profile" th:field="*{email}">snowed@gamedetronos.serie</span>
-	                </div>
+	        <form id="modifyProfileForm" class="form" th:action="@{/modifyProfile}" th:object="${user}" method="POST" th:if="${user != null}">
+	            <div class="form-row justify-content-center">
+	                <p class="nick text-center" th:text="${'@'+user.nickname}"></p>
+	            </div>
+	            <div class="form-row justify-content-center">
+	            	<p class="text-center" th:text="${user.email}"></p>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-6">
-	                    <input type="text" class="form-control" id="inputFirstName" placeholder="FirstName" th:field="*{name}">
+	                    <input type="text" class="form-control" placeholder="FirstName" th:id="name" th:name="name" th:value="${user.name}">
 	                </div>
 	                <div class="form-group col-6">
-	                    <input type="text" class="form-control" id="inputLastName" placeholder="LastName" th:field="*{lastname}">
+	                    <input type="text" class="form-control" placeholder="LastName" th:id="lastName" th:name="lastName" th:value="${user.lastName}">
+	                </div>
+	            </div>
+	            <!-- 
+	            <div class="form-row">
+	                <div class="form-group col-12">
+	                    <input type="email" class="form-control" placeholder="Email" th:id="email" th:name="email" th:value="${user.email}">
+	                </div>
+	            </div>
+	             -->
+	            <div class="form-row">
+	                <div class="form-group col-12">
+	                    <!-- 
+	                    <input type="date" class="form-control" th:id="birthdate" th:name="birthdate" th:if="${user.birthdate != null}"th:value="${#date.format(user.birthdate, 'yyyy-MM-dd')}">
+	                	 -->
 	                </div>
 	            </div>
 	            <div class="form-row">
 	                <div class="form-group col-12">
-	                    <input type="text" class="form-control" id="inputNick" placeholder="Nick" th:value="*{nickname}">
+	                    <textarea class="form-control" rows = "4" th:id="birthdate" th:name="birthdate" th:text="${user.description}"></textarea>
 	                </div>
 	            </div>
-	            <div class="form-row">
-	                <div class="form-group col-12">
-	                    <input type="date" class="form-control" id="inputBirthday" th:value="*{birthdate}">
-	                </div>
-	            </div>
-	            <div class="form-row">
-	                <div class="form-group col-12">
-	                    <textarea class="form-control" id="text_description" rows = "4" th:field="*{description}">· I know nothing, my friends killed me once, my parents are dead... but I have a white wolf! =) ·</textarea>
-	                </div>
-	            </div>
-	            <div class="d-flex flex-column align-items-center"> 
-	                <button type="button" class="btn button content-button mt-3" data-toggle="modal" data-target="#exampleModal"><i class="material-icons mr-3">settings_backup_restore</i>Modify password</button>
-	                <button type="button" class="btn button content-button mt-3"><i class="material-icons mr-3">save</i> Save changes</button>
-	
-	                <!-- Modal PASSWORD-->
-	                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-	                    <div class="modal-dialog" role="document">
-	                    <div class="modal-content">
-	                        <div class="modal-header">
-	                        <h5 class="modal-title" id="exampleModalLabel">Modify password</h5>
-	                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	                            <span aria-hidden="true">&times;</span>
-	                        </button>
-	                        </div>
-	                        <div class="modal-body px-5">
-	                            <form class ="form">
-	                                <div class="form-row">
-	                                    <div class="form-group col-12">
-	                                        <input type="password" class="form-control" id="OldPassword" placeholder="OldPassword">
-	                                    </div>
-	                                </div>
-	                                <div class="form-row">
-	                                    <div class="form-group col-12">
-	                                        <input type="password" class="form-control" id="NewPassword" placeholder="NewPassword">
-	                                    </div>
-	                                </div>
-	                            </form>
-	                        </div>
-	                        <div class="modal-footer">
-	                        <button type="button" class="button content-button btn" data-dismiss="modal">Cancel</button>
-	                        <button type="button" class="button content-button btn">Save changes</button>
-	                        </div>
-	                    </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </form>
+			</form>
+			
+            <div class="d-flex flex-column align-items-center"> 
+                <button class="btn button content-button mt-3" data-toggle="modal" data-target="#exampleModal"><i class="material-icons mr-3">settings_backup_restore</i>Modify password</button>
+                
+                <form id="deleteForm" th:action="@{/delete}" method="POST">
+					<input type="hidden" id="userId" name="userId" th:value="${user.id}"/>
+					<button type="submit" form="deleteForm" class="btn button content-button mt-3"><i class="material-icons p-1">delete</i>Delete profile</button>
+				</form>
+                
+                <button form="modifyProfileForm" class="btn button content-button mt-3"><i class="material-icons mr-3">save</i> Save changes</button>
+
+                <!-- Modal PASSWORD-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modify password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body px-5">
+                            <form class ="form">
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <input type="password" class="form-control" id="OldPassword" placeholder="OldPassword">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <input type="password" class="form-control" id="NewPassword" placeholder="NewPassword">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="button content-button btn" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="button content-button btn">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+	        
 	    </div>
 	    
 	</div>
