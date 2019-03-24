@@ -202,13 +202,75 @@ public class RootController {
 	}
 	
 	@GetMapping("/profile")
-	public String profile(Model model) {
-		return "profile";
+	public ModelAndView profile(ModelAndView modelAndView, HttpSession session, SessionStatus status, @ModelAttribute ("userId") Long userId) {
+		
+		String err = "User not found";
+
+		if(userId != null) {
+			User user = userService.findById(userId);
+			if(user != null && user.isActive()) {
+				err = null;
+				modelAndView.addObject("user", user);
+			}
+		}
+		
+		if(err != null) {
+			this.notifyModal(modelAndView, "Error", err);
+		}
+		
+		modelAndView.setViewName("profile");
+		return modelAndView;
 	}
 	
 	@GetMapping("/modifyProfile")
-	public String modifyProfile(Model model) {
-		return "modifyProfile";
+	public ModelAndView modifyProfileGet(ModelAndView modelAndView, HttpSession session, SessionStatus status, @ModelAttribute ("userId") Long userId) {
+		
+		String err = "User not found";
+
+		User user = null;
+		if(userId != null) {
+			user = userService.findById(userId);
+			if(user != null && user.isActive()) {
+				err = null;
+				modelAndView.addObject("user", user);
+			}
+		}
+		
+		if(err != null) {
+			this.notifyModal(modelAndView, "Error", err);
+			modelAndView.setViewName("profile");
+		}
+		else {
+			modelAndView.addObject("user", user);
+			modelAndView.setViewName("modifyProfile");
+		}
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/modifyProfile")
+	public ModelAndView modifyProfilePost(ModelAndView modelAndView, HttpSession session, SessionStatus status, @ModelAttribute ("user") User user)  {
+		String err = "User not found";
+
+		if(user != null) {
+			User userDatabase = userService.findById(user.getId());
+			if(userDatabase != null && userDatabase.isActive()) {
+				//PARSE USER
+				User userSaved = userService.save(user);
+				if(userSaved != null) {
+					err = null;
+					this.notifyModal(modelAndView, "Saved changes", "Your data has been saved successfully!");
+				}
+			}
+		}
+
+		if(err != null) {
+			this.notifyModal(modelAndView, "Error", err);
+		}
+		//If redirect to users the modal wont be rendered
+		this.usersGet(modelAndView);
+		
+		return modelAndView;
 	}
 	
 	@GetMapping("/chats")
