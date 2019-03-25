@@ -26,8 +26,6 @@ public class IwApplicationTests {
                 .setParameter("userLogin", "Darko")
                 .getSingleResult();
 		
-		System.out.println(u.toString());
-		
 		assertNotNull(u);
 		assertEquals(u.getNickname(), "Darko");
 		
@@ -36,7 +34,7 @@ public class IwApplicationTests {
                 .getSingleResult();
 		
 		assertNotNull(u);
-		assertEquals(u.getNickname(), "Darko");
+		assertEquals(u.getNickname(), "BadmintonNoob");
 	}
 	
 	

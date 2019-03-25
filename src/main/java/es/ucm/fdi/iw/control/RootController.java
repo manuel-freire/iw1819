@@ -84,7 +84,7 @@ public class RootController {
 	
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
-		return "index";
+		return "login";
 	}
 
 	@GetMapping("/login")
