@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.model;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -15,10 +16,21 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+<<<<<<< HEAD
 @NamedQueries({
 	@NamedQuery(name="User.all",
 		query="SELECT u FROM User u"),
 })
+=======
+<<<<<<< Updated upstream
+=======
+@NamedQueries({
+	@NamedQuery(name="User.byEmailOrNickname",
+			query="SELECT u FROM User u "
+					+ "WHERE (u.email = :userLogin OR u.nickname = :userLogin) AND u.active = 1"),
+})
+>>>>>>> Stashed changes
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 public class User{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -38,10 +50,21 @@ public class User{
 	
 	private Date birthdate;
 	
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 	private String description;
 	
 	private boolean active;
 	
+<<<<<<< HEAD
+=======
+	private String roles;
+	
+>>>>>>> Stashed changes
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 	
 	@ManyToOne(targetEntity=User.class)
 	private List<Friend> friends;
@@ -167,6 +190,12 @@ public class User{
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+}*/
+=======
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 
 	public List<Message> getSentMessages() {
 		return sentMessages;
@@ -184,6 +213,28 @@ public class User{
 		this.receivedMessages = receivedMessages;
 	}
 	
+<<<<<<< HEAD
+=======
+	public String getRoles() {
+		return this.roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+	
+	public boolean hasRole(String roleName) {
+		return Arrays.stream(this.roles.split(","))
+				.anyMatch(r -> r.equalsIgnoreCase(roleName));
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", nickname=" + nickname + ", name=" + name + ", lastName=" + lastName + 
+					", password=" + password + ", birthdate=" + birthdate + ", description=" + description + ", roles=" + roles + ", active=" + active + "]";
+	}
+	
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 }
 
 
@@ -193,3 +244,7 @@ public class User{
 
 
 
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
