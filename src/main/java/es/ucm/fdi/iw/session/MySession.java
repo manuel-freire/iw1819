@@ -22,18 +22,9 @@ public class MySession {
 	
 	public String userLoggedStr = "userLogged";
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public void setUserLogged(HttpSession session, User userDatabase, String userType) {
-		if(userDatabase != null && userType != null) {
-=======
+
 	public void setUserLogged(HttpSession session, User userDatabase) {
 		if(userDatabase != null) {
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-=======
-	public void setUserLogged(HttpSession session, User userDatabase) {
-		if(userDatabase != null) {
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 			session.setAttribute(userLoggedStr, userDatabase);
 		}
 	}

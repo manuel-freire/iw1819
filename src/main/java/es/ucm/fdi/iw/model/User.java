@@ -16,28 +16,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-<<<<<<< HEAD
-<<<<<<< HEAD
-@NamedQueries({
-	@NamedQuery(name="User.all",
-		query="SELECT u FROM User u"),
-})
-=======
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-<<<<<<< Updated upstream
-=======
 @NamedQueries({
 	@NamedQuery(name="User.byEmailOrNickname",
 			query="SELECT u FROM User u "
 					+ "WHERE (u.email = :userLogin OR u.nickname = :userLogin) AND u.active = 1"),
 })
->>>>>>> Stashed changes
-<<<<<<< HEAD
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-public class User{
+public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
@@ -55,33 +39,12 @@ public class User{
 	private String password;
 	
 	private Date birthdate;
-	
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
+
 	private String description;
 	
 	private boolean active;
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 	private String roles;
-	
->>>>>>> Stashed changes
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-=======
-	private String roles;
-	
->>>>>>> Stashed changes
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 	
 	@ManyToOne(targetEntity=User.class)
 	private List<Friend> friends;
@@ -207,18 +170,6 @@ public class User{
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-}*/
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-=======
-<<<<<<< Updated upstream
-}*/
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 
 	public List<Message> getSentMessages() {
 		return sentMessages;
@@ -236,11 +187,6 @@ public class User{
 		this.receivedMessages = receivedMessages;
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 	public String getRoles() {
 		return this.roles;
 	}
@@ -259,25 +205,4 @@ public class User{
 		return "User [id=" + id + ", email=" + email + ", nickname=" + nickname + ", name=" + name + ", lastName=" + lastName + 
 					", password=" + password + ", birthdate=" + birthdate + ", description=" + description + ", roles=" + roles + ", active=" + active + "]";
 	}
-	
-<<<<<<< HEAD
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 }
-
-
-
-
-
-
-
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-=======
->>>>>>> Stashed changes
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"

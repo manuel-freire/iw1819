@@ -15,16 +15,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,19 +23,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.ucm.fdi.iw.model.User;
 import es.ucm.fdi.iw.service.UserService;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import es.ucm.fdi.util.StringUtil;
-=======
+
 import es.ucm.fdi.iw.session.MySession;
 import es.ucm.fdi.util.StringUtil;
->>>>>>> Stashed changes
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-=======
-import es.ucm.fdi.iw.session.MySession;
-import es.ucm.fdi.util.StringUtil;
->>>>>>> Stashed changes
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
+
 
 @Controller
 public class RootController {
@@ -57,25 +38,13 @@ public class RootController {
 	
 	@Autowired
 	private IwSocketHandler iwSocketHandler;
-	
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
+
 	@Autowired 
 	private EntityManager entityManager;
 	
 	@Autowired
 	UserService userService;
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	/**
 	 * Function to notify the current user a message from server
 	 * the modal is located on nav.html in order to display a message in any view
@@ -120,20 +89,10 @@ public class RootController {
 		}
 	}
 	
-	
-=======
-	
->>>>>>> Stashed changes
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
-=======
-	
->>>>>>> Stashed changes
->>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
 		return "index";
 	}
-<<<<<<< Updated upstream
 
 	@GetMapping("/signin")
 	public String login(Model model) {
