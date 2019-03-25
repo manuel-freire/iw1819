@@ -38,13 +38,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    http
 	        .authorizeRequests()
 <<<<<<< HEAD
+<<<<<<< HEAD
 	        .antMatchers("/css/**", "/js/**", "/img/**", "/", "/**").permitAll()
 =======
+=======
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 <<<<<<< Updated upstream
 	            .antMatchers("/css/**", "/js/**", "/img/**", "/").permitAll()
 =======
 	        .antMatchers("/css/**", "/js/**", "/img/**", "/").permitAll()
 >>>>>>> Stashed changes
+<<<<<<< HEAD
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
+=======
 >>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 	            .antMatchers("/admin**").hasRole("ADMIN")
 	            .anyRequest().authenticated()

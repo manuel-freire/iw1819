@@ -16,6 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 =======
 <<<<<<< Updated upstream
 =======
@@ -29,7 +34,13 @@ import org.springframework.web.servlet.ModelAndView;
 import es.ucm.fdi.iw.model.User;
 import es.ucm.fdi.iw.service.UserService;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import es.ucm.fdi.util.StringUtil;
+=======
+import es.ucm.fdi.iw.session.MySession;
+import es.ucm.fdi.util.StringUtil;
+>>>>>>> Stashed changes
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 =======
 import es.ucm.fdi.iw.session.MySession;
 import es.ucm.fdi.util.StringUtil;
@@ -48,6 +59,11 @@ public class RootController {
 	private IwSocketHandler iwSocketHandler;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 =======
 <<<<<<< Updated upstream
 =======
@@ -58,6 +74,7 @@ public class RootController {
 	@Autowired
 	UserService userService;
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 	/**
 	 * Function to notify the current user a message from server
@@ -104,6 +121,10 @@ public class RootController {
 	}
 	
 	
+=======
+	
+>>>>>>> Stashed changes
+>>>>>>> parent of f0d4d74... Revert "Añadidos cambios para dividir los Controller y que funcione con Spring security"
 =======
 	
 >>>>>>> Stashed changes
