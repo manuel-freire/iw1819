@@ -1,0 +1,6 @@
+/* Navbar css */
+.nav-item.nav-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

@@ -1,6 +1,8 @@
 package es.ucm.fdi.iw;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,6 +21,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	 private LoginSuccessHandler loginSuccessHandler;
+	
 	/**
 	 * Main security configuration.
 	 * 
@@ -32,11 +37,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 	    http
 	        .authorizeRequests()
+<<<<<<< Updated upstream
 	            .antMatchers("/css/**", "/js/**", "/img/**", "/").permitAll()
+=======
+	        .antMatchers("/css/**", "/js/**", "/img/**", "/").permitAll()
+>>>>>>> Stashed changes
 	            .antMatchers("/admin**").hasRole("ADMIN")
 	            .anyRequest().authenticated()
 	            .and()
-	        .formLogin();
+	        .formLogin()
+	        	.permitAll().successHandler(loginSuccessHandler);
 	}
 	
 	/**
@@ -59,5 +69,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public IwUserDetailsService springDataUserDetailsService() {
 		return new IwUserDetailsService();
-	}    
+	}
+	
+	/**
+	 * Declares an AuthenticationManager bean.
+	 * 
+	 *  This can be used to auto-login into the site after creating new users, for example.
+	 */
+	 @Bean
+	 @Override
+	 public AuthenticationManager authenticationManagerBean() throws Exception {
+	     return super.authenticationManagerBean();
+	 }
+	 
 }

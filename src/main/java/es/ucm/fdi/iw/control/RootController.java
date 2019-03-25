@@ -7,6 +7,19 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+<<<<<<< Updated upstream
+=======
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
+
+import es.ucm.fdi.iw.model.User;
+import es.ucm.fdi.iw.service.UserService;
+import es.ucm.fdi.iw.session.MySession;
+import es.ucm.fdi.util.StringUtil;
+>>>>>>> Stashed changes
 
 @Controller
 public class RootController {
@@ -19,10 +32,21 @@ public class RootController {
 	@Autowired
 	private IwSocketHandler iwSocketHandler;
 	
+<<<<<<< Updated upstream
+=======
+	@Autowired 
+	private EntityManager entityManager;
+	
+	@Autowired
+	UserService userService;
+	
+	
+>>>>>>> Stashed changes
 	@GetMapping("/")
-	public String index(Model model) {
+	public String index(Model model, HttpSession session) {
 		return "index";
 	}
+<<<<<<< Updated upstream
 
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -38,6 +62,8 @@ public class RootController {
 	public String modifyProfile(Model model) {
 		return "modifyProfile";
 	}
+=======
+>>>>>>> Stashed changes
 	
 	@GetMapping("/chats")
 	public String chats(Model model) {
