@@ -274,8 +274,6 @@ public class RootController {
 		
 		return modelAndView;
 	}
-=======
->>>>>>> Stashed changes
 	
 	@GetMapping("/chats")
 	public String chats(Model model) {
