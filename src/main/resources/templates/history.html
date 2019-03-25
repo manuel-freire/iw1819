@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<head th:replace="fragments/head.html :: head"></head>
+	
+	<!-- Put additional css and js sources -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">    
+    <link rel="stylesheet" type="text/css" href="css/style_index.css"/>
+    
+    <title>M3 - History</title>
+</head>
+
+<body> 
+    
+    <nav th:replace="fragments/nav :: nav"></nav>
+    
+    <div class="conatiner mt-4">
+        <div class="panel">
+            <p class="title-section ml-4 center-content">HISTORY <i class="material-icons title-section ml-4">history</i></p>
+            <ul class="list-group list-group-flush mt-4">
+                <li class="list-group-item"><a href="">Pedro</a> ha compartido la <a href="">imagen1.png</a></li>
+                <li class="list-group-item"><a href="">Maria</a> ha compartido el video <a href="">video2.avi</a></li>
+                <li class="list-group-item"><a href="">Rocío</a> ha escrito por el chat <a href="">GRUPO FAMILIA</a></li>
+                <li class="list-group-item"><a href="">Tú</a> has compartido por el chat <a href="">GRUPO FAMILIA</a> la <a href="">imagenFamilia.jpg</a></li>
+                <li class="list-group-item"><a href="">Tú</a> has compartido por el chat <a href="">GRUPO FAMILIA</a> el video<a href="">videoVacaciones.avi</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+

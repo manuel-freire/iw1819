@@ -1,19 +1,80 @@
 <!DOCTYPE html>
 <html 
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
 <head>
 	<meta charset="utf-8">
-	<title>IW 2918-19</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<head th:replace="fragments/head.html :: head"></head>
+	
+	<!-- Put additional css and js sources -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">    
+    <link rel="stylesheet" type="text/css" href="css/style_index.css"/>
+    
+    <!-- datatables-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/sl-1.2.6/datatables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css"></script>
+    
+    <script type="text/javascript" src="js/admin.js"></script>
+    
+    <title>M3- Admin</title>
 </head>
 <body>
-	<h1 th:text="#{admin.welcome}">Ojo solo admines</h1>
+
+	<nav th:replace="fragments/nav :: nav"></nav>
+        
+    <div class="container col-10 mt-5">
+    
+    	<div id="userTable-container">
+	        <table id="userTable" class="table table-striped table-bordered">
+	            <thead>
+	                <tr>
+	                    <th>Nickname</th>
+	                    <th>Name</th>
+	                    <th>Last name</th>
+	                    <th>Email</th>
+	                    <th>Active</th>
+	                    <th>Birthdate</th>
+	                    <th>Description</th>
+	                    <th>Opt</th>
+	                </tr>
+	            </thead>
+	            <tbody th:if="${users != null}">     
+	                <tr th:id="${user.id}" th:each=" user, iStat : ${users}">
+	                	<td th:text="${user.nickname}"></td>
+	                    <td th:text="${user.name}"></td>
+	                    <td th:text="${user.lastName}"></td>
+	                    <td th:text="${user.email}"></td>
+	                    <th th:text="${user.active}"></th>
+	                    <td th:text="${#dates.format(user.birthdate, 'dd/MM/yyyy')}"></td>
+	                    <td th:text="${user.description}"></td>
+	                    <td class="d-flex justify-content-center align-items-center">
+	                    	<form th:action="@{/delete}" method="POST">
+								<input type="hidden" id="userId" name="userId" th:value="${user.id}"/>
+								<button class="button"><i class="material-icons p-1">delete</i></button>
+							</form>
+	                    </td>
+	                </tr>
+	            </tbody>
+	        </table>
+	    </div>
 		
-	<h4>Configuración</h4>
-	<ul>
-	<li>Directorio local para archivos de usuario: <span th:text="${basePath}">tal</span>
-	<li>Perfiles activos: <span th:text="${activeProfiles}">tal</span>
-	</ul>
+		<div id="action-button-container" class="row pt-2 mx-1">
+		    <div class="d-flex flex-column w-100">
+		        <span class="border-bottom">Operations over selected items</span>
+		        <div class="d-flex flex-row justify-content-around pt-3 w-100">
+		            <button id="delete-selected" class="btn button d-flex flex-row align-items-center"><i class="material-icons mr-2">delete</i>Delete</button>
+		        </div>
+		    </div>
+		</div>
+		
+	</div>
 	
 </body>
 </html>

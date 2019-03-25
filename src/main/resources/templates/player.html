@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<title>M3 - Player</title>
+</head>
+<body class="container-fluid">
+
+    <!-- th:fragment="player" -->
+	<div class="player-container col-5 py-3">
+	
+	    <!-- Added links here because only need them when the fragment is included -->
+		<link rel="stylesheet" type="text/css" href="css/player.css"/>
+		<link rel="stylesheet" type="text/css" href="css/fontawesome-free-5.7.2-web/css/all.css"/>
+
+        <div class="player row d-flex flex-column mx-auto">
+            <div class="embed-responsive">
+                <div class="d-flex flex-column">
+                    <div class="player-title d-flex flex-row justify-content-center align-items-end py-1">
+                        <span class="player-title-name text-center px-2">All Star</span>
+                        <span class="player-title-subname px-1">Smash Mouth</span>
+                    </div>
+                    
+                    <img src="https://via.placeholder.com/300/09f/fff.png">
+                    <audio>
+                        <source src="horse.ogg" type="audio/ogg">
+                        <source src="horse.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                
+                <!-- 
+                <video width="300" height="240">
+                    <source src="test-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                -->
+            </div>
+
+            <div class="d-flex flex-row justify-content-between my-1">
+                <button id="btnShare" class="btn"><i class="fas fa-share-alt"></i></button>
+                <div class="d-flex flex-row">
+                    <button class="btn"><i class="fas fa-random"></i></button>
+                    <button class="btn"><i class="fas fa-step-backward"></i></button>
+                    <button class="btn"><i class="fas fa-play"></i></button>
+                    <button class="btn"><i class="fas fa-step-forward"></i></button>
+                    <button class="btn"><i class="fas fa-redo-alt"></i></button>
+                </div>
+                <button id="btnInfo" class="btn"
+                    data-toggle="collapse" href="#info-collapse" role="button" aria-expanded="false" aria-controls="info-collapse">
+                    <i class="fas fa-info"></i>
+                </button>
+            </div>
+
+            <div class="info pb-2 collapse" id="info-collapse">
+                
+            </div>
+
+        </div>
+
+        <div class="playlist-container mt-1 mx-2 d-flex flex-column">
+
+            <div class="row mt-2">
+                <div id="playlist-title" class="playlist-title d-flex flex-row mx-2 pl-3">
+                    <span class="mb-1 mr-5">Nombre de la playlist</span>
+                </div>
+            </div>
+
+            <div class="my-2">
+                <!-- th:each -->
+                <div class="d-flex flex-row my-1">
+                    <img class="thumbnail" src="https://via.placeholder.com/100/09f/fff.png">
+                    <div class="multim-info w-100 d-flex flex-row justify-content-between align-items-center">
+                        <div class="d-flex flex-column justify-content-center px-2 py-1">
+                            <span class="info-title px-3">Lovers on the sun</span>
+                            <span class="pl-3">David Guetta</span>
+                        </div>
+                        <div>
+                            <button class="btn mx-2"><i class="fas fa-ellipsis-h fa-lg"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row my-1">
+                    <img class="thumbnail" src="https://via.placeholder.com/100/09f/fff.png">
+                    <div class="multim-info w-100 d-flex flex-row justify-content-between align-items-center">
+                        <div class="d-flex flex-column justify-content-center px-2 py-1">
+                            <span class="info-title px-3">Lovers on the sun</span>
+                            <span class="pl-3">David Guetta</span>
+                        </div>
+                        <div>
+                            <button class="btn mx-2"><i class="fas fa-ellipsis-h fa-lg"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row my-1">
+                    <img class="thumbnail" src="https://via.placeholder.com/100/09f/fff.png">
+                    <div class="multim-info w-100 d-flex flex-row justify-content-between align-items-center">
+                        <div class="d-flex flex-column justify-content-center px-2 py-1">
+                            <span class="info-title px-3">Lovers on the sun</span>
+                            <span class="pl-3">David Guetta</span>
+                        </div>
+                        <div>
+                            <button class="btn mx-2"><i class="fas fa-ellipsis-h fa-lg"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+
+        </div>
+        
+    </div>
+
+</body>
+</html>

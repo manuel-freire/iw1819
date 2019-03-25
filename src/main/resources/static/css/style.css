@@ -118,6 +118,17 @@
     color: inherit;
     font-family: inherit;
     color: #fff;
+    border-color: inherit;
+}
+.form-wrap form .input.is-invalid {
+	border-color: #FF5757;
+}
+.form-wrap form .input.is-valid {
+	border-color: #62D6C4;
+}
+.invalid-feedback {
+	font-size: 15px;
+	color:#FF5757;
 }
 .form-wrap form .button {
     margin: 1em 0;

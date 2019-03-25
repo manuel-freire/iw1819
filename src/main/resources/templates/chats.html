@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<head th:replace="fragments/head.html :: head"></head>
+	
+	<!-- Put additional css and js sources -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">    
+    <link rel="stylesheet" type="text/css" href="css/style_index.css"/>
+
+    <title>M3 - Chats</title>
+</head>
+
+<body> 
+        
+	<nav th:replace="fragments/nav :: nav"></nav>
+                
+    <div class="container col-10 mt-5">
+	    <div class="left-panel-index col-3">
+	        <img class="avatar center-content" src="img/snow.png">
+	        <p class="name text-center">John Snow</p>
+	        <p class="nick text-center">@snow</p>
+	        <p class="bio text-center">· I know nothing, my friends killed me once, my parents are dead... but I have a white wolf! =) ·</p>
+	        <div class="border-top">
+	            <a href=""><i class="material-icons mr-3">explore</i>Winterfell, GOT</a><br>
+	            <a href=""><i class="material-icons mr-3">language</i>winteriscoming.com</a><br>
+	            <div class="center-content">
+	                <img class="social" src="img/facebook.png">
+	                <img class="social" src="img/twitter.png">
+	            </div>
+	        </div>
+	        
+	        <div class="border-top"> 
+	            <button type="button" class="btn button content-button mt-3"><i class="material-icons mr-3">photo_library</i> Images</button>
+	            <button type="button" class="btn button content-button mt-3"><i class="material-icons mr-3">videocam</i> Videos</button>
+	            <button type="button" class="btn button content-button mt-3"><i class="material-icons mr-3">library_music</i> Music</button>
+	        </div>
+	    </div>
+           
+        <div class="right-panel col-9">
+            <div class="ml-5">
+                <div class="panel-chat ml-5">
+                    <div class="name-group-chat">
+                        <p class="title-section">FAMILIA</p>
+                    </div>
+                    <div class="panel-msg-chat">
+	                    <div class="message message-right">
+	                        <span>Holi</span>
+	                    </div>
+                        <div class="message message-left">
+                            <div class="row">
+                                <a href="">Maria</a>&nbsp;compartió
+                            </div>
+                            <div class="row">
+                                <div class="d-flex flex-row my-1">
+                                    <img class="thumbnail" src="https://via.placeholder.com/100/09f/fff.png">
+                                    <div class="multim-info w-100 d-flex flex-row justify-content-between align-items-center">
+                                        <div class="d-flex flex-column justify-content-center px-2 py-1">
+                                            <span class="info-title px-3">Lovers on the sun</span>
+                                            <span class="pl-3">David Guetta</span>
+                                        </div>
+                                        <div>
+                                            <button class="btn mx-2"><i class="fas fa-ellipsis-h fa-lg"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message message-left">
+                            <div class="row">
+                                <a href="">Maria</a>
+                            </div>
+                            <div class="row">
+                                Esta cancion me encanta
+                            </div>
+                        </div>
+                        <div class="message message-center">
+                            <a href="">Rocío</a><span> se ha unido a <a href="">GRUPO FAMILIA</a></span>
+                        </div>
+                        <div class="message message-left">
+                            <div class="row">
+                                <a href="">Rocio</a>
+                            </div>
+                            <div class="row">
+                                Hola familia!!!
+                            </div>
+                        </div>
+                        <div class="message message-left">
+                            <div class="row">
+                                <a href="">Papá</a>&nbsp;compartió
+                            </div>
+                            <div class="row">
+                                <div class="d-flex flex-row my-1">
+                                    <img class="thumbnail" src="https://via.placeholder.com/100/09f/fff.png">
+                                    <div class="multim-info w-100 d-flex flex-row justify-content-between align-items-center">
+                                        <div class="d-flex flex-column justify-content-center px-2 py-1">
+                                            <span class="info-title px-3">Star wars</span>
+                                            <span class="pl-3">Episodio IX - Trailer</span>
+                                        </div>
+                                        <div>
+                                            <button class="btn mx-2"><i class="fas fa-ellipsis-h fa-lg"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-chat center-content">
+                        <input type="text"  class="form-control col-10" placeholder="Type something here...">
+                        <button type="button" class="btn button button-send center-content"><i class="material-icons">send</i></button>
+
+                    </div>
+                </div>
+            </div>
+            
+            <hr>
+            
+            <div class="add_group_and_search mb-5">
+                <button class="btn button add_group mr-5"><i class="material-icons mr-3">share</i>Share new file</button>
+
+                <form class="form-inline border-left border-dark center-content pl-5">
+                    <input class="form-control" type="search" placeholder="Search a file" aria-label="Search">
+                    <button class="btn button button-search my-2 my-sm-0" type="submit"><i class="material-icons center-content">search</i></button>
+                </form>
+            </div>
+            
+             <div class="panel ml-5">        
+                 <p class="title-section ml-4 center-content">SHARED FILES<i class="material-icons title-section ml-4">folder_shared</i></p>
+                 <ul class="list-group list-group-flush mt-4">
+                     <li class="list-group-item">
+                         <div class="btn-group dropright">IMG_2085.jpg
+                             <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                             <div class="dropdown-menu">
+                                 <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
+                                 <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
+                             </div>
+                         </div>
+                     </li>
+                     <li class="list-group-item">
+                         <div class="btn-group dropright">IMG_1234.jpg
+                             <button type="button" class="btn dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                             <div class="dropdown-menu">
+                                 <a class="dropdown-item" href="#"><i class="material-icons mr-2">edit</i>Modify</a>
+                                 <a class="dropdown-item" href="#"><i class="material-icons mr-2">delete_outline</i>Delete</a>
+                             </div>
+                         </div>
+                      </li>
+                 </ul>
+             </div>
+        
+        </div>
+        
+    </div>
+
+</body>
+</html>

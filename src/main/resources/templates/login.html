@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<head th:replace="fragments/head.html :: head"></head>
+	
+	<!-- Put additional css and js sources -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style_index.css">
+    
+    <script src="js/moment.min.js"></script>
+	<script src="js/parser.js"></script>
+    <script src="js/register.js"></script>
+    
+    <title>M3 - Login</title>
+</head>
+
+<body> 
+
+	<nav th:replace="fragments/nav :: nav"></nav>
+	
+	<div class="conatiner mt-4">
+	
+		<!-- LOGIN MODULE -->
+		<div class="login">
+	     <div class="wrap">
+			<!-- TOGGLE -->
+			<div id="toggle-wrap">
+			    <div id="toggle-terms">
+			        <div id="cross">
+			            <span></span>
+			            <span></span>
+			        </div>
+			    </div>
+			</div>
+			<div class="panel-izq mt-5">
+			    <div id="slideshow">
+					<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+				        <ol class="carousel-indicators">
+							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+				        </ol>
+					    <div class="carousel-inner">
+					    	<div class="carousel-item active">
+					        	<h1 class="texto-carousel">Comparte tus peliculas, musica y videos!</h1>
+					        </div>
+					        <div class="carousel-item">
+					        	<h1 class="texto-carousel">Crea tus playlist</h1>
+					        </div>
+					          
+					    </div>
+					    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+					    	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					        <span class="sr-only">Previous</span>
+					    </a>
+					    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+					    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					        <span class="sr-only">Next</span>
+					    </a>
+					</div>
+			    </div>
+			</div>
+			
+            <!-- LOGIN -->
+            <div class="panel-der mt-5">
+            	<div class="form-wrap ">
+                                    
+	                <!-- TABS -->
+	                <ul class="nav ">   
+	                 <h3 class="login-tab"><a class="log-in active ml-5" data-toggle="tab" href="#login-tab-content">Login</a></h3>
+	                 <h3><a class="sign-up ml-5" data-toggle="tab" href="#signup-tab-content">Sign up</a></h3>    
+	                </ul>
+                               
+                    <!-- TABS  -->
+                    <div class="tabs-content">
+	                    <!-- TABS LOGIN -->
+	                    <div id="login-tab-content" class="active">
+	                        <form class="login-form" action="" method="post">
+	                            <input type="text" class="input"   placeholder="Email or Username">
+	                            <input type="password" class="input"   placeholder="Password">
+	                            <input type="checkbox" class="checkbox" checked id="remember_me">
+	                            <label for="remember_me">Remember me</label>
+	                            <input type="submit" class="button" value="Login">
+	                        </form>
+	                        <div class="">
+	                            <p><i class="fa fa-arrow-left" aria-hidden="true"></i><a class="forgot" href="#">Forgot your password?</a></p>
+	                        </div>
+	                    </div>
+	                    <!-- TABS SIGNUP -->
+	                    <div id="signup-tab-content">
+	                        <form class="signup-form" action="" method="post">
+	                        	<div class="form-row">
+		                            <input id="inputEmail" type="email" class="input form-control" placeholder="Email">
+		                            <div class="invalid-feedback" th:text="${emailError}"></div>
+	                            </div>
+	                            <div class="form-row">
+	                            	<input id="inputName" type="text" class="input form-control" placeholder="Username">
+	                            	<div class="invalid-feedback" th:text="${nameError}"></div>
+	                            </div>
+	                            <div class="form-row">
+	                            	<input id="inputPassword" type="password" class="input form-control" autocomplete="off" placeholder="Password">
+	                            	<div class="invalid-feedback" th:text="${passwordError}"></div>
+	                            </div>
+	                            <div class="form-row">
+	                           		<input id="inputSamePassword" type="password" class="input form-control" autocomplete="off" placeholder="Repeat password">
+	                            	<div class="invalid-feedback" th:text="${samePasswordError}"></div>
+	                            </div>
+	                            <input type="submit" class="button" value="Sign Up">
+	                        </form>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+     
+     </div>
+     
+</body>
+</html>

@@ -7,15 +7,32 @@
 	<title>Nav fragment - rest intentionally left empty</title>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark center-content" th:fragment="nav">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-center" th:fragment="nav">
 
-        <div class="navbar-nav">
-        	<img src="img/">
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">home</i></a>
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">folder_open</i></a>
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">group</i></a>
-            <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">brightness_low</i></a>
-        </div>
+    <div class="navbar-nav">
+    	<img class="mx-3" src="img/logoM3.png" width="40px" height="40px">
+        <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">home</i></a>
+        <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">folder_open</i></a>
+        <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">group</i></a>
+        <a class="nav-item nav-link" href="#"><i class="material-icons mr-3">brightness_low</i></a>
+    </div>
+        
+    <!-- Modal to dsplay server messages to user -->
+	<div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="msgModal" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" th:text="${title}">Error</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  	<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body py-4 px-5">
+					<span id="msg" th:text="${msg}"></span>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<!-- 
 		<a class="logo" href="" th:href="@{/}"></a>
@@ -28,6 +45,8 @@
 			th:if="not ${#authorization.expression('hasRole(''ROLE_USER'')')}" 
 			th:href="@{/login}" href="/login">login</a>		
 	 -->
+	 
+	 <script src="js/nav.js"></script>
 	</nav>
 </body>
 </html>
