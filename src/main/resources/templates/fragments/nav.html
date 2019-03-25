@@ -7,7 +7,6 @@
 	<title>Nav fragment - rest intentionally left empty</title>
 </head>
 <body>
-<<<<<<< Updated upstream
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark center-content" th:fragment="nav">
 
         <div class="navbar-nav">
@@ -29,52 +28,6 @@
 			th:if="not ${#authorization.expression('hasRole(''ROLE_USER'')')}" 
 			th:href="@{/login}" href="/login">login</a>		
 	 -->
-=======
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-center" th:fragment="nav">
-	
-		<link rel="stylesheet" href="css/nav.css">
-		
-	    <div class="navbar-nav">
-	    	<a href="/"><img class="mx-3 my-1" src="img/logoM3.png" width="40px" height="40px"></a>
-	        <a class="nav-item nav-link mx-2" href="#"><i class="material-icons">home</i></a>
-	        <a class="nav-item nav-link mx-2" href="#"><i class="material-icons">folder_open</i></a>
-	        <a class="nav-item nav-link mx-2" href="#"><i class="material-icons">group</i></a>
-	        <a class="nav-item nav-link mx-2" href="#"><i class="material-icons">brightness_low</i></a>
-	        <a th:if="${session.userLogged != null}" th:href="@{/profile?userId=__${session.userLogged.id}__}"><img class="border-3 rounded-circle mx-3" src="img/guille.jpg" width="50px" height="50px"></a>
-	    </div>
-	        
-	    <!-- Modal to dsplay server messages to user -->
-		<div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="msgModal" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" th:text="${title}">Error</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						  	<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body py-4 px-5">
-						<span id="msg" th:text="${msg}"></span>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- 
-			<a class="logo" href="" th:href="@{/}"></a>
-			<span class="sitename">Karmómetro</span>
-	
-			<a class="logx" 
-				th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" 
-				th:href="@{/logout}" href="/logout">logout</a>
-			<a class="logx" 
-				th:if="not ${#authorization.expression('hasRole(''ROLE_USER'')')}" 
-				th:href="@{/login}" href="/login">login</a>		
-		 -->
-		 
-		<script src="js/nav.js"></script>
-		
->>>>>>> Stashed changes
 	</nav>
 </body>
 </html>
