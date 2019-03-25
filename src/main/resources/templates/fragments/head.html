@@ -14,6 +14,19 @@
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
+    <script type="text/javascript">
+		const m3 = {
+			socketUrl: '[[${session.ws}?:false]]',
+			apiUrl: '[[${session.ws}?@{/api/v/}:false]]',
+			csrf: {
+				name: "[[${_csrf.parameterName}]]",
+				value: "[[${_csrf.token}]]"
+			},
+			admin: [[${session.u != null && session.u.hasRole('admin')}?'true':'false']],
+			userId: [[${session.u != null}?${session.u.id}:-1]]
+		};
+	</script>
+	
 </head>
 <body>
 	Head fragment - rest intentionally left empty.

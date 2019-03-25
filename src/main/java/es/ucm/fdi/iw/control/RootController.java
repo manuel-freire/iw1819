@@ -8,23 +8,16 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.ucm.fdi.iw.model.User;
 import es.ucm.fdi.iw.service.UserService;
-
-import es.ucm.fdi.iw.session.MySession;
 import es.ucm.fdi.util.StringUtil;
 
 
@@ -94,183 +87,20 @@ public class RootController {
 		return "index";
 	}
 
-	@GetMapping("/signin")
-	public String login(Model model) {
-		return "login";
-	}
-	
-	@GetMapping("/users")
-	public ModelAndView usersGet(ModelAndView modelAndView) {
+	@GetMapping("/login")
+	public ModelAndView login(ModelAndView modelAndView, 
+			@RequestParam(value = "error", required = false) String error, 
+			@RequestParam(value = "logout", required = false) String logout
+	) {
 		
-		/*
-		 * //To check if the user is logged
-		User userLogged = MySession.getInstance().getUserLogged(modelAndView, session, status);
-		if(userLogged != null) {
-			//Do things
+		if(error != null) {
+			modelAndView.addObject("error", true);
 		}
-		*/
-		
-		createExampleUsers();
-		
-		List<User> users = userService.getAll();
-
-		modelAndView.addObject("users", users);
-		modelAndView.setViewName("admin");
-		return modelAndView;
-	}
-	
-	/**
-	 * Holds /register POST
-	 * @return register view
-	 */
-	@RequestMapping(value= "/delete", method = RequestMethod.POST)
-	public ModelAndView deleteUser(ModelAndView modelAndView, HttpSession session, SessionStatus status, @ModelAttribute ("userId") Long userId) {
-		String err = "User not found";
-
-		if(userId != null) {
-			User user = userService.findById(userId);
-			if(user != null) {
-				if(user.isActive()) {
-					user = userService.delete(user);
-					if(user != null && !user.isActive()) {
-						err = null;
-						String msg = "User "+user.getName()+" ("+user.getEmail()+")"+
-										" with id: "+userId+", has been deactivated";
-						this.notifyModal(modelAndView, "User notification", msg);
-					}
-				}
-				else {
-					err = "The user with id: "+userId+" is already deactivated";
-				}
-			}
-		}
-
-		if(err != null) {
-			this.notifyModal(modelAndView, "Error", err);
-		}
-		//If redirect to users the modal wont be rendered
-		this.usersGet(modelAndView);
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping(value= "/delete-users", method = RequestMethod.POST)
-	public ModelAndView deleteUsers(ModelAndView modelAndView, HttpSession session, SessionStatus status, @ModelAttribute ("userIdsToDelete") JSONArray userIdsToDelete) {
-		String err = "";
-		
-		if(userIdsToDelete != null) {
-			for(int i = 0; i < userIdsToDelete.length(); i++) {
-				String errUserId = "";
-				Long userId = null;
-				try {
-					userId = userIdsToDelete.getLong(i);
-				} catch (JSONException e) {
-					log.error("delete-users JSONArray parseLong exception", e);
-				}
-				
-				if(userId != null) {
-					User user = userService.findById(userId);
-	
-					errUserId += "User with id: "+userId+", not found";
-				
-					if(user != null) {
-						if(user.isActive()) {
-							user = userService.delete(user);
-							if(user != null && !user.isActive()) {
-								errUserId = "";
-							}
-						}
-						else {
-							errUserId = "The user with id: "+userId+" is already deactivated";
-						}
-					}
-				}
-				else {
-					errUserId += "Error with user id";
-				}
-				err += errUserId + '\n';
-			}
+		if(logout != null) {
+			notifyModal(modelAndView, "logout", "You have been logged out");
 		}
 		
-		err = err.trim();
-
-		if(err != null && err != "") {
-			this.notifyModal(modelAndView, "Error", err);
-		}
-		//If redirect to users the modal wont be rendered
-		this.usersGet(modelAndView);
-		
-		return modelAndView;
-	}
-	
-	@GetMapping("/profile")
-	public ModelAndView profile(ModelAndView modelAndView, HttpSession session, SessionStatus status, @ModelAttribute ("userId") Long userId) {
-		
-		String err = "User not found";
-
-		if(userId != null) {
-			User user = userService.findById(userId);
-			if(user != null && user.isActive()) {
-				err = null;
-				modelAndView.addObject("user", user);
-			}
-		}
-		
-		if(err != null) {
-			this.notifyModal(modelAndView, "Error", err);
-		}
-		
-		modelAndView.setViewName("profile");
-		return modelAndView;
-	}
-	
-	@GetMapping("/modifyProfile")
-	public ModelAndView modifyProfileGet(ModelAndView modelAndView, HttpSession session, SessionStatus status, @ModelAttribute ("userId") Long userId) {
-		
-		String err = "User not found";
-
-		User user = null;
-		if(userId != null) {
-			user = userService.findById(userId);
-			if(user != null && user.isActive()) {
-				err = null;
-				modelAndView.addObject("user", user);
-			}
-		}
-		
-		if(err != null) {
-			this.notifyModal(modelAndView, "Error", err);
-			modelAndView.setViewName("profile");
-		}
-		else {
-			modelAndView.addObject("user", user);
-			modelAndView.setViewName("modifyProfile");
-		}
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping("/modifyProfile")
-	public ModelAndView modifyProfilePost(ModelAndView modelAndView, HttpSession session, SessionStatus status, @ModelAttribute ("user") User user)  {
-		String err = "User not found";
-
-		if(user != null) {
-			User userDatabase = userService.findById(user.getId());
-			if(userDatabase != null && userDatabase.isActive()) {
-				//PARSE USER
-				User userSaved = userService.save(user);
-				if(userSaved != null) {
-					err = null;
-					this.notifyModal(modelAndView, "Saved changes", "Your data has been saved successfully!");
-				}
-			}
-		}
-
-		if(err != null) {
-			this.notifyModal(modelAndView, "Error", err);
-		}
-		//If redirect to users the modal wont be rendered
-		this.usersGet(modelAndView);
+		modelAndView.setViewName("login");
 		
 		return modelAndView;
 	}

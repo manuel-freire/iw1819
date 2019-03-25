@@ -18,7 +18,7 @@
 	        <a class="nav-item nav-link mx-2" href="#"><i class="material-icons">folder_open</i></a>
 	        <a class="nav-item nav-link mx-2" href="#"><i class="material-icons">group</i></a>
 	        <a class="nav-item nav-link mx-2" href="#"><i class="material-icons">brightness_low</i></a>
-	        <a th:if="${session.userLogged != null}" th:href="@{/profile?userId=__${session.userLogged.id}__}"><img class="border-3 rounded-circle mx-3" src="img/guille.jpg" width="50px" height="50px"></a>
+	        <a th:if="${session.u != null}" th:href="@{user/profile?userId=__${session.u.id}__}"><img class="border-3 rounded-circle mx-3" src="img/guille.jpg" width="50px" height="50px"></a>
 	    </div>
 	        
 	    <!-- Modal to dsplay server messages to user -->

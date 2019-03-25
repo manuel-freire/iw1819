@@ -81,12 +81,13 @@
                     <div class="tabs-content">
 	                    <!-- TABS LOGIN -->
 	                    <div id="login-tab-content" class="active">
-	                        <form class="login-form" action="" method="post">
-	                            <input type="text" class="input"   placeholder="Email or Username">
-	                            <input type="password" class="input"   placeholder="Password">
+	                        <form class="login-form" th:action="@{/login}" method="post">
+	                            <input type="text" class="input form-control" placeholder="Email or Username" id="username" name="username" th:classappend="${error} ? is-invalid : ''">
+	                            <input type="password" class="input form-control" placeholder="Password" id="password" name="password" th:classappend="${error} ? is-invalid : ''">
 	                            <input type="checkbox" class="checkbox" checked id="remember_me">
 	                            <label for="remember_me">Remember me</label>
-	                            <input type="submit" class="button" value="Login">
+	                            <div class="invalid-feedback" th:if="${error}">Invalid user or password</div>
+	                            <input type="submit" class="button">
 	                        </form>
 	                        <div class="">
 	                            <p><i class="fa fa-arrow-left" aria-hidden="true"></i><a class="forgot" href="#">Forgot your password?</a></p>

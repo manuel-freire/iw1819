@@ -86,11 +86,6 @@ public class UserController {
 		
 		return "index";
 	}
-
-	@GetMapping("/signin")
-	public String login(Model model) {
-		return "login";
-	}
 	
 	@GetMapping("/profile")
 	public ModelAndView profile(ModelAndView modelAndView, HttpSession session, SessionStatus status, @ModelAttribute ("userId") Long userId) {

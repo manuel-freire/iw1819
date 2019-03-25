@@ -196,6 +196,8 @@ public class User {
 	}
 	
 	public boolean hasRole(String roleName) {
+		if(roles == null)
+			return false;
 		return Arrays.stream(this.roles.split(","))
 				.anyMatch(r -> r.equalsIgnoreCase(roleName));
 	}

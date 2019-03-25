@@ -2,6 +2,7 @@ package es.ucm.fdi.iw.service;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,11 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepo;
 	
-	@Autowired PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private EntityManager entityManager;
 	
 	@Transactional
     @Override

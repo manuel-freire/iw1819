@@ -15,6 +15,10 @@ $(function() {
         	$.ajax({
     			type: "POST",
     			url: "/delete-users",
+    			headers: {
+    				"Content-Type": "application/json",				
+    				"X-CSRF-TOKEN": km.csrf.value
+    			},
     			data: JSON.stringify(userIdsToDelete),
     			success: function() {
     				console.log("users deleted");

@@ -35,9 +35,14 @@ public class IwUserDetailsService implements UserDetailsService {
 	        // build UserDetails object
 	        ArrayList<SimpleGrantedAuthority> roles = new ArrayList<>();
 	        
-	        for (String r : u.getRoles().split("[,]")) {
-	        	roles.add(new SimpleGrantedAuthority("ROLE_" + r));
-		        log.info("Roles for " + userLogin + " include " + roles.get(roles.size()-1));
+	        if(u.getRoles() != null) {
+		        for (String r : u.getRoles().split("[,]")) {
+		        	roles.add(new SimpleGrantedAuthority("ROLE_" + r));
+			        log.info("Roles for " + userLogin + " include " + roles.get(roles.size()-1));
+		        }
+	        }
+	        else {
+	        	roles.add(new SimpleGrantedAuthority("ROLE_" + "user"));
 	        }
 	        
 	        return new org.springframework.security.core.userdetails.User(
