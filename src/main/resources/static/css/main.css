@@ -87,52 +87,6 @@ nav div.debug {
 	height: 32px;
 }
 
-/* your vote vs class votes */
-.question .others {
-	color: gray;
-}
-.question div.bars {
-	display: inline-block;
-	border-right: 1px solid gray;
-}
-.question div {
-	margin: 0;
-	border: none;
-	padding: 2px;
-}
-.question span.barlabel {
-	display: inline-block;
-	width: 3em;
-	text-align: right;
-}
-.question input {
-	position: relative;
-	top: 5px;
-}
-.ask textarea {
-	margin: 10px;
-}
-
-.question div.metadata {
-	float: right;
-	text-align: right;
-}
-div.metadata span {
-	color: gray;
-	font-size: 7pt;
-	display: block;
-}
-
-.polls h4, .questions h4, .newquestion h4,
-.polls h4+p, .questions h4+p {
-	display: inline-block;
-	margin: 10px 0 10px 0;	
-}
-.polls h4+p, .questions h4+p {
-	margin-left: 10px;
-	color: gray;
-}
-
 /* for error debugging */
 .errKey {
 	display: block;
@@ -145,17 +99,12 @@ div.metadata span {
 .errTable td {
 	border: 1px solid gray;
 }
+.errTable tr>td:first-child {
+	background-color: #dddddd;
+	min-width: 5em;
+}
 .errTable div {
 	border: none;
 	margin: 0;
 	padding: 0;
-}
-
-/* admin */
-.adminTable {
-	word-break: break-word;
-	border-collapse: collapse;
-}
-.adminTable td, .adminTable th {
-	border: 1px solid gray;
 }
