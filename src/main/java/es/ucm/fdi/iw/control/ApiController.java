@@ -1,12 +1,18 @@
 package es.ucm.fdi.iw.control;
 
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -32,6 +38,8 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.ucm.fdi.iw.model.CGroup;
+import es.ucm.fdi.iw.model.GameMove;
+import es.ucm.fdi.iw.model.GameState;
 import es.ucm.fdi.iw.model.Question;
 import es.ucm.fdi.iw.model.User;
 import es.ucm.fdi.iw.model.Views;
@@ -195,4 +203,31 @@ public class ApiController {
 		return question;
 	}
 	
+	@PostMapping("/e")
+	@Transactional
+	public GameState eval(@RequestBody GameMove gameMove) {
+		GameState state = new GameState(); // retrieve from database!
+		state.setJson("{un: 'objeto de estado', de: 123, ejemplo: false}");
+		
+		ScriptEngineManager manager = new ScriptEngineManager();
+		ScriptEngine engine = manager.getEngineByName("JavaScript");
+		// read script file
+		try {
+			engine.eval(new InputStreamReader(getClass().getResourceAsStream(
+					"/static/js/game.js"))); // relativo a src/main/resources
+		} catch (ScriptException e) {
+			log.warn("Error loading script",  e);
+		}
+
+		Invocable inv = (Invocable) engine;
+		Object result = null;
+		// call function from script file
+		try {
+			result = inv.invokeFunction("prueba", state.getJson(), gameMove.getJson());
+		} catch (NoSuchMethodException | ScriptException e) {
+			log.warn("Error running script",  e);
+		}
+		log.warn(result);
+		return null;
+	}	
 }

@@ -4,6 +4,25 @@
 
 
 /**
+ * Posts a simple message to the server. Purely for testing JS integration
+ */
+function testServerSideJs() {
+	const headers = {
+		"Content-Type": "application/json",				
+		"X-CSRF-TOKEN": km.csrf.value
+	};	
+	const body = JSON.stringify({json: "hola mundo"});
+	console.log("asking ", body);
+	fetch("/api/e", {
+		method: 'POST',
+		headers: headers,
+		body: body				
+	}).then(response => {
+		console.log(response)
+	});
+}
+
+/**
  * Replaces dates with relative deltas to the current moment.
  * @param {Element} e, an element with a data-timestamp attribute
  * 		representing nanoseconds since the unich epoch
